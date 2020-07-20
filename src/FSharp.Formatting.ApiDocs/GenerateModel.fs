@@ -562,7 +562,7 @@ module internal ValueReader =
     formatTypeWithPrec 5 typ
 
   let isUnitType (ty: FSharpType) =
-      ty.HasTypeDefinition && ty.TypeDefinition.XmlDocSig = "T:Microsoft.FSharp.Core.unit" 
+      ty.HasTypeDefinition && ty.TypeDefinition.XmlDocSig = "T:Microsoft.FSharp.Core.unit"
 
   let formatArgNameAndType i (arg:FSharpParameter) =
     let nm =
@@ -582,22 +582,91 @@ module internal ValueReader =
             argType
     argName, argType
 
-  // Format each argument, including its name and type
-  let formatArgUsage generateTypes i (arg:FSharpParameter) =
-    let argName, argType = formatArgNameAndType i arg
-    if generateTypes then
-      (match arg.Name with None -> "" | Some argName -> argName + ": ") +
-      formatTypeWithPrec 2 argType
-    else argName
+  let internal (++) (a:string) (b:string) =
+    match String.IsNullOrEmpty a, String.IsNullOrEmpty b with
+    | true, true -> ""
+    | false, true -> a
+    | true, false -> b
+    | false, false -> a + " " + b
 
-  let formatArgsUsage generateTypes (v:FSharpMemberOrFunctionOrValue) args =
+  let formatParameter (p:FSharpParameter) =
+    try formatType p.Type
+    with :? InvalidOperationException -> p.DisplayName
+
+
+  //Formats argument list for "signature" information with padding
+  let formatSignature (v:FSharpMemberOrFunctionOrValue) (args: list<list<FSharpParameter>>) =
+
+    let ident = 3
+    let maxPadding = 20
+    let indent = String.replicate ident " "
+
+    let maxUnderThreshold nmax =
+        List.maxBy(fun n -> if n > nmax then 0 else n)
+
+    let padLength =
+      let allLengths =
+        args
+        |> List.concat
+        |> List.map (fun p -> let name = Option.defaultValue p.DisplayName p.Name
+                              let normalisedName = PrettyNaming.QuoteIdentifierIfNeeded name
+                              normalisedName.Length )
+      match allLengths with
+      | [] -> 0
+      | l -> l |> maxUnderThreshold maxPadding
+
+    let allParamsLengths =
+      args |> List.map (List.map (fun p -> (formatParameter p).Length) >> List.sum)
+    let maxLength = (allParamsLengths |> maxUnderThreshold maxPadding) + 1
+
+    let parameterTypeWithPadding (p: FSharpParameter) length =
+      (formatParameter p) + (String.replicate (if length >= maxLength then 1 else maxLength - length) " ")
+
+    let formatName indent padding (parameter:FSharpParameter) =
+      let name = Option.defaultValue parameter.DisplayName parameter.Name
+      let normalisedName = PrettyNaming.QuoteIdentifierIfNeeded name
+      indent + name.PadRight padding + ":"
+
+    let formatParameterPadded length p =
+      formatName indent padLength p ++ (parameterTypeWithPadding p length)
+
+    let allParams =
+        List.zip args allParamsLengths
+        |> List.map(fun (paramTypes, length) ->
+                        paramTypes
+                        |> List.map (formatParameterPadded length)
+                        |> String.concat (" *\n"))
+        |> String.concat ("->\n")
+
+    allParams +  "\n" + indent + (String.replicate (max (padLength-1) 0) " ") + "->"
+
+  //Formats argument list for "signature" information without padding
+  let formatSignatureNoPadding (v:FSharpMemberOrFunctionOrValue) (args: list<list<FSharpParameter>>) =
     let isItemIndexer = (v.IsInstanceMember && v.DisplayName = "Item")
     let counter = let n = ref 0 in fun () -> incr n; !n
-    let unit, argSep, tupSep =
-      if generateTypes then "unit", " -> ", " * "
-      else "()", " ", ", "
+    let unit, argSep, tupSep = "unit", " -> ", " * "
     args
-    |> List.map (List.map (fun x -> formatArgUsage generateTypes (counter()) x))
+    |> List.map (List.map (fun x -> formatParameter x))
+    |> List.map (function
+        | [] -> unit
+        | [arg] when arg = unit -> unit
+        | [arg] when not v.IsMember || isItemIndexer -> arg
+        | args when isItemIndexer -> String.concat tupSep args
+        | args -> bracket (String.concat tupSep args))
+    |> String.concat argSep
+
+  // Format each argument, including its name and type for "usage"
+  let formatArgUsage i (arg:FSharpParameter) =
+    let argName, argType = formatArgNameAndType i arg
+    argName
+
+  //Formats argument list for "usage"
+  let formatArgsUsage (v:FSharpMemberOrFunctionOrValue) args =
+    let isItemIndexer = (v.IsInstanceMember && v.DisplayName = "Item")
+    let counter = let n = ref 0 in fun () -> incr n; !n
+    let unit, argSep, tupSep = "()", " ", ", "
+    args
+    |> List.map (List.map (fun x -> formatArgUsage (counter()) x))
     |> List.map (function
         | [] -> unit
         | [arg] when arg = unit -> unit
@@ -641,7 +710,7 @@ module internal ValueReader =
           else sprintf "(%s)" s)
 
       match v.IsMember, v.IsInstanceMember, v.LogicalName, v.DisplayName with
-      // Constructors 
+      // Constructors
       | _, _, ".ctor", _ -> v.ApparentEnclosingEntity.DisplayName + (defaultArg parArgs "(...)")
       // Indexers
       | _, true, _, "Item" -> "this.[" + (defaultArg args "...") + "]"
@@ -669,7 +738,7 @@ module internal ValueReader =
         argInfos
         |> List.concat
         |> List.mapi (fun i p -> let nm, ty = formatArgNameAndType i p in nm, formatType ty)
-           
+
     // Extension members can have apparent parents which are not F# types.
     // Hence getting the generic argument count if this is a little trickier
     let numGenericParamsOfApparentParent =
@@ -689,18 +758,18 @@ module internal ValueReader =
     let retTypeText = defaultArg (retType |> Option.map formatType) "unit"
 
     let returnTooltip =
-       match retType with None -> None | Some retType -> if isUnitType retType then None else Some retTypeText 
+       match retType with None -> None | Some retType -> if isUnitType retType then None else Some retTypeText
 
     let signatureTooltip =
       match argInfos with
       | [] -> retTypeText
       | [[x]] when (v.IsPropertyGetterMethod || v.HasGetterMethod) && x.Name.IsNone && isUnitType x.Type -> retTypeText
-      | _  -> (formatArgsUsage true v argInfos) + " -> " + retTypeText
+      | _  -> (formatSignature v argInfos) + " " + retTypeText
 
     let fullArgUsage =
       match argInfos with
       | [[x]] when (v.IsPropertyGetterMethod || v.HasGetterMethod) && x.Name.IsNone && isUnitType x.Type -> ""
-      | _  -> formatArgsUsage false v argInfos
+      | _  -> formatArgsUsage v argInfos
 
     let usageTooltip = buildUsage (Some fullArgUsage)
 
@@ -737,11 +806,11 @@ module internal ValueReader =
         fields |> List.map (fun p -> p.Name, formatType p.FieldType)
 
     let returnTooltip = None
-       //if isUnitType retType then None else Some retTypeText 
+       //if isUnitType retType then None else Some retTypeText
 
     let usage (maxLength:int) =
        let nm = (if requireQualifiedAccess then typ.DisplayName + "." else "") + case.Name
-       nm + buildUsage (maxLength - nm.Length) 
+       nm + buildUsage (maxLength - nm.Length)
 
     let usageTooltip = usage Int32.MaxValue
     let modifiers = List.empty
@@ -766,7 +835,7 @@ module internal ValueReader =
     let paramTooltips = []
 
     let returnTooltip = None
-       //if isUnitType retType then None else Some retTypeText 
+       //if isUnitType retType then None else Some retTypeText
     let loc = tryGetLocation field
     let location = formatSourceLocation ctx.UrlRangeHighlight ctx.SourceFolderRepository loc
     let usageTooltip = usage Int32.MaxValue

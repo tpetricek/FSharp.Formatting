@@ -25,7 +25,7 @@ let renderEntities (entities: Choice<ApiDocType, ApiDocModule> list) =
           ]
         ]
         tbody [] [
-          for e in entities do 
+          for e in entities do
             tr [] [
                td [Class "type-name"] [
                  let nm = match e with Choice1Of2 t -> t.Name | Choice2Of2 m -> m.Name
@@ -76,34 +76,19 @@ let renderMembers sigWidth header tableHeader (members: ApiDocMember list) =
            for m in members do
              tr [] [
                td [Class "member-name"] [
-                  
+
                   renderWithToolTip [
                       // This adds #MemberName anchor. These may currently be ambiguous
                       a [Name m.Name] [!! HttpUtility.HtmlEncode(m.FormatUsage(sigWidth)) ]
                     ]
                     [
                         strong [] [!! "Full Usage: "]
-                        !! HttpUtility.HtmlEncode(m.UsageTooltip)
+                        p [Class "full-usage"] [
+                            !! HttpUtility.HtmlEncode(m.UsageTooltip)
+                        ]
                         br []
-                        if not m.ParameterTooltips.IsEmpty then
-                            strong [] [!! "Parameters: "]
-                            ul [] [
-                              for (pname, ptyp) in m.ParameterTooltips do
-                                li [] [
-                                  b [] [!! pname]
-                                  !! ":"
-                                  !! HttpUtility.HtmlEncode(ptyp)
-                                ]
-                            ]
-                        br []
-                        match m.ReturnTooltip with
-                        | None -> ()
-                        | Some t ->
-                            strong [] [!! "Returns: "]
-                            !! HttpUtility.HtmlEncode(t)
-                            br []
                         strong [] [!! "Signature: "]
-                        !! HttpUtility.HtmlEncode(m.SignatureTooltip)
+                        !!(sprintf "<p class='signature'>%s</p>"(HttpUtility.HtmlEncode(m.SignatureTooltip))) //Hack - workaround the fact our view engine implementation adds whitespaces to create human readable HTML. In this case we don't want additional whitespaces as it breaks formatting we've created for signature
                         br []
                         if not m.Modifiers.IsEmpty then
                           strong [] [!! "Modifiers: "]
@@ -114,7 +99,7 @@ let renderMembers sigWidth header tableHeader (members: ApiDocMember list) =
                           !!m.FormatTypeArguments
                     ]
                ]
-            
+
                td [Class "xmldoc"] [
                   !!m.Comment.FullText
                   if m.IsObsolete then
@@ -146,7 +131,7 @@ let moduleContent sigWidth (info: ApiDocModuleInfo) =
   // ...and can be used to categorize members in large modules or types
   // (but if this is not used, then all members end up in just one category)
   let byCategory =
-    members 
+    members
     |> List.groupBy(fun m -> m.Category)
     |> List.sortBy (fun (key, _) -> if String.IsNullOrEmpty(key) then "ZZZ" else key)
     |> List.mapi (fun n (key, elems) ->
@@ -172,12 +157,12 @@ let moduleContent sigWidth (info: ApiDocModuleInfo) =
       // we print only those that belong to the <default>
       for sec in comment.Sections do
         if not (byCategory |> List.exists (fun (_, g, _, _) -> g = sec.Key)) then
-          if (sec.Key <> "<default>") then 
+          if (sec.Key <> "<default>") then
             h2 [] [!!sec.Key]
-        !! sec.Value 
+        !! sec.Value
       ]
     if (byCategory.Length > 1) then
-      // If there is more than 1 category in the type, generate TOC 
+      // If there is more than 1 category in the type, generate TOC
       h2 [] [!!"Table of contents"]
       ul [] [
         for (index, _, _, name) in byCategory do
@@ -228,7 +213,7 @@ let typeContent sigWidth (info: ApiDocTypeInfo) =
     members
     |> List.groupBy(fun m -> m.Category)
     |> List.sortBy(fun (g, ms) -> if String.IsNullOrEmpty(g) then "ZZZ" else g)
-    |> List.mapi (fun n (g, ms) -> 
+    |> List.mapi (fun n (g, ms) ->
         let ms = ms |> List.sortBy(fun m -> if (m.Kind = ApiDocMemberKind.StaticParameter) then "" else m.Name)
         let name = (if String.IsNullOrEmpty(g) then "Other type members" else g)
         (n, g, ms, name))
@@ -251,12 +236,12 @@ let typeContent sigWidth (info: ApiDocTypeInfo) =
       // we print only those that belong to the <default>
       for sec in comment.Sections do
         if not (byCategory |> List.exists (fun (_, g, _, _) -> g = sec.Key)) then
-          if (sec.Key <> "<default>") then 
+          if (sec.Key <> "<default>") then
             h2 [] [!!sec.Key]
-        !! sec.Value 
+        !! sec.Value
     ]
     if (byCategory.Length > 1) then
-      // If there is more than 1 category in the type, generate TOC 
+      // If there is more than 1 category in the type, generate TOC
       h2 [] [!!"Table of contents"]
       ul [] [
         for (index, _, _, name) in byCategory do
@@ -282,7 +267,7 @@ let typeContent sigWidth (info: ApiDocTypeInfo) =
       div [] (renderMembers sigWidth "Instance members" "Instance member" (ms |> List.filter (fun m -> m.Kind = ApiDocMemberKind.InstanceMember)))
       div [] (renderMembers sigWidth "Static members" "Static member" (ms |> List.filter (fun m -> m.Kind = ApiDocMemberKind.StaticMember)))
   ]
-    
+
 let namespacesContent (asm: ApiDocAssemblyGroup) =
   [ h1 [] [!! asm.Name]
     for (nsIndex, ns) in Seq.indexed asm.Namespaces do
@@ -324,7 +309,7 @@ let namespacesContent (asm: ApiDocAssemblyGroup) =
              for (name, index, entities) in allByCategory do
                  li [] [a [Href ("#section" + index)] [!!name]]
           ]
- 
+
       for (name, index, entities) in allByCategory do
         if (allByCategory.Length > 1) then
            h3 [] [a [Class "anchor"; Name ("section" + index); Href ("#section" + index)] [!! name]]

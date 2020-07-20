@@ -110,6 +110,15 @@ table.pre td.lines {
   width:30px;
 }
 
+div.tip .signature {
+ white-space: pre;
+ font-family: Monaco, Menlo, Consolas, 'Courier New', Courier, monospace;
+}
+
+div.tip .full-usage {
+  font-family: Monaco, Menlo, Consolas, 'Courier New', Courier, monospace;
+ }
+
 /*--------------------------------------------------------------------------
   Formatting for page & standard document content
 /*--------------------------------------------------------------------------*/
