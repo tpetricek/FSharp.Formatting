@@ -1,0 +1,364 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\href{https://mybinder.org/v2/gh/diffsharp/diffsharp.github.io/master?filepath=literate.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-binder.svg}
+\caption{Binder}
+\end{figure}
+} 
+\href{literate.fsx}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-script.svg}
+\caption{Script}
+\end{figure}
+} 
+\href{literate.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-notebook.svg}
+\caption{Notebook}
+\end{figure}
+}
+\section*{Literate Scripts}
+
+
+
+The following example shows most of the features that can be used in a literate
+F\# script file with \texttt{.fsx} extension. Most of the features should be quite self-explanatory:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{(**}
+\com{\# First-level heading}
+\com{Some more documentation using `Markdown`.}
+\com{*)}
+
+\kwd{let} \lfun{helloWorld}{(}{)} \ops{=} \lfun{printfn} \str{"Hello world!"}
+
+\com{(** }
+\com{\#\# Second-level heading}
+\com{With some more documentation}
+\com{*)}
+
+\kwd{let} \id{numbers} \ops{=} {[} \num{0} \ops{..} \num{99} {]}
+\com{(*** include-value: numbers ***)}
+
+\ltyp{List}{.}\id{sum} \id{numbers}
+\com{(*** include-it ***)}
+
+\end{Verbatim}
+
+
+
+The F\# script files is processed as follows:
+\begin{itemize}
+\item 
+
+A multi-line comment starting with \texttt{(**} and ending with \texttt{*)} is
+turned into text and is processed using the F\# Markdown processor
+(which supports standard Markdown commands).
+
+\item 
+
+A single-line comment starting with \texttt{(***} and ending with \texttt{***)}
+is treated as a special command. The command can consist of
+\texttt{key}, \texttt{key: value} or \texttt{key=value} pairs.
+
+\end{itemize}
+
+\begin{tabular}{|l|l|}\hline
+\textbf{Literate Command} & \textbf{Description}\\ \hline\hline
+\texttt{(** ... *)} & Markdown\\ \hline
+\texttt{(*** condition: prepare ***)} & Utilise a code snippet when analyzing for tooltips or executing for outputs\\ \hline
+\texttt{(*** condition: ipynb ***)} & Include a code snippet when making a .ipynb notebook\\ \hline
+\texttt{(*** condition: tex ***)} & Include a code snippet when making a .tex output\\ \hline
+\texttt{(*** condition: html ***)} & Include a code snippet when making HTML output\\ \hline
+\texttt{(*** hide ***)} & Hide the subsequent snippet\\ \hline
+\texttt{(*** include-output ***)} & The output of the preceeding snippet\\ \hline
+\texttt{(*** include-fsi-output ***)} & The F\# Interactive output of the preceeding snippet\\ \hline
+\texttt{(*** include-fsi-merged-output ***)} & The merge of console output and F\# Interactive output of the preceeding snippet\\ \hline
+\texttt{(*** include-it ***)} & The formatted result of the preceeding snippet\\ \hline
+\texttt{(*** include-it-raw ***)} & The unformatted result of the preceeding snippet\\ \hline
+\texttt{(*** include-value: value-name ***)} & The formatted value\\ \hline
+\texttt{(*** raw ***)} & The subsequent code is treated as raw text\\ \hline
+\end{tabular}
+
+\subsubsection*{Named snippets}
+
+
+
+The command \texttt{define} defines a named snippet (such as \texttt{final-sample}) and removes the command together with
+the following F\# code block from the main document. The snippet can then
+be referred to using these variations. This makes it
+possible to write documents without the ordering requirements of the
+F\# language.
+\begin{tabular}{|l|l|}\hline
+\textbf{Literate Command} & \textbf{Description}\\ \hline\hline
+\texttt{(*** define: snippet-name ***)} & Define a named snippet\\ \hline
+\texttt{(*** include-output: snippet-name ***)} & The output of the named snippet\\ \hline
+\texttt{(*** include-fsi-output: snippet-name ***)} & The F\# Interactive output of the named snippet\\ \hline
+\texttt{(*** include-fsi-merged-output: snippet-name ***)} & The merge of console output and F\# Interactive output of the named snippet\\ \hline
+\texttt{(*** include-it: snippet-name ***)} & The formatted result of the named snippet\\ \hline
+\texttt{(*** include-it-raw: snippet-name ***)} & The unformatted result of the named snippet\\ \hline
+\texttt{(*** include: snippet-name ***)} & Include the code of the named snippet\\ \hline
+\end{tabular}
+
+\paragraph{Hiding code snippets}
+
+
+
+The command \texttt{hide} specifies that the following F\# code block (until the next comment or command) should be
+omitted from the output.
+\paragraph{Evaluating and formatting results}
+
+
+
+The commands to evaluate and format results are explained in \href{evaluation.html}{evaluation}.
+You must build your documentation with evaluation turned on using \texttt{--eval}.
+\paragraph{Substitutions}
+
+
+
+Substitutions are applied to content, see \href{content.html}{content}.
+\subsubsection*{Literate Markdown Documents}
+
+
+
+For files with \texttt{.md} extension, the entire file is a Markdown document, which may
+contain F\# code snippets (but also other code snippets). As usual, snippets are
+indented with four spaces. In addition, the snippets can be annotated with special
+commands. Some of them are demonstrated in the following example:
+\begin{lstlisting}
+# First-level heading
+
+    [hide]
+    let print s = printfn "%s" s
+
+Some more documentation using `Markdown`.
+
+    [module=Hello]
+    let helloWorld() = print "Hello world!"
+
+## Second-level heading
+With some more documentation
+
+    [lang=csharp]
+    Console.WriteLine("Hello world!");
+
+\end{lstlisting}
+
+
+When processing the document, all F\# snippets are copied to a separate file that
+is type-checked using the F\# compiler (to obtain colours and tool tips).
+The commands are written on the first line of the named snippet, wrapped in \texttt{[...]}:
+\begin{itemize}
+\item 
+
+The \texttt{hide} command specifies that the F\# snippet should not be included in the
+final document. This can be used to include code that is needed to type-check
+the code, but is not visible to the reader.
+
+\item 
+
+The \texttt{module=Foo} command can be used to specify F\# \texttt{module} where the snippet
+is placed. Use this command if you need multiple versions of the same snippet
+or if you need to separate code from different snippets.
+
+\item 
+
+The \texttt{lang=foo} command specifies the language of the named snippet. If the language
+is other than \texttt{fsharp}, the snippet is copied to the output as \texttt{<pre>} HTML
+tag without any processing.
+
+\end{itemize}
+
+\subsubsection*{LaTeX in Literate Scripts and Markdown Documents}
+
+
+
+Literate Scripts may contain LaTeX sections in Markdown using these forms:
+\begin{enumerate}
+\item 
+
+Single line latex starting with \texttt{\$\$}.
+
+\item 
+
+A block delimited by \texttt{{\textbackslash}begin\{equation\}...{\textbackslash}end\{equation\}} or \texttt{{\textbackslash}begin\{align\}...{\textbackslash}end\{align\}}.
+
+\item 
+
+An indented paragraph starting with \texttt{\$\$\$}.  This is F\#-literate-specific and corresponds to
+\texttt{{\textbackslash}begin\{equation\}...{\textbackslash}end\{equation\}}.
+
+\end{enumerate}
+
+
+
+For example
+\begin{lstlisting}
+$$\frac{x}{y}$$
+
+\begin{equation}
+   \frac{d}{dx} \left. \left( x \left( \left. \frac{d}{dy} x y \; \right|_{y=3} \right) \right) \right|_{x=2}
+\end{equation}
+
+\end{lstlisting}
+
+
+Becomes
+
+
+\begin{equation}
+\frac{x}{y}
+\end{equation}
+
+
+
+
+\begin{equation}
+   \frac{d}{dx} \left. \left( x \left( \left. \frac{d}{dy} x y \; \right|_{y=3} \right) \right) \right|_{x=2}
+\end{equation}
+
+
+
+
+The LaTeX will also be used in HTML and iPython notebook outputs.
+\subsubsection*{Making literate scripts work for different outputs}
+
+
+
+Literate scripts and markdown can by turned into LaTex, Python Notebooks and F\# scripts.
+
+
+A header may be needed to get the code to load, a typical example is this:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{(*** condition: prepare ***)}
+\prep{\#nowarn} \str{"211"}
+\prep{\#I} \str{"../src/FSharp.Formatting/bin/Release/netstandard2.1"}
+\prep{\#r} \str{"FSharp.Formatting.Common.dll"}
+\prep{\#r} \str{"FSharp.Formatting.Markdown.dll"}
+\prep{\#r} \str{"FSharp.Formatting.CodeFormat.dll"}
+\prep{\#r} \str{"FSharp.Formatting.Literate.dll"}
+\com{(*** condition: fsx ***)}
+\prep{\#if} \id{FSX}
+\inact{\#r}\inact{ }\inact{"nuget:}\inact{ }\inact{FSharp.Formatting,\{\{package-version\}\}"}
+\prep{\#endif} \com{// FSX}
+\com{(*** condition: ipynb ***)}
+\prep{\#if} \id{IPYNB}
+\inact{\#r}\inact{ }\inact{"nuget:}\inact{ }\inact{FSharp.Formatting,\{\{package-version\}\}"}
+\prep{\#endif} \com{// IPYNB}
+
+\end{Verbatim}
+
+\subsubsection*{Processing literate files programatically}
+
+
+
+To process file Use the two static methods to turn single documents into HTML
+as follows using functionality from the \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-literate.html}{Literate} type:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{open} \id{System}{.}\id{IO}
+\kwd{open} \id{FSharp}{.}\id{Formatting}{.}\id{Literate}
+
+\kwd{let} \id{source} \ops{=} \kwd{\_\_SOURCE\_DIRECTORY\_\_}
+\kwd{let} \id{template} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"template.html"}{)}
+
+\kwd{let} \id{script} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"../docs/script.fsx"}{)}
+\ltyp{Literate}{.}\id{ConvertScriptFile}{(}\id{script}{,} \id{template}{)}
+
+\kwd{let} \id{doc} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"../docs/document.md"}{)}
+\ltyp{Literate}{.}\id{ConvertMarkdownFile}{(}\id{doc}{,} \id{template}{)}
+\end{Verbatim}
+
+
+
+The following sample also uses optional parameter \texttt{parameters} to specify additional
+keywords that will be replaced in the template file (this matches the \texttt{template-project.html}
+file which is included as a sample in the package):
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{// Load the template \& specify project information}
+\kwd{let} \id{projTemplate} \ops{=} \id{source} \ops{+} \str{"template-project.html"}
+\kwd{let} \id{projInfo} \ops{=}
+  {[} \str{"fsdocs-authors"}{,} \str{"Tomas Petricek"}
+    \str{"fsdocs-source-link"}{,} \str{"https://github.com/fsprojects/FSharp.Formatting"}
+    \str{"fsdocs-collection-name"}{,} \str{"F\# Formatting"} {]}
+\end{Verbatim}
+
+
+
+The methods used above (\href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-literate.html}{Literate.ConvertScriptFile}, \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-literate.html}{Literate.ConvertMarkdownFile})
+produce HTML output by default, but they can be also used to produce LaTeX output. This is done
+by setting the output kind. The following
+example shows how to call the methods to generate LaTeX documents:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{templateTex} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"template.tex"}{)}
+
+\kwd{let} \id{scriptTex} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"../docs/script.fsx"}{)}
+\ltyp{Literate}{.}\id{ConvertScriptFile}{(}\id{scriptTex}{,} \id{templateTex}{,} \lfun{outputKind}\ops{=}\ltyp{OutputKind}{.}\id{Latex}{)}
+
+\kwd{let} \id{docTex} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"../docs/document.md"}{)}
+\ltyp{Literate}{.}\id{ConvertMarkdownFile}{(}\id{docTex}{,} \id{templateTex}{,} \lfun{outputKind}\ops{=}\ltyp{OutputKind}{.}\id{Latex}{)}
+\end{Verbatim}
+
+
+
+The methods used above (\texttt{ConvertScriptFile}, \texttt{ConvertMarkdownFile})
+can also produce iPython Notebook output. This is done
+by setting the named parameter \texttt{format} to \texttt{OutputKind.Pynb}:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{// Process script file, Markdown document and a directory}
+\kwd{let} \id{scriptPynb} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"../docs/script.fsx"}{)}
+\ltyp{Literate}{.}\id{ConvertScriptFile}{(}\id{scriptPynb}{,} \lfun{outputKind}\ops{=}\ltyp{OutputKind}{.}\id{Pynb}{)}
+
+\kwd{let} \id{docPynb} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{source}{,} \str{"../docs/document.md"}{)}
+\ltyp{Literate}{.}\id{ConvertMarkdownFile}{(}\id{docPynb}{,} \lfun{outputKind}\ops{=}\ltyp{OutputKind}{.}\id{Pynb}{)}
+\end{Verbatim}
+
+
+
+All of the three methods discussed in the previous two sections take a number of optional
+parameters that can be used to tweak how the formatting works
+
+
+\end{document}

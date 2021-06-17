@@ -1,0 +1,125 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Example: Using Markdown Content}
+
+
+
+This file demonstrates how to write Markdown document with
+embedded F\# snippets that can be transformed into nice HTML
+using the \texttt{literate.fsx} script from the \href{http://fsprojects.github.io/FSharp.Formatting}{F\# Formatting
+package}.
+
+
+In this case, the document itself is a valid Markdown and
+you can use standard Markdown features to format the text:
+\begin{itemize}
+\item Here is an example of unordered list and...
+
+\item Text formatting including \textbf{bold} and \emph{emphasis}
+
+\end{itemize}
+
+
+
+For more information, see the \href{http://daringfireball.net/projects/markdown}{Markdown} reference.
+\subsection*{Writing F\# code}
+
+
+
+In standard Markdown, you can include code snippets by
+writing a block indented by four spaces and the code
+snippet will be turned into a \texttt{<pre>} element. If you do
+the same using Literate F\# tool, the code is turned into
+a nicely formatted F\# snippet:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{/// The Hello World of functional languages!}
+\kwd{let} \kwd{rec} \lfun{factorial} \lfun{x} \ops{=} 
+  \kwd{if} \lfun{x} \ops{=} \num{0} \kwd{then} \num{1} 
+  \kwd{else} \lfun{x} \ops{*} {(}\lfun{factorial} {(}\lfun{x} \ops{-} \num{1}{)}{)}
+
+\kwd{let} \id{f10} \ops{=} \lfun{factorial} \num{10}
+
+\end{Verbatim}
+
+\subsection*{Hiding code}
+
+
+
+If you want to include some code in the source code,
+but omit it from the output, you can use the \texttt{hide}
+command. You can also use \texttt{module=...} to specify that
+the snippet should be placed in a separate module
+(e.g. to avoid duplicate definitions).
+
+
+The value will be deffined in the F\# code that is
+processed and so you can use it from other (visible)
+code and get correct tool tips:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{answer} \ops{=} \ltyp{Hidden}{.}\id{answer}
+
+\end{Verbatim}
+
+\subsection*{Including other snippets}
+
+
+
+When writing literate programs as Markdown documents,
+you can also include snippets in other languages.
+These will not be colorized and processed as F\#
+code samples:
+\begin{lstlisting}
+Console.WriteLine("Hello world!");
+
+\end{lstlisting}
+
+
+This snippet is turned into a \texttt{pre} element with the
+\texttt{lang} attribute set to \texttt{csharp}.
+
+
+\end{document}

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Literate Scripts
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary navbar-nav-scroll fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<p><a href="https://mybinder.org/v2/gh/diffsharp/diffsharp.github.io/master?filepath=literate.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="literate.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="literate.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="Literate-Scripts" class="anchor" href="#Literate-Scripts">Literate Scripts</a></h1>
+<p>The following example shows most of the features that can be used in a literate
+F# script file with <code>.fsx</code> extension. Most of the features should be quite self-explanatory:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">(**</span>
+<span class="c"># First-level heading</span>
+<span class="c">Some more documentation using `Markdown`.</span>
+<span class="c">*)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="fn">helloWorld</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">printfn</span> <span class="s">&quot;Hello world!&quot;</span>
+
+<span class="c">(** </span>
+<span class="c">## Second-level heading</span>
+<span class="c">With some more documentation</span>
+<span class="c">*)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">numbers</span> <span class="o">=</span> <span class="pn">[</span> <span class="n">0</span> <span class="o">..</span> <span class="n">99</span> <span class="pn">]</span>
+<span class="c">(*** include-value: numbers ***)</span>
+
+<span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="m">List</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">sum</span> <span onmouseout="hideTip(event, 'fs3', 6)" onmouseover="showTip(event, 'fs3', 6)" class="id">numbers</span>
+<span class="c">(*** include-it ***)</span>
+</code></pre>
+<p>The F# script files is processed as follows:</p>
+<ul>
+<li>
+<p>A multi-line comment starting with <code>(**</code> and ending with <code>*)</code> is
+turned into text and is processed using the F# Markdown processor
+(which supports standard Markdown commands).</p>
+</li>
+<li>
+<p>A single-line comment starting with <code>(***</code> and ending with <code>***)</code>
+is treated as a special command. The command can consist of
+<code>key</code>, <code>key: value</code> or <code>key=value</code> pairs.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>Literate Command</p></th>
+<th align="left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>(** ... *)</code></p></td>
+<td align="left"><p>Markdown</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** condition: prepare ***)</code></p></td>
+<td align="left"><p>Utilise a code snippet when analyzing for tooltips or executing for outputs</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** condition: ipynb ***)</code></p></td>
+<td align="left"><p>Include a code snippet when making a .ipynb notebook</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** condition: tex ***)</code></p></td>
+<td align="left"><p>Include a code snippet when making a .tex output</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** condition: html ***)</code></p></td>
+<td align="left"><p>Include a code snippet when making HTML output</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** hide ***)</code></p></td>
+<td align="left"><p>Hide the subsequent snippet</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** include-output ***)</code></p></td>
+<td align="left"><p>The output of the preceeding snippet</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** include-fsi-output ***)</code></p></td>
+<td align="left"><p>The F# Interactive output of the preceeding snippet</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** include-fsi-merged-output ***)</code></p></td>
+<td align="left"><p>The merge of console output and F# Interactive output of the preceeding snippet</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** include-it ***)</code></p></td>
+<td align="left"><p>The formatted result of the preceeding snippet</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** include-it-raw ***)</code></p></td>
+<td align="left"><p>The unformatted result of the preceeding snippet</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** include-value: value-name ***)</code></p></td>
+<td align="left"><p>The formatted value</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** raw ***)</code></p></td>
+<td align="left"><p>The subsequent code is treated as raw text</p></td>
+</tr>
+</tbody>
+</table>
+
+<h3><a name="Named-snippets" class="anchor" href="#Named-snippets">Named snippets</a></h3>
+<p>The command <code>define</code> defines a named snippet (such as <code>final-sample</code>) and removes the command together with
+the following F# code block from the main document. The snippet can then
+be referred to using these variations. This makes it
+possible to write documents without the ordering requirements of the
+F# language.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>Literate Command</p></th>
+<th align="left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>(*** define: snippet-name ***)</code></p></td>
+<td align="left"><p>Define a named snippet</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** include-output: snippet-name ***)</code></p></td>
+<td align="left"><p>The output of the named snippet</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** include-fsi-output: snippet-name ***)</code></p></td>
+<td align="left"><p>The F# Interactive output of the named snippet</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** include-fsi-merged-output: snippet-name ***)</code></p></td>
+<td align="left"><p>The merge of console output and F# Interactive output of the named snippet</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** include-it: snippet-name ***)</code></p></td>
+<td align="left"><p>The formatted result of the named snippet</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>(*** include-it-raw: snippet-name ***)</code></p></td>
+<td align="left"><p>The unformatted result of the named snippet</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>(*** include: snippet-name ***)</code></p></td>
+<td align="left"><p>Include the code of the named snippet</p></td>
+</tr>
+</tbody>
+</table>
+
+<h4><a name="Hiding-code-snippets" class="anchor" href="#Hiding-code-snippets">Hiding code snippets</a></h4>
+<p>The command <code>hide</code> specifies that the following F# code block (until the next comment or command) should be
+omitted from the output.</p>
+<h4><a name="Evaluating-and-formatting-results" class="anchor" href="#Evaluating-and-formatting-results">Evaluating and formatting results</a></h4>
+<p>The commands to evaluate and format results are explained in <a href="evaluation.html">evaluation</a>.
+You must build your documentation with evaluation turned on using <code>--eval</code>.</p>
+<h4><a name="Substitutions" class="anchor" href="#Substitutions">Substitutions</a></h4>
+<p>Substitutions are applied to content, see <a href="content.html">content</a>.</p>
+<h3><a name="Literate-Markdown-Documents" class="anchor" href="#Literate-Markdown-Documents">Literate Markdown Documents</a></h3>
+<p>For files with <code>.md</code> extension, the entire file is a Markdown document, which may
+contain F# code snippets (but also other code snippets). As usual, snippets are
+indented with four spaces. In addition, the snippets can be annotated with special
+commands. Some of them are demonstrated in the following example:</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="text"># First-level heading
+
+    [hide]
+    let print s = printfn "%s" s
+
+Some more documentation using `Markdown`.
+
+    [module=Hello]
+    let helloWorld() = print "Hello world!"
+
+## Second-level heading
+With some more documentation
+
+    [lang=csharp]
+    Console.WriteLine("Hello world!");
+</code></pre></td></tr></table>
+<p>When processing the document, all F# snippets are copied to a separate file that
+is type-checked using the F# compiler (to obtain colours and tool tips).
+The commands are written on the first line of the named snippet, wrapped in <code>[...]</code>:</p>
+<ul>
+<li>
+<p>The <code>hide</code> command specifies that the F# snippet should not be included in the
+final document. This can be used to include code that is needed to type-check
+the code, but is not visible to the reader.</p>
+</li>
+<li>
+<p>The <code>module=Foo</code> command can be used to specify F# <code>module</code> where the snippet
+is placed. Use this command if you need multiple versions of the same snippet
+or if you need to separate code from different snippets.</p>
+</li>
+<li>
+<p>The <code>lang=foo</code> command specifies the language of the named snippet. If the language
+is other than <code>fsharp</code>, the snippet is copied to the output as <code>&lt;pre&gt;</code> HTML
+tag without any processing.</p>
+</li>
+</ul>
+<h3><a name="LaTeX-in-Literate-Scripts-and-Markdown-Documents" class="anchor" href="#LaTeX-in-Literate-Scripts-and-Markdown-Documents">LaTeX in Literate Scripts and Markdown Documents</a></h3>
+<p>Literate Scripts may contain LaTeX sections in Markdown using these forms:</p>
+<ol>
+<li><p>Single line latex starting with <code>$$</code>.</p></li>
+<li><p>A block delimited by <code>\begin{equation}...\end{equation}</code> or <code>\begin{align}...\end{align}</code>.</p></li>
+<li>
+<p>An indented paragraph starting with <code>$$$</code>.  This is F#-literate-specific and corresponds to
+<code>\begin{equation}...\end{equation}</code>.</p>
+</li>
+</ol>
+<p>For example</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="text">$$\frac{x}{y}$$
+
+\begin{equation}
+   \frac{d}{dx} \left. \left( x \left( \left. \frac{d}{dy} x y \; \right|_{y=3} \right) \right) \right|_{x=2}
+\end{equation}
+</code></pre></td></tr></table>
+<p>Becomes</p>
+<p><span class="math">\[\frac{x}{y}\]</span></p>
+<p><span class="math">\[   \frac{d}{dx} \left. \left( x \left( \left. \frac{d}{dy} x y \; \right|_{y=3} \right) \right) \right|_{x=2}\]</span></p>
+<p>The LaTeX will also be used in HTML and iPython notebook outputs.</p>
+<h3><a name="Making-literate-scripts-work-for-different-outputs" class="anchor" href="#Making-literate-scripts-work-for-different-outputs">Making literate scripts work for different outputs</a></h3>
+<p>Literate scripts and markdown can by turned into LaTex, Python Notebooks and F# scripts.</p>
+<p>A header may be needed to get the code to load, a typical example is this:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">(*** condition: prepare ***)</span>
+<span class="pp">#nowarn</span> <span class="s">&quot;211&quot;</span>
+<span class="pp">#I</span> <span class="s">&quot;../src/FSharp.Formatting/bin/Release/netstandard2.1&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;FSharp.Formatting.Common.dll&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;FSharp.Formatting.Markdown.dll&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;FSharp.Formatting.CodeFormat.dll&quot;</span>
+<span class="pp">#r</span> <span class="s">&quot;FSharp.Formatting.Literate.dll&quot;</span>
+<span class="c">(*** condition: fsx ***)</span>
+<span class="pp">#if</span> <span class="id">FSX</span>
+<span class="inactive">#r</span><span class="inactive"> </span><span class="inactive">&quot;nuget:</span><span class="inactive"> </span><span class="inactive">FSharp.Formatting,{{package-version}}&quot;</span>
+<span class="pp">#endif</span> <span class="c">// FSX</span>
+<span class="c">(*** condition: ipynb ***)</span>
+<span class="pp">#if</span> <span class="id">IPYNB</span>
+<span class="inactive">#r</span><span class="inactive"> </span><span class="inactive">&quot;nuget:</span><span class="inactive"> </span><span class="inactive">FSharp.Formatting,{{package-version}}&quot;</span>
+<span class="pp">#endif</span> <span class="c">// IPYNB</span>
+</code></pre>
+<h3><a name="Processing-literate-files-programatically" class="anchor" href="#Processing-literate-files-programatically">Processing literate files programatically</a></h3>
+<p>To process file Use the two static methods to turn single documents into HTML
+as follows using functionality from the <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-literate.html">Literate</a> type:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">IO</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="id">Formatting</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs10', 11)" onmouseover="showTip(event, 'fs10', 11)" class="id">Literate</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 12)" onmouseover="showTip(event, 'fs11', 12)" class="id">source</span> <span class="o">=</span> <span class="k">__SOURCE_DIRECTORY__</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 13)" onmouseover="showTip(event, 'fs12', 13)" class="id">template</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 14)" onmouseover="showTip(event, 'fs13', 14)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 15)" onmouseover="showTip(event, 'fs14', 15)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 16)" onmouseover="showTip(event, 'fs11', 16)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;template.html&quot;</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs15', 17)" onmouseover="showTip(event, 'fs15', 17)" class="id">script</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 20)" onmouseover="showTip(event, 'fs11', 20)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;../docs/script.fsx&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="rt">Literate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="id">ConvertScriptFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs15', 23)" onmouseover="showTip(event, 'fs15', 23)" class="id">script</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs12', 24)" onmouseover="showTip(event, 'fs12', 24)" class="id">template</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 25)" onmouseover="showTip(event, 'fs18', 25)" class="id">doc</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 26)" onmouseover="showTip(event, 'fs13', 26)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 27)" onmouseover="showTip(event, 'fs14', 27)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 28)" onmouseover="showTip(event, 'fs11', 28)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;../docs/document.md&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs16', 29)" onmouseover="showTip(event, 'fs16', 29)" class="rt">Literate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 30)" onmouseover="showTip(event, 'fs19', 30)" class="id">ConvertMarkdownFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs18', 31)" onmouseover="showTip(event, 'fs18', 31)" class="id">doc</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs12', 32)" onmouseover="showTip(event, 'fs12', 32)" class="id">template</span><span class="pn">)</span>
+</code></pre>
+<p>The following sample also uses optional parameter <code>parameters</code> to specify additional
+keywords that will be replaced in the template file (this matches the <code>template-project.html</code>
+file which is included as a sample in the package):</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Load the template &amp; specify project information</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="id">projTemplate</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 34)" onmouseover="showTip(event, 'fs11', 34)" class="id">source</span> <span class="o">+</span> <span class="s">&quot;template-project.html&quot;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs21', 35)" onmouseover="showTip(event, 'fs21', 35)" class="id">projInfo</span> <span class="o">=</span>
+  <span class="pn">[</span> <span class="s">&quot;fsdocs-authors&quot;</span><span class="pn">,</span> <span class="s">&quot;Tomas Petricek&quot;</span>
+    <span class="s">&quot;fsdocs-source-link&quot;</span><span class="pn">,</span> <span class="s">&quot;https://github.com/fsprojects/FSharp.Formatting&quot;</span>
+    <span class="s">&quot;fsdocs-collection-name&quot;</span><span class="pn">,</span> <span class="s">&quot;F# Formatting&quot;</span> <span class="pn">]</span>
+</code></pre>
+<p>The methods used above (<a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-literate.html">Literate.ConvertScriptFile</a>, <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-literate.html">Literate.ConvertMarkdownFile</a>)
+produce HTML output by default, but they can be also used to produce LaTeX output. This is done
+by setting the output kind. The following
+example shows how to call the methods to generate LaTeX documents:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="id">templateTex</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 37)" onmouseover="showTip(event, 'fs13', 37)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 38)" onmouseover="showTip(event, 'fs14', 38)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 39)" onmouseover="showTip(event, 'fs11', 39)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;template.tex&quot;</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 40)" onmouseover="showTip(event, 'fs23', 40)" class="id">scriptTex</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 41)" onmouseover="showTip(event, 'fs13', 41)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 42)" onmouseover="showTip(event, 'fs14', 42)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 43)" onmouseover="showTip(event, 'fs11', 43)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;../docs/script.fsx&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs16', 44)" onmouseover="showTip(event, 'fs16', 44)" class="rt">Literate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 45)" onmouseover="showTip(event, 'fs17', 45)" class="id">ConvertScriptFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs23', 46)" onmouseover="showTip(event, 'fs23', 46)" class="id">scriptTex</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs22', 47)" onmouseover="showTip(event, 'fs22', 47)" class="id">templateTex</span><span class="pn">,</span> <span class="fn">outputKind</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs24', 48)" onmouseover="showTip(event, 'fs24', 48)" class="rt">OutputKind</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 49)" onmouseover="showTip(event, 'fs25', 49)" class="id">Latex</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 50)" onmouseover="showTip(event, 'fs26', 50)" class="id">docTex</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 51)" onmouseover="showTip(event, 'fs13', 51)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 52)" onmouseover="showTip(event, 'fs14', 52)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 53)" onmouseover="showTip(event, 'fs11', 53)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;../docs/document.md&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs16', 54)" onmouseover="showTip(event, 'fs16', 54)" class="rt">Literate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 55)" onmouseover="showTip(event, 'fs19', 55)" class="id">ConvertMarkdownFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs26', 56)" onmouseover="showTip(event, 'fs26', 56)" class="id">docTex</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs22', 57)" onmouseover="showTip(event, 'fs22', 57)" class="id">templateTex</span><span class="pn">,</span> <span class="fn">outputKind</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs24', 58)" onmouseover="showTip(event, 'fs24', 58)" class="rt">OutputKind</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs25', 59)" onmouseover="showTip(event, 'fs25', 59)" class="id">Latex</span><span class="pn">)</span>
+</code></pre>
+<p>The methods used above (<code>ConvertScriptFile</code>, <code>ConvertMarkdownFile</code>)
+can also produce iPython Notebook output. This is done
+by setting the named parameter <code>format</code> to <code>OutputKind.Pynb</code>:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">// Process script file, Markdown document and a directory</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 60)" onmouseover="showTip(event, 'fs27', 60)" class="id">scriptPynb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 61)" onmouseover="showTip(event, 'fs13', 61)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 62)" onmouseover="showTip(event, 'fs14', 62)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 63)" onmouseover="showTip(event, 'fs11', 63)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;../docs/script.fsx&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs16', 64)" onmouseover="showTip(event, 'fs16', 64)" class="rt">Literate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs17', 65)" onmouseover="showTip(event, 'fs17', 65)" class="id">ConvertScriptFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs27', 66)" onmouseover="showTip(event, 'fs27', 66)" class="id">scriptPynb</span><span class="pn">,</span> <span class="fn">outputKind</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs24', 67)" onmouseover="showTip(event, 'fs24', 67)" class="rt">OutputKind</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 68)" onmouseover="showTip(event, 'fs28', 68)" class="id">Pynb</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 69)" onmouseover="showTip(event, 'fs29', 69)" class="id">docPynb</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs13', 70)" onmouseover="showTip(event, 'fs13', 70)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs14', 71)" onmouseover="showTip(event, 'fs14', 71)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs11', 72)" onmouseover="showTip(event, 'fs11', 72)" class="id">source</span><span class="pn">,</span> <span class="s">&quot;../docs/document.md&quot;</span><span class="pn">)</span>
+<span onmouseout="hideTip(event, 'fs16', 73)" onmouseover="showTip(event, 'fs16', 73)" class="rt">Literate</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs19', 74)" onmouseover="showTip(event, 'fs19', 74)" class="id">ConvertMarkdownFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs29', 75)" onmouseover="showTip(event, 'fs29', 75)" class="id">docPynb</span><span class="pn">,</span> <span class="fn">outputKind</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs24', 76)" onmouseover="showTip(event, 'fs24', 76)" class="rt">OutputKind</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs28', 77)" onmouseover="showTip(event, 'fs28', 77)" class="id">Pynb</span><span class="pn">)</span>
+</code></pre>
+<p>All of the three methods discussed in the previous two sections take a number of optional
+parameters that can be used to tweak how the formatting works</p>
+
+            <div class="fsdocs-tip" id="fs1">val helloWorld : unit -&gt; unit</div>
+<div class="fsdocs-tip" id="fs2">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+<div class="fsdocs-tip" id="fs3">val numbers : int list</div>
+<div class="fsdocs-tip" id="fs4">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;&#160;&#160;interface IReadOnlyList&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IReadOnlyCollection&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;interface IEnumerable<br />&#160;&#160;&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;&#160;&#160;member GetReverseIndex : rank:int * offset:int -&gt; int<br />&#160;&#160;&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;&#160;&#160;member Head : &#39;T<br />&#160;&#160;&#160;&#160;member IsEmpty : bool<br />&#160;&#160;&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs5">val sum : list:&#39;T list -&gt; &#39;T (requires member ( + ) and member get_Zero)</div>
+<div class="fsdocs-tip" id="fs6">namespace System</div>
+<div class="fsdocs-tip" id="fs7">namespace System.IO</div>
+<div class="fsdocs-tip" id="fs8">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs9">namespace FSharp.Formatting</div>
+<div class="fsdocs-tip" id="fs10">namespace FSharp.Formatting.Literate</div>
+<div class="fsdocs-tip" id="fs11">val source : string</div>
+<div class="fsdocs-tip" id="fs12">val template : string</div>
+<div class="fsdocs-tip" id="fs13">type Path =<br />&#160;&#160;static member ChangeExtension : path: string * extension: string -&gt; string<br />&#160;&#160;static member Combine : path1: string * path2: string -&gt; string + 3 overloads<br />&#160;&#160;static member EndsInDirectorySeparator : path: ReadOnlySpan&lt;char&gt; -&gt; bool + 1 overload<br />&#160;&#160;static member GetDirectoryName : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetExtension : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetFileName : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetFileNameWithoutExtension : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetFullPath : path: string -&gt; string + 1 overload<br />&#160;&#160;static member GetInvalidFileNameChars : unit -&gt; char []<br />&#160;&#160;static member GetInvalidPathChars : unit -&gt; char []<br />&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs14">Path.Combine([&lt;System.ParamArray&gt;] paths: string []) : string<br />Path.Combine(path1: string, path2: string) : string<br />Path.Combine(path1: string, path2: string, path3: string) : string<br />Path.Combine(path1: string, path2: string, path3: string, path4: string) : string</div>
+<div class="fsdocs-tip" id="fs15">val script : string</div>
+<div class="fsdocs-tip" id="fs16">type Literate =<br />&#160;&#160;private new : unit -&gt; Literate<br />&#160;&#160;static member ConvertMarkdownFile : input:string * ?template:string * ?output:string * ?outputKind:OutputKind * ?formatAgent:CodeFormatAgent * ?prefix:string * ?fscOptions:string * ?lineNumbers:bool * ?references:bool * ?substitutions:Substitutions * ?generateAnchors:bool * ?rootInputFolder:string * ?crefResolver:(string -&gt; (string * string) option) -&gt; unit<br />&#160;&#160;static member ConvertScriptFile : input:string * ?template:string * ?output:string * ?outputKind:OutputKind * ?formatAgent:CodeFormatAgent * ?prefix:string * ?fscOptions:string * ?lineNumbers:bool * ?references:bool * ?fsiEvaluator:IFsiEvaluator * ?substitutions:Substitutions * ?generateAnchors:bool * ?rootInputFolder:string * ?crefResolver:(string -&gt; (string * string) option) -&gt; unit<br />&#160;&#160;static member private FormatLiterateNodes : doc:LiterateDocument * ?outputKind:OutputKind * ?prefix:string * ?lineNumbers:bool * ?generateAnchors:bool * ?tokenKindToCss:(TokenKind -&gt; string) * ?crefResolver:(string -&gt; (string * string) option) -&gt; LiterateDocument<br />&#160;&#160;static member ParseAndCheckScriptFile : path:string * ?formatAgent:CodeFormatAgent * ?fscOptions:string * ?definedSymbols:string list * ?references:bool * ?fsiEvaluator:IFsiEvaluator * ?parseOptions:MarkdownParseOptions * ?rootInputFolder:string -&gt; LiterateDocument<br />&#160;&#160;static member private ParseAndTransformMarkdownFile : input:string * ?output:string * ?outputKind:OutputKind * ?formatAgent:CodeFormatAgent * ?prefix:string * ?fscOptions:string * ?lineNumbers:bool * ?references:bool * ?substitutions:Substitutions * ?generateAnchors:bool * ?customizeDocument:(LiterateProcessingContext -&gt; LiterateDocument -&gt; LiterateDocument) * ?tokenKindToCss:(TokenKind -&gt; string) * ?imageSaver:(string -&gt; string) * ?rootInputFolder:string * ?crefResolver:(string -&gt; (string * string) option) * ?parseOptions:MarkdownParseOptions -&gt; LiterateDocModel<br />&#160;&#160;static member private ParseAndTransformScriptFile : input:string * ?output:string * ?outputKind:OutputKind * ?formatAgent:CodeFormatAgent * ?prefix:string * ?fscOptions:string * ?lineNumbers:bool * ?references:bool * ?fsiEvaluator:IFsiEvaluator * ?substitutions:Substitutions * ?generateAnchors:bool * ?customizeDocument:(LiterateProcessingContext -&gt; LiterateDocument -&gt; LiterateDocument) * ?tokenKindToCss:(TokenKind -&gt; string) * ?imageSaver:(string -&gt; string) * ?rootInputFolder:string * ?crefResolver:(string -&gt; (string * string) option) -&gt; LiterateDocModel<br />&#160;&#160;static member ParseMarkdownFile : path:string * ?formatAgent:CodeFormatAgent * ?fscOptions:string * ?definedSymbols:string list * ?references:bool * ?fsiEvaluator:IFsiEvaluator * ?parseOptions:MarkdownParseOptions * ?rootInputFolder:string -&gt; LiterateDocument<br />&#160;&#160;static member ParseMarkdownString : content:string * ?path:string * ?formatAgent:CodeFormatAgent * ?fscOptions:string * ?definedSymbols:string list * ?references:bool * ?fsiEvaluator:IFsiEvaluator * ?parseOptions:MarkdownParseOptions * ?rootInputFolder:string -&gt; LiterateDocument<br />&#160;&#160;static member ParseScriptString : content:string * ?path:string * ?formatAgent:CodeFormatAgent * ?fscOptions:string * ?definedSymbols:string list * ?references:bool * ?fsiEvaluator:IFsiEvaluator * ?parseOptions:MarkdownParseOptions * ?rootInputFolder:string -&gt; LiterateDocument<br />&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs17">static member Literate.ConvertScriptFile : input:string * ?template:string * ?output:string * ?outputKind:OutputKind * ?formatAgent:FSharp.Formatting.CodeFormat.CodeFormatAgent * ?prefix:string * ?fscOptions:string * ?lineNumbers:bool * ?references:bool * ?fsiEvaluator:Evaluation.IFsiEvaluator * ?substitutions:FSharp.Formatting.Templating.Substitutions * ?generateAnchors:bool * ?rootInputFolder:string * ?crefResolver:(string -&gt; (string * string) option) -&gt; unit</div>
+<div class="fsdocs-tip" id="fs18">val doc : string</div>
+<div class="fsdocs-tip" id="fs19">static member Literate.ConvertMarkdownFile : input:string * ?template:string * ?output:string * ?outputKind:OutputKind * ?formatAgent:FSharp.Formatting.CodeFormat.CodeFormatAgent * ?prefix:string * ?fscOptions:string * ?lineNumbers:bool * ?references:bool * ?substitutions:FSharp.Formatting.Templating.Substitutions * ?generateAnchors:bool * ?rootInputFolder:string * ?crefResolver:(string -&gt; (string * string) option) -&gt; unit</div>
+<div class="fsdocs-tip" id="fs20">val projTemplate : string</div>
+<div class="fsdocs-tip" id="fs21">val projInfo : (string * string) list</div>
+<div class="fsdocs-tip" id="fs22">val templateTex : string</div>
+<div class="fsdocs-tip" id="fs23">val scriptTex : string</div>
+<div class="fsdocs-tip" id="fs24">type OutputKind =<br />&#160;&#160;| Html<br />&#160;&#160;| Latex<br />&#160;&#160;| Pynb<br />&#160;&#160;| Fsx<br />&#160;&#160;| Md<br />&#160;&#160;&#160;&#160;member Extension : string</div>
+<div class="fsdocs-tip" id="fs25">union case OutputKind.Latex: OutputKind</div>
+<div class="fsdocs-tip" id="fs26">val docTex : string</div>
+<div class="fsdocs-tip" id="fs27">val scriptPynb : string</div>
+<div class="fsdocs-tip" id="fs28">union case OutputKind.Pynb: OutputKind</div>
+<div class="fsdocs-tip" id="fs29">val docPynb : string</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

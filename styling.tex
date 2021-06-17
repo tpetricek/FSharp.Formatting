@@ -1,0 +1,222 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Customization and Styling}
+
+
+
+When using \texttt{fsdocs}, there are six levels of extra content development and styling.
+\begin{enumerate}
+\item 
+
+Don't do any styling or documentation customization and simply write content.  This is by far the simplest option to maintain.
+
+\item 
+
+Add content such as an \texttt{docs/index.md} to customize the front-page content for your generated docs.
+You can also add content such as \texttt{docs/reference/fslib.md} to give a bespoke landing page
+for one of your namespaces, e.g. here assumed to be \texttt{namespace FsLib}.  This will override any
+generated content.
+
+\item 
+
+Customize via Styling Parameters
+
+\item 
+
+Customize via CSS
+
+\item 
+
+Customize via a new template
+
+\item 
+
+Customize by generating your own site using your own code
+
+\end{enumerate}
+
+
+
+By default \texttt{fsdocs} does no styling customization and uses the following defaults. These are the settings used to build this site.
+\begin{itemize}
+\item 
+
+Uses the default template in \href{https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/\_template.html}{docs/\_template.html}
+
+\item 
+
+Uses the default styles in \href{https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/content/fsdocs-default.css}{docs/content/fsdocs-default.css}.
+
+\item 
+
+Uses no custom styles in \href{https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/content/fsdocs-default.css}{docs/content/fsdocs-custom.css}.
+
+\item 
+
+Uses no styling parameters except those extracted from the project files.
+
+\end{itemize}
+
+
+
+For your project, you don't need any of these files. However you can add them if you wish, though if
+you adjust them there is no guarantee that your template will continue to work with future versions of F\# Formatting.
+\subsection*{Customizing via Styling Parameters}
+
+
+
+The following \href{content.html}{content parameters} are particularly related to visual styling:
+\begin{tabular}{|l|l|}\hline
+\textbf{Substitution name} & \textbf{Value (if not overriden by --parameters)}\\ \hline\hline
+\texttt{fsdocs-authors} & \texttt{<Authors>}\\ \hline
+\texttt{fsdocs-collection-name-link} & \texttt{<FsDocsCollectionNameLink>}\\ \hline
+\texttt{fsdocs-license-link} & \texttt{<FsDocsLicenseLink>}\\ \hline
+\texttt{fsdocs-logo-src} & \texttt{<FsDocsLogoSource>}\\ \hline
+\texttt{fsdocs-logo-link} & \texttt{<FsDocsLogoLink>}\\ \hline
+\texttt{fsdocs-navbar-position} & \texttt{<FsDocsNavbarPosition>} (\texttt{fixed-left} or \texttt{fixed-right})\\ \hline
+\texttt{fsdocs-release-notes-link} & \texttt{<FsDocsReleaseNotesLink>} else \texttt{<PackageProjectUrl>/blob/master/RELEASE\_NOTES.md}\\ \hline
+\texttt{fsdocs-repository-link} & \texttt{<RepositoryUrl>}\\ \hline
+\texttt{fsdocs-theme} & \texttt{<FsDocsTheme>}, must currently be \texttt{default}\\ \hline
+\end{tabular}
+
+
+
+These basic entry-level styling parameters can be set in the project file or \texttt{Directory.Build.props}.
+For example:
+\begin{lstlisting}
+    <!-- Example ultra-simple styling and generation settings for FsDocs default template-->
+    <PackageLicenseUrl>https://github.com/foo/bar/blob/master/License.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://foo.github.io/bar/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/foo/bar/</RepositoryUrl>
+    <FsDocsLogoLink>https://fsharp.org</FsDocsLogoLink>
+    <FsDocsLicenseLink>https://github.com/foo/bar/blob/master/License.txt</FsDocsLicenseLink>
+    <FsDocsReleaseNotesLink>https://github.com/foo/bar/blob/master/release-notes.md</FsDocsReleaseNotesLink>
+    <FsDocsNavbarPosition>fixed-left</FsDocsNavbarPosition>
+    <FsDocsWarnOnMissingDocs>true</FsDocsWarnOnMissingDocs>
+    <FsDocsTheme>default</FsDocsTheme>
+
+\end{lstlisting}
+
+
+As an example, here is \href{templates/leftside/styling.html}{a page with \texttt{fsdocs-navbar-position} set to \texttt{fixed-right}}.
+\subsection*{Customizing via CSS}
+
+
+
+You can start styling by creating a file \texttt{docs/fsdocs-custom.css} and adding entries to it.  It is loaded by
+the standard template.  The CSS classes of generated content are:
+\begin{tabular}{|l|l|}\hline
+\textbf{CSS class} & \textbf{Corresponding Content}\\ \hline\hline
+\texttt{.fsdocs-tip} & generated tooltips\\ \hline
+\texttt{.fsdocs-xmldoc} & generated xmldoc sections\\ \hline
+\texttt{.fsdocs-member-list} & generated member lists (tables)\\ \hline
+\texttt{.fsdocs-member-usage} & usage in generated member lists\\ \hline
+\texttt{.fsdocs-member-tooltip} & tooltips in generated member lists\\ \hline
+\texttt{.fsdocs-member-xmldoc} & documentation in generated member lists\\ \hline
+\texttt{.fsdocs-entity-list} & generated entity lists\\ \hline
+\texttt{.fsdocs-entity-name} & generated entity lists\\ \hline
+\texttt{.fsdocs-entity-xmldoc} & documentation in generated entity lists\\ \hline
+\texttt{.fsdocs-exception-list} & generated exception lists\\ \hline
+\texttt{.fsdocs-summary} & the 'summary' section of an XML doc\\ \hline
+\texttt{.fsdocs-remarks} & the 'remarks' section of an XML doc\\ \hline
+\texttt{.fsdocs-params} & the 'parameters' section of an XML doc\\ \hline
+\texttt{.fsdocs-param} & a 'parameter' section of an XML doc\\ \hline
+\texttt{.fsdocs-param-name} & a 'parameter' name of an XML doc\\ \hline
+\texttt{.fsdocs-returns} & the 'returns' section of an XML doc\\ \hline
+\texttt{.fsdocs-example} & the 'example' section of an XML doc\\ \hline
+\texttt{.fsdocs-note} & the 'notes' section of an XML doc\\ \hline
+\texttt{.fsdocs-para} & a paragraph of an XML doc\\ \hline
+\end{tabular}
+
+
+
+Some generated elements are given specific HTML ids:
+\begin{tabular}{|l|l|}\hline
+\textbf{HTML Element Id} & \textbf{Content}\\ \hline\hline
+\texttt{\#fsdocs-content} & The generated content\\ \hline
+\texttt{\#fsdocs-searchbox} & The search box\\ \hline
+\texttt{\#fsdocs-logo} & The logo\\ \hline
+\texttt{\#fsdocs-nav} & The navigation-bar\\ \hline
+\end{tabular}
+
+
+
+If you write a new theme by CSS styling please contribute it back to FSharp.Formatting.
+\subsection*{Customizing via a new template}
+
+
+
+You can do advanced styling by creating a new template.  Add a file \texttt{docs/\_template.html}, likely starting
+with the existing default template.
+\begin{quote}
+
+
+NOTE: To enable hot reload during development with \texttt{fsdocs watch} in a custom \texttt{\_template.html} file,
+make sure to add the single line \texttt{\{\{fsdocs-watch-script\}\}}  to your \texttt{<head>} tag.
+NOTE: There is no guarantee that your template will continue to work with future versions of F\# Formatting.
+If you do develop a good template please consider contributing it back to F\# Formatting.
+\end{quote}
+
+\subsection*{Customizing by generating your own site using your own code}
+
+
+
+The \texttt{FSharp.Formatting.ApiDocs} namespace includes a \texttt{GenerateModel} that captures
+the results of documentation preparation in \texttt{ApiDocsModel} and allows you to
+generate your own site using your own code.
+\begin{quote}
+
+
+NOTE: The ApiDocsModel API is undergoing change and improvement and there is no guarantee that your bespoke site generation will continue to work
+with future versions of F\# Formatting.
+NOTE: The \texttt{ApiDocsModel} currently includes some generated HTML with some specific style tags.
+In the long term these may be removed from the design of that component.
+\end{quote}
+
+
+
+\end{document}

@@ -1,0 +1,93 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Example: Using the Markdown Extensions for LaTeX}
+
+
+
+To use LaTex extension, you need add javascript
+link to \href{http://www.mathjax.org/}{MathJax} in
+your template.
+
+
+To use inline LaTex, eclose LaTex code with \texttt{\$}:
+$k_{n+1} = n^2 + k_n^2 - k_{n-1}$. Alternatively,
+you can also use \texttt{\$\$}.
+
+
+To use block LaTex, start a new parapgraph, with
+the first line marked as \texttt{\$\$\$} (no close \texttt{\$\$\$}):
+
+
+\begin{equation}
+A_{m,n} =
+ \begin{pmatrix}
+  a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+  a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+  \vdots  & \vdots  & \ddots & \vdots  \\
+  a_{m,1} & a_{m,2} & \cdots & a_{m,n}
+ \end{pmatrix}
+\end{equation}
+
+
+
+
+Use LaTex escape rule:
+\begin{itemize}
+\item Escape \$ in inline mode: $\$$, $\$var$
+
+\item Other escapes: $\& \% \$ \# \_ \{ \}$
+
+\item Using < or >: $x > 1$, $y < 1$, $x >= 1$,
+$y <= 1$, $x = 1$
+
+\item $<p>something</p>$
+
+\end{itemize}
+
+
+
+\end{document}

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>FSharp.Formatting.Markdown</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary navbar-nav-scroll fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2 id="fsharp-formatting-markdown">
+    FSharp.Formatting.Markdown Namespace
+  </h2>
+  <div class="fsdocs-xmldoc">
+    <p>
+      Functionality for processing markdown documents, converting to HTML, LaTeX, ipynb and scripts
+    </p>
+  </div>
+  <table class="table outer-list fsdocs-entity-list">
+    <thead>
+      <tr>
+        <td>
+          Type/Module
+        </td>
+        <td>
+          Description
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Dsl">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-dsl.html">
+                Dsl
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.Dsl`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.Dsl\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L107-107" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="Markdown">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdown.html">
+                Markdown
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.Markdown`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.Markdown\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L33-33" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ Static class that provides methods for formatting 
+ and transforming Markdown documents.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownColumnAlignment">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowncolumnalignment.html">
+                MarkdownColumnAlignment
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownColumnAlignment`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownColumnAlignment\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L22-22" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ Column in a table can be aligned to left, right, center or using the default alignment
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownDocument">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">
+                MarkdownDocument
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownDocument`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownDocument\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L24-24" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ Representation of a Markdown document - the representation of Paragraphs
+ uses an F# discriminated union type and so is best used from F#.
+ 
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownEmbedParagraphs">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownembedparagraphs.html">
+                MarkdownEmbedParagraphs
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownEmbedParagraphs`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownEmbedParagraphs\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L104-104" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ Provides an extensibility point for adding custom kinds of paragraphs into a document
+ (MarkdownEmbedParagraphs values can be embedded using MarkdownParagraph.EmbedParagraphs)
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownEmbedSpans">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownembedspans.html">
+                MarkdownEmbedSpans
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownEmbedSpans`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownEmbedSpans\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L50-50" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ Provides an extensibility point for adding custom kinds of spans into a document
+ (MarkdownEmbedSpans values can be embedded using MarkdownSpan.EmbedSpans)
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownListKind">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownlistkind.html">
+                MarkdownListKind
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownListKind`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownListKind\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L17-17" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+   A list kind can be Ordered or Unordered corresponding to <code><ol></code> and <code><ul></code> elements
+ 
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownParagraph">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownparagraph.html">
+                MarkdownParagraph
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownParagraph`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownParagraph\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L56-56" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ A paragraph represents a (possibly) multi-line element of a Markdown document.
+ Paragraphs are headings, inline paragraphs, code blocks, lists, quotations, tables and
+ also embedded LaTeX blocks.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownParagraphs">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownparagraphs.html">
+                MarkdownParagraphs
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownParagraphs`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownParagraphs\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L97-97" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ A type alias for a list of paragraphs
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownParseOptions">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownparseoptions.html">
+                MarkdownParseOptions
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownParseOptions`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownParseOptions\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L216-216" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ Controls the parsing of markdown
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownPatterns">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownpatterns.html">
+                MarkdownPatterns
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownPatterns`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownPatterns\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L130-130" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ This module provides an easy way of processing Markdown documents.
+ It lets you decompose documents into leafs and nodes with nested paragraphs.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownRange">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownrangemodule.html">
+                MarkdownRange (Module)
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownRangeModule`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownRangeModule\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Common/Range.fs#L12-12" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownRange">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownrange.html">
+                MarkdownRange (Type)
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownRange`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownRange\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Common/Range.fs#L4-4" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownSpan">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownspan.html">
+                MarkdownSpan
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownSpan`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownSpan\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L30-30" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ Represents inline formatting inside a paragraph. This can be literal (with text), various
+ formattings (string, emphasis, etc.), hyperlinks, images, inline maths etc.
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownSpans">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownspans.html">
+                MarkdownSpans
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownSpans`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownSpans\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L46-46" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ A type alias for a list of MarkdownSpan values
+
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="fsdocs-entity-name">
+          <p>
+            <a name="MarkdownTableRow">
+              <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowntablerow.html">
+                MarkdownTableRow
+              </a>
+            </a>
+          </p>
+        </td>
+        <td class="fsdocs-entity-xmldoc">
+          <div>
+            <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:T:FSharp.Formatting.Markdown.MarkdownTableRow`')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+            </div>
+            <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'T:FSharp.Formatting.Markdown.MarkdownTableRow\'/>')">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+            </div>
+            <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/MarkdownModel.fs#L100-100" class="fsdocs-source-link" title="Source on GitHub">
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+              <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+            </a>
+            <p class="fsdocs-summary">
+              
+ A type alias representing table row as a list of paragraphs
+
+            </p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

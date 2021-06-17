@@ -1,0 +1,337 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\href{https://mybinder.org/v2/gh/diffsharp/diffsharp.github.io/master?filepath=apidocs.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-binder.svg}
+\caption{Binder}
+\end{figure}
+} 
+\href{apidocs.fsx}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-script.svg}
+\caption{Script}
+\end{figure}
+} 
+\href{apidocs.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-notebook.svg}
+\caption{Notebook}
+\end{figure}
+}
+\section*{API Documentation Generation}
+
+
+
+The \href{commandline.html}{command-line tool \texttt{fsdocs}} can be used to generate documentation
+for F\# libraries with XML comments.  The documentation is normally built using \texttt{fsdocs build} and developed using \texttt{fsdocs watch}. For
+the former the output will be placed in \texttt{output{\textbackslash}reference} by default.
+\subsection*{Templates}
+
+
+
+The HTML is built by instantiating a template. The template used is the first of:
+\begin{itemize}
+\item 
+
+\texttt{docs/reference/\_template.html}
+
+\item 
+
+\texttt{docs/\_template.html}
+
+\item 
+
+The default template
+
+\end{itemize}
+
+
+
+Usually the same template can be used as for \href{content.html}{other content}.
+\subsection*{Classic XML Doc Comments}
+
+
+
+XML Doc Comments may use \href{https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/}{the normal F\# and C\# XML doc standards}.
+
+
+The tags that form the core of the XML doc specification are:
+\begin{Verbatim}[commandchars=\\\{\}]
+{<}\id{c}{>}	{<}\id{para}{>}	{<}\id{see}{>}{*}	{<}\id{value}{>}
+{<}\id{code}{>}	{<}\id{param}{>}{*}	{<}\id{seealso}{>}{*}	
+{<}\id{example}{>}	{<}\id{paramref}{>}	{<}\id{summary}{>}	
+{<}\kwd{exception}{>}{*}	{<}\id{permission}{>}{*}	{<}\id{typeparam}{>}{*}	
+{<}\id{include}{>}{*}	{<}\id{remarks}{>}	{<}\id{typeparamref}{>}	
+{<}\id{list}{>}	{<}\id{inheritdoc}{>}	{<}\id{returns}{>}	
+
+\end{Verbatim}
+
+
+
+In addition, you may also use the \href{https://github.com/fsharp/fslang-design/blob/master/tooling/FST-1031-xmldoc-extensions.md}{Recommended XML doc extensions for F\# documentation tooling}.
+\begin{itemize}
+\item 
+
+\texttt{<a href = "...">} links
+
+\item 
+
+Arbitrary paragraph-level HTML such as \texttt{<b>} for bold in XML doc text
+
+\item 
+
+\texttt{<namespacedoc>} giving documentation for the enclosing namespace
+
+\item 
+
+\texttt{<exclude>} to exclude from XML docs
+
+\item 
+
+\texttt{<category>} to give a category for an entity or member. An optional \texttt{index} attribute can be specified
+to help sort the list of categories.
+
+\item 
+
+\texttt{{\textbackslash}(...{\textbackslash})} for inline math and \texttt{\$\$...\$\$} and \texttt{{\textbackslash}[...{\textbackslash}]}for math environments, see \href{http://docs.mathjax.org.
+Some}{http://docs.mathjax.org.
+Some} escaping of characters (e.g. \texttt{<}, \texttt{>}) may be needed to form valid XML
+
+\end{itemize}
+
+
+
+An example of an XML documentation comment, assuming the code is in namespace \texttt{TheNamespace}:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{/// <summary>}
+\com{///   A module}
+\com{/// </summary>}
+\com{///}
+\com{/// <namespacedoc>}
+\com{///   <summary>A namespace to remember</summary>}
+\com{///}
+\com{///   <remarks>More on that</remarks>}
+\com{/// </namespacedoc>}
+\com{///}
+\kwd{module} \ltyp{SomeModule} \ops{=} 
+    \com{/// <summary>}
+    \com{///   Some actual comment}
+    \com{///   <para>Another paragraph, see  <see cref="T:TheNamespace.SomeType"/>. </para>}
+    \com{/// </summary>}
+    \com{///}
+    \com{/// <param name="x">The input</param>}
+    \com{///}
+    \com{/// <returns>The output</returns>}
+    \com{///}
+    \com{/// <example>}
+    \com{///   Try using}
+    \com{///   <code>}
+    \com{///      open TheNamespace}
+    \com{///      SomeModule.a}
+    \com{///   </code>}
+    \com{/// </example>}
+    \com{///}
+    \com{/// <category>Foo</category>}
+   \kwd{let} \lfun{someFunction} \lfun{x} \ops{=} \num{42} \ops{+} \lfun{x}
+
+\com{/// <summary>}
+\com{///   A type, see  <see cref="T:TheNamespace.SomeModule"/> and}
+\com{///  <see cref="M:TheNamespace.SomeModule.someFunction"/>. }
+\com{/// </summary>}
+\com{///}
+\kwd{type} \ltyp{SomeType}{(}{)} \ops{=}
+   \kwd{member} \lfun{x}{.}{P} \ops{=} \num{1}
+\end{Verbatim}
+
+
+
+Like types, members are referred to by xml doc sig.  These must currently be precise as the F\#
+compiler doesn't elaborate these references from simpler names:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{type} \ltyp{Class2}{(}{)} \ops{=} 
+    \kwd{member} \lfun{this}{.}{Property} \ops{=} \str{"more"}
+    \kwd{member} \lfun{this}{.}\lfun{Method0}{(}{)} \ops{=} \str{"more"}
+    \kwd{member} \lfun{this}{.}\lfun{Method1}{(}\lfun{c}{:} \ltyp{string}{)} \ops{=} \str{"more"}
+    \kwd{member} \lfun{this}{.}\lfun{Method2}{(}\lfun{c}{:} \ltyp{string}{,} \lfun{o}{:} \ltyp{obj}{)} \ops{=} \str{"more"}
+
+\com{/// <see cref="P:TheNamespace.Class2.Property" />}
+\com{/// and <see cref="M:TheNamespace.Class2.OtherMethod0" />}
+\com{/// and <see cref="M:TheNamespace.Class2.Method1(System.String)" />}
+\com{/// and <see cref="M:TheNamespace.Class2.Method2(System.String,System.Object)" />}
+\kwd{let} \lfun{referringFunction1} {(}{)} \ops{=} \str{"result"}
+\end{Verbatim}
+
+
+
+Generic types are referred to by .NET compiled name, e.g.
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{type} \ltyp{GenericClass2}{<}{'}\id{T}{>}{(}{)} \ops{=} 
+    \kwd{member} \lfun{this}{.}{Property} \ops{=} \str{"more"}
+
+    \kwd{member} \lfun{this}{.}\lfun{NonGenericMethod}{(}\id{\_c}{:} {'}\id{T}{)} \ops{=} \str{"more"}
+
+    \kwd{member} \lfun{this}{.}\lfun{GenericMethod}{(}\id{\_c}{:} {'}\id{T}{,} \id{\_o}{:} {'}\id{U}{)} \ops{=} \str{"more"}
+
+\com{/// See <see cref="T:TheNamespace.GenericClass2`1" />}
+\com{/// and <see cref="P:TheNamespace.GenericClass2`1.Property" />}
+\com{/// and <see cref="M:TheNamespace.GenericClass2`1.NonGenericMethod(`0)" />}
+\com{/// and <see cref="M:TheNamespace.GenericClass2`1.GenericMethod``1(`0,``0)" />}
+\kwd{let} \lfun{referringFunction2} {(}{)} \ops{=} \str{"result"}
+
+\com{(*}
+
+\com{\#\# Go to Source links}
+
+\com{'fsdocs' normally automatically adds GitHub links to each functions, values and class members for further reference.}
+
+\com{This is normally done automatically based on the following settings:}
+
+\com{    <RepositoryUrl>https://github.com/...</RepositoryUrl>}
+\com{    <RepositoryBranch>...</RepositoryBranch>}
+\com{    <RepositoryType>git</RepositoryType>}
+
+\com{If your source is not built from the same project where you are building documentation then}
+\com{you may need these settings:}
+
+\com{    <FsDocsSourceRepository>...</FsDocsSourceRepository> -- the URL for the root of the source }
+\com{    <FsDocsSourceFolder>...</FsDocsSourceFolder>         -- the root soure folder at time of build}
+
+\com{It is assumed that `sourceRepo` and `sourceFolder` have synchronized contents.}
+
+\com{\#\# Markdown Comments}
+
+\com{You can use Markdown instead of XML in `///` comments. If you do, you should set `<UsesMarkdownComments>` in}
+\com{your F\# project file.}
+
+\com{> Note: Markdown Comments are not supported in all F\# IDE tooling.}
+
+\com{\#\#\# Adding cross-type links to modules and types in the same assembly}
+
+\com{You can automatically add cross-type links to the documentation pages of other modules and types in the same assembly.}
+\com{You can do this in two different ways:}
+
+\com{* Add a [markdown inline link](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\#links) were the link}
+\com{title is the name of the type you want to link.}
+
+\com{      /// this will generate a link to [Foo.Bar] documentation}
+
+\com{* Add a [Markdown inline code](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet\#code) (using}
+\com{back-ticks) where the code is the name of the type you want to link.}
+
+\com{      /// This will also generate a link to `Foo.Bar` documentation}
+
+\com{You can use either the full name (including namespace and module) or the simple name of a type.}
+\com{If more than one type is found with the same name the link will not be generated.}
+\com{If a type with the given name is not found in the same assembly the link will not be generated.}
+\com{*)}
+
+\com{/// Contains two types [Bar] and [Foo.Baz]}
+\kwd{module} \ltyp{Foo} \ops{=} 
+    
+    \com{/// Bar is just an `int` and belongs to module [Foo]}
+    \kwd{type} \ltyp{Bar} \ops{=} \ltyp{int}
+    
+    \com{/// Baz contains a `Foo.Bar` as its `id`}
+    \kwd{type} \ltyp{Baz} \ops{=} {\{} {id}{:} \ltyp{Bar} {\}}
+
+    \com{/// This function operates on `Baz` types.}
+    \kwd{let} \lfun{f} {(}\lfun{b}{:}\ltyp{Baz}{)} \ops{=} 
+        \lfun{b}{.}\id{id} \ops{*} \num{42}
+
+\com{/// Referencing [Foo3] will not generate a link as there is no type with the name `Foo3`}
+\kwd{module} \ltyp{Foo3} \ops{=}
+    
+    \com{/// This is not the same type as `Foo.Bar`}
+    \kwd{type} \ltyp{Bar} \ops{=} \ltyp{double}
+
+    \com{/// Using the simple name for [Bar] will fail to create a link because the name is duplicated in }
+    \com{/// [Foo.Bar] and in [Foo3.Bar]. In this case, using the full name works.}
+    \kwd{let} \lfun{f2} \lfun{b} \ops{=}
+         \lfun{b} \ops{*} \num{50}
+\end{Verbatim}
+
+\subsubsection*{Markdown Comments: Excluding APIs from the docs}
+
+
+
+If you want to exclude modules or functions from the API docs you can use the \texttt{[omit]} tag.
+It needs to be set on a separate tripple-slashed line, but it could be either the first or the last:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{/// [omit]}
+\com{/// Some actual comment}
+\kwd{module} \ltyp{Bar} \ops{=} 
+   \kwd{let} \id{a} \ops{=} \num{42}
+\end{Verbatim}
+
+\subsection*{Building library documentation programmatically}
+
+
+
+You can build library documentation programatically using the functionality
+in the \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocs.html}{ApiDocs} type. To do this, load the assembly and open necessary namespaces:
+\begin{Verbatim}[commandchars=\\\{\}]
+\prep{\#r} \str{"FSharp.Formatting.ApiDocs.dll"}
+\kwd{open} \id{FSharp}{.}\id{Formatting}{.}\id{ApiDocs}
+\kwd{open} \id{System}{.}\id{IO}
+\end{Verbatim}
+
+
+
+For example the \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocs.html}{ApiDocs.GenerateHtml} method:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{file} \ops{=} \ltyp{Path}{.}\id{Combine}{(}\id{root}{,} \str{"bin/YourLibrary.dll"}{)}
+\kwd{let} \id{input} \ops{=} \ltyp{ApiDocInput}{.}\id{FromFile}{(}\id{file}{)} 
+\ltyp{ApiDocs}{.}\id{GenerateHtml}
+    {(} {[} \id{input} {]}{,} 
+      \lfun{output}\ops{=}\ltyp{Path}{.}\id{Combine}{(}\id{root}{,} \str{"output"}{)}{,}
+      \lfun{collectionName}\ops{=}\str{"YourLibrary"}{,}
+      \lfun{template}\ops{=}\ltyp{Path}{.}\id{Combine}{(}\id{root}{,} \str{"templates"}{,} \str{"template.html"}{)}{,}
+      \lfun{substitutions}\ops{=}{[}{]}{)}
+\end{Verbatim}
+
+
+
+\end{document}

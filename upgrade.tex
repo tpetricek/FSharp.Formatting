@@ -1,0 +1,143 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Upgrading to fsdocs}
+
+
+
+Here are the typical steps to upgrade a repo based on \texttt{ProjectScaffold} to use \texttt{fsdocs}
+\begin{enumerate}
+\item 
+
+Run
+\begin{lstlisting}
+dotnet new tool
+dotnet tool install FSharp.Formatting.CommandTool
+
+\end{lstlisting}
+
+\item 
+
+Delete all of \texttt{docs{\textbackslash}tools} particularly \texttt{docs{\textbackslash}tool{\textbackslash}generate.fsx}.  Keep a copy of any templates for reference as you'll have to copy some bits across to the new template.
+
+\item 
+
+Put your docs directory so it reflects the final shape of the site. For example move the content of \texttt{docs{\textbackslash}input{\textbackslash}*} and \texttt{docs{\textbackslash}files{\textbackslash}*} directly to \texttt{docs{\textbackslash}*}
+
+\item 
+
+Follow the notes in \href{styling.html}{styling} to start to style your site.
+
+\item 
+
+Run
+\begin{lstlisting}
+dotnet fsdocs watch
+
+\end{lstlisting}
+
+
+and edit and test your docs.
+
+\item 
+
+If using FAKE adjust \texttt{build.fsx} e.g.
+\begin{lstlisting}
+Target.create "GenerateDocs" (fun _ ->
+   Shell.cleanDir ".fsdocs"
+   DotNet.exec id "fsdocs" "build --clean" |> ignore
+)
+
+Target.create "ReleaseDocs" (fun _ ->
+    Git.Repository.clone "" projectRepo "temp/gh-pages"
+    Git.Branches.checkoutBranch "temp/gh-pages" "gh-pages"
+    Shell.copyRecursive "output" "temp/gh-pages" true |> printfn "%A"
+    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" "add ." |> printfn "%s"
+    let cmd = sprintf """commit -a -m "Update generated documentation for version %s""" release.NugetVersion
+    Git.CommandHelper.runSimpleGitCommand "temp/gh-pages" cmd |> printfn "%s"
+    Git.Branches.push "temp/gh-pages"
+)
+
+\end{lstlisting}
+
+\item 
+
+Consider creating \texttt{docs{\textbackslash}\_template.fsx} and \texttt{docs{\textbackslash}\_template.ipynb} to enable co-generation of F\# scripts and F\# notebooks.
+
+
+If you add support for notebooks and scripts, consider adding mybinder links to each of your literate executable content pages. For example \href{https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/literate.fsx\#L19}{like this}.
+
+
+Also add load sections to make sure your notebooks and scripts contain the right content to load packages out of repo.  For example \href{https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/literate.fsx\#L1}{like this}.
+
+\end{enumerate}
+
+
+
+Sample commands:
+\begin{lstlisting}
+dotnet tool install FSharp.Formatting.CommandTool --local
+git add dotnet-tools.json   
+git rm -fr docs/tools
+git mv docs/input/* docs
+git mv docs/files/* docs
+
+<manually download and fixup the _template.html>
+
+dotnet fsdocs watch
+
+touch docs/_template.fsx
+touch docs/_template.ipynb
+git add docs/_template.fsx
+git add docs/_template.ipynb
+
+\end{lstlisting}
+
+
+Here is an example PR: \href{https://github.com/fsprojects/FSharp.Control.AsyncSeq/pull/116}{https://github.com/fsprojects/FSharp.Control.AsyncSeq/pull/116}
+
+
+\end{document}

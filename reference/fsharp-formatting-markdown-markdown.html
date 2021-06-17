@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Markdown (FSharp.Formatting)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary navbar-nav-scroll fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    Markdown Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown.html">
+        FSharp.Formatting.Markdown
+      </a>
+    </dt>
+    <dt>
+      Assembly: FSharp.Formatting.Markdown.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code>obj</code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+ Static class that provides methods for formatting 
+ and transforming Markdown documents.
+
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Static members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Static member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '408', 408)" onmouseover="showTip(event, '408', 408)">
+                <p>
+                  <a id="Parse">
+                    <a href="#Parse">
+                      <code><span>Markdown.Parse<span><span>(<span>text,&#32;?newline,&#32;?parseOptions</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="408">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.Parse<span><span>(<span>text,&#32;?newline,&#32;?parseOptions</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        text
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?parseOptions
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownparseoptions.html">MarkdownParseOptions</a></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.Parse`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.Parse\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L36-36" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Parse the specified text into a MarkdownDocument. Line breaks in the
+ inline HTML (etc.) will be stored using the specified string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  text
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?parseOptions
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownparseoptions.html">MarkdownParseOptions</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '409', 409)" onmouseover="showTip(event, '409', 409)">
+                <p>
+                  <a id="ToFsx">
+                    <a href="#ToFsx">
+                      <code><span>Markdown.ToFsx<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="409">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.ToFsx<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        doc
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.ToFsx`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.ToFsx\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L127-127" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform the provided MarkdownDocument into Fsx and return the result as a string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  doc
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '410', 410)" onmouseover="showTip(event, '410', 410)">
+                <p>
+                  <a id="ToHtml">
+                    <a href="#ToHtml">
+                      <code><span>Markdown.ToHtml<span><span>(<span>markdownText,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="410">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.ToHtml<span><span>(<span>markdownText,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        markdownText
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.ToHtml`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.ToHtml\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L88-88" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform Markdown document into HTML format. 
+ The result will be returned as a string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  markdownText
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '411', 411)" onmouseover="showTip(event, '411', 411)">
+                <p>
+                  <a id="ToHtml">
+                    <a href="#ToHtml">
+                      <code><span>Markdown.ToHtml<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="411">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.ToHtml<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        doc
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.ToHtml`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.ToHtml\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L80-80" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform the provided MarkdownDocument into HTML
+ format and return the result as a string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  doc
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '412', 412)" onmouseover="showTip(event, '412', 412)">
+                <p>
+                  <a id="ToLatex">
+                    <a href="#ToLatex">
+                      <code><span>Markdown.ToLatex<span><span>(<span>markdownText,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="412">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.ToLatex<span><span>(<span>markdownText,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        markdownText
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.ToLatex`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.ToLatex\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L115-115" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform Markdown text into LaTeX format. The result will be returned as a string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  markdownText
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '413', 413)" onmouseover="showTip(event, '413', 413)">
+                <p>
+                  <a id="ToLatex">
+                    <a href="#ToLatex">
+                      <code><span>Markdown.ToLatex<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="413">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.ToLatex<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        doc
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.ToLatex`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.ToLatex\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L108-108" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform the provided MarkdownDocument into LaTeX
+ format and return the result as a string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  doc
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '414', 414)" onmouseover="showTip(event, '414', 414)">
+                <p>
+                  <a id="ToMd">
+                    <a href="#ToMd">
+                      <code><span>Markdown.ToMd<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="414">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.ToMd<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        doc
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.ToMd`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.ToMd\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L134-134" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform the provided MarkdownDocument into Md and return the result as a string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  doc
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '415', 415)" onmouseover="showTip(event, '415', 415)">
+                <p>
+                  <a id="ToPynb">
+                    <a href="#ToPynb">
+                      <code><span>Markdown.ToPynb<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="415">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.ToPynb<span><span>(<span>doc,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        doc
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code>string</code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.ToPynb`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.ToPynb\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L120-120" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform the provided MarkdownDocument into Pynb and return the result as a string.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  doc
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '416', 416)" onmouseover="showTip(event, '416', 416)">
+                <p>
+                  <a id="WriteHtml">
+                    <a href="#WriteHtml">
+                      <code><span>Markdown.WriteHtml<span><span>(<span>markdownText,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="416">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.WriteHtml<span><span>(<span>markdownText,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        markdownText
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        writer
+                      </b>
+                      :
+                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.WriteHtml`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.WriteHtml\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L74-74" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform Markdown text into HTML format. The result
+ will be written to the provided TextWriter.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  markdownText
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  writer
+                </span>
+                :
+                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '417', 417)" onmouseover="showTip(event, '417', 417)">
+                <p>
+                  <a id="WriteHtml">
+                    <a href="#WriteHtml">
+                      <code><span>Markdown.WriteHtml<span><span>(<span>doc,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="417">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.WriteHtml<span><span>(<span>doc,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        doc
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        writer
+                      </b>
+                      :
+                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.WriteHtml`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.WriteHtml\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L66-66" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform the provided MarkdownDocument into HTML
+ format and write the result to a given writer.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  doc
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  writer
+                </span>
+                :
+                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '418', 418)" onmouseover="showTip(event, '418', 418)">
+                <p>
+                  <a id="WriteLatex">
+                    <a href="#WriteLatex">
+                      <code><span>Markdown.WriteLatex<span><span>(<span>markdownText,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="418">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.WriteLatex<span><span>(<span>markdownText,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        markdownText
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        writer
+                      </b>
+                      :
+                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.WriteLatex`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.WriteLatex\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L102-102" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform Markdown document into LaTeX format. The result
+ will be written to the provided TextWriter.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  markdownText
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  writer
+                </span>
+                :
+                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '419', 419)" onmouseover="showTip(event, '419', 419)">
+                <p>
+                  <a id="WriteLatex">
+                    <a href="#WriteLatex">
+                      <code><span>Markdown.WriteLatex<span><span>(<span>doc,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="419">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>Markdown.WriteLatex<span><span>(<span>doc,&#32;writer,&#32;?newline,&#32;?substitutions,&#32;?crefResolver</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        doc
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        writer
+                      </b>
+                      :
+                      <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?newline
+                      </b>
+                      :
+                      <code>string</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?substitutions
+                      </b>
+                      :
+                      <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?crefResolver
+                      </b>
+                      :
+                      <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.Markdown.Markdown.WriteLatex`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.Markdown.Markdown.WriteLatex\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.Markdown/Markdown.fs#L94-94" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Transform the provided MarkdownDocument into LaTeX
+ format and write the result to a given writer.
+
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  doc
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdowndocument.html">MarkdownDocument</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  writer
+                </span>
+                :
+                <code><a href="https://docs.microsoft.com/dotnet/api/system.io.textwriter">TextWriter</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?newline
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?substitutions
+                </span>
+                :
+                <code><span><span>(<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-paramkey.html">ParamKey</a>&#32;*&#32;string</span>)</span>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?crefResolver
+                </span>
+                :
+                <code><span>string&#32;->&#32;<span><span>(<span>string&#32;*&#32;string</span>)</span>&#32;option</span></span></code>
+              </dt>
+              <dd class="fsdocs-param-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

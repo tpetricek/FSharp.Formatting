@@ -1,0 +1,321 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\href{https://mybinder.org/v2/gh/diffsharp/diffsharp.github.io/master?filepath=content.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-binder.svg}
+\caption{Binder}
+\end{figure}
+} 
+\href{content.fsx}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-script.svg}
+\caption{Script}
+\end{figure}
+} 
+\href{content.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-notebook.svg}
+\caption{Notebook}
+\end{figure}
+}
+\section*{Creating Content}
+
+
+
+The \href{commandline.html}{"fsdocs" tool} allows documentation for a site to be built
+from content in a \texttt{docs} directory. The expected structure for a \texttt{docs} directory is
+\begin{lstlisting}
+docs/**/*.md                  -- markdown with embedded code, converted to html and optionally tex/ipynb
+docs/**/*.fsx                 -- fsx scripts converted to html and optionally tex/ipynb
+docs/**/*                     -- other content, copied over
+docs/**/_template.html        -- optional template, specifies the HTML template for this directory and its contents
+docs/**/_template.tex         -- optionally indicates Latex files should be generated
+docs/**/_template.ipynb       -- optionally indicates F# ipynb files should be generated
+docs/**/_template.fsx         -- optionally indicates F# fsx files should be generated (even from markdown)
+docs/reference/_template.html -- optionally specifies the default template for reference docs
+
+\end{lstlisting}
+
+
+Processing is by these two commands:
+\begin{Verbatim}[commandchars=\\\{\}]
+\id{dotnet} \id{fsdocs} \id{build}
+\id{dotnet} \id{fsdocs} \id{watch}
+
+\end{Verbatim}
+
+
+
+The output goes in \texttt{output/} by default.  Processing is recursive, making this a form of static site generation.
+\subsection*{Literate Scripts and Markdown Content}
+
+
+
+The input directory may contain \href{literate.html}{literate scripts} and markdown content.
+\subsection*{Other Content}
+
+
+
+Content that is not \texttt{*.fsx} or \texttt{*.md} is copied across.
+\subsection*{Default Styling Content}
+
+
+
+By default additional content such as \texttt{fsdocs-search.js}, \texttt{fsdocs-tips.js} and \texttt{fsdocs-styles.css} are included in the
+the \texttt{content} directory of the output.  This can be suppressed with \texttt{--nodefaultcontent} or by having your own
+copy of this content in your \texttt{content} directory.
+\subsection*{Ignored Content}
+
+
+
+Any file or directory beginning with \texttt{.} is ignored.
+\subsection*{Front matter}
+
+
+
+Each content file can have optional frontmatter.  This determines the navigation bar title, categorization and ordering.
+
+
+For markdown, the format is:
+\begin{Verbatim}[commandchars=\\\{\}]
+{---}
+\id{title}{:} \id{Some} \id{Title}
+\id{category}{:} \id{Some} \id{Category}
+\id{categoryindex}{:} \num{2}
+\id{index}{:} \num{3}
+\ops{---}
+
+\end{Verbatim}
+
+
+
+For F\# scripts the frontmatter is in this form:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{(**}
+\com{---}
+\com{title: A Literate Script}
+\com{category: Examples}
+\com{categoryindex: 2}
+\com{index: 1}
+\com{---}
+\com{*)}
+
+\end{Verbatim}
+
+
+
+All entries are optional.
+The \texttt{categoryindex} determines the ordering of categories.
+The \texttt{index} determines the ordering of within each category.
+The \texttt{title} is used in the navigation bar instead of any title inferred from the document.
+\subsection*{Multi-language Content}
+
+
+
+Versions of content in other languages should go in two-letter coded sub-directories, e.g.
+\begin{Verbatim}[commandchars=\\\{\}]
+\id{docs}\ops{/}\id{ja}\ops{/...}
+\id{docs}\ops{/}\id{de}\ops{/...}
+
+\end{Verbatim}
+
+
+
+These will be elided from the main table-of-contents and search indexes.  (Currently no language-specific
+table of contents is built, nor language-specific site search indexes).
+\subsection*{Templates and Substitutions}
+
+
+
+Templates are used for HTML (\texttt{\_template.html}), LaTeX (\texttt{\_template.tex}), Notebooks (\texttt{\_template.ipynb)}
+and F\# script outputs (\texttt{\_template.fsx}).
+
+
+The following substitutions determine the primary (non-styling) content of your site.
+For example \texttt{\{\{fsdocs-content\}\}} is replaced with the generated content in each file.
+
+
+Substitutions are applied when generating content from HTML templates, IPYNB templates, FSX templates.
+They are also applied to content apart from Markdown inline code \texttt{`...`}, Markdown LaTeX and
+generated outputs.
+
+
+See \href{styling.html}{Styling} for information about template parameters and styling beyond the default template.
+\begin{tabular}{|l|l|}\hline
+\textbf{Substitution name} & \textbf{Generated content}\\ \hline\hline
+\texttt{root} & \texttt{<PackageProjectUrl>} else \texttt{/} followed by \texttt{fsdocs-collection-name}\\ \hline
+\texttt{fsdocs-collection-name} & Name of .sln, single .fsproj or containing directory\\ \hline
+\texttt{fsdocs-content} & Main page content\\ \hline
+\texttt{fsdocs-list-of-namespaces} & HTML \texttt{<li>} list of namespaces with links\\ \hline
+\texttt{fsdocs-list-of-documents} & HTML \texttt{<li>} list of documents with  titles and links\\ \hline
+\texttt{fsdocs-page-title} & First h1 heading in literate file. Generated for API docs\\ \hline
+\texttt{fsdocs-source} & Original literate script or markdown source\\ \hline
+\texttt{fsdocs-source-filename} & Name of original input source, relative to the \texttt{docs} root\\ \hline
+\texttt{fsdocs-source-basename} & Name of original input source, excluding its extensions, relative to the \texttt{docs} root\\ \hline
+\texttt{fsdocs-tooltips} & Generated hidden div elements for tooltips\\ \hline
+\texttt{fsdocs-watch-script} & The websocket script used in watch mode to trigger hot reload\\ \hline
+\end{tabular}
+
+
+
+The following substitutions are extracted from your project files and may or may not be used by the default
+template:
+\begin{tabular}{|l|l|}\hline
+\textbf{Substitution name} & \textbf{Value}\\ \hline\hline
+\texttt{fsdocs-copyright} & \texttt{<Copyright>}\\ \hline
+\texttt{fsdocs-package-project-url} & \texttt{<PackageProjectUrl>}\\ \hline
+\texttt{fsdocs-package-license-expression} & \texttt{<PackageLicenseExpression>}\\ \hline
+\texttt{fsdocs-package-tags} & \texttt{<PackageTags>}\\ \hline
+\texttt{fsdocs-package-version} & \texttt{<Version>}\\ \hline
+\end{tabular}
+
+
+
+For the \texttt{fsdocs} tool, additional substitutions can be specified using \texttt{--parameters}.
+\subsection*{Cross References to API Docs}
+
+
+
+Markdown content can contain cross-references to API Docs.  Use inline
+markdown code snippets of the special form \texttt{`cref:T:MyNamespace.MyType`} where \texttt{T:MyNamespace.MyType}
+is a method, property or type xml doc sig reference, see \href{apidocs.html}{API Docs}.
+This can include any cross-references resolved by fsdocs.
+
+
+The generated API documentation includes buttons to copy the XML and Markdown forms of API doc references.
+
+
+For example, within this project,
+\begin{itemize}
+\item 
+
+the text \texttt{`cref:T:FSharp.Formatting.Markdown.MarkdownParagraph`} resolves to the link \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-markdown-markdownparagraph.html}{MarkdownParagraph}
+
+\item 
+
+the text \texttt{`cref:T:System.Console`} resolves to the link \href{https://docs.microsoft.com/dotnet/api/system.console}{Console}
+
+\item 
+
+the text \texttt{`cref:M:System.Console.WriteLine`} resolves to the link \href{https://docs.microsoft.com/dotnet/api/system.console.writeline}{Console.WriteLine}
+
+\item 
+
+the text \texttt{`cref:M:System.Console.WriteLine(System.String)`} resolves to the link \href{https://docs.microsoft.com/dotnet/api/system.console.writeline}{Console.WriteLine}
+
+\item 
+
+the text \texttt{``cref:T:FSharp.Control.FSharpAsync`1``} resolves to the link \href{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync-1}{Async}
+
+\item 
+
+the text \texttt{`cref:T:FSharp.Control.FSharpAsync`} resolves to the link \href{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-control-fsharpasync}{Async}
+
+\item 
+
+the text \texttt{``cref:T:FSharp.Core.array`1``} resolves to the link \href{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-array-1}{array}
+
+\item 
+
+the text \texttt{`cref:T:FSharp.Core.OptionModule`} resolves to the link \href{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-optionmodule}{Option}
+
+\item 
+
+the text \texttt{```cref:M:FSharp.Collections.ListModule.Append``1```} resolves to the link \href{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule\#Append}{ListModule.Append}
+
+\end{itemize}
+
+\begin{quote}
+
+
+NOTE: These cases act as tests - if the links above do not work, then that indicates a bug or a change in the
+external link. \href{https://github.com/fsprojects/FSharp.Formatting/issues/new}{Please report it}.
+\end{quote}
+
+
+
+Determining xmldoc sig references is not simple.  The API doc generated pages come with
+buttons to copy out the XmlDoc signature.
+\subsection*{Generating HTML Output}
+
+
+
+HTML is generated by default. You can also add a \texttt{\_template.html}.  This should contain \texttt{\{\{fsdocs-content\}\}},  \texttt{\{\{fsdocs-tooltips\}\}}
+and other placeholders. Substitutions are
+applied to this template.
+If a file \texttt{\_template.html} exists then is used as the template for HTML generation for that directory and all sub-content.
+\subsection*{Generating LaTeX output}
+
+
+
+To generate .tex output for each script and markdown file, add a \texttt{\_template.tex}. Substitutions are
+applied to this template. The file is either empty of contains \texttt{\{\{fsdocs-content\}\}} as the key where the body
+of the document is placed.
+\subsection*{Generating iPython Notebook output}
+
+
+
+To generate .ipynb output for each script and markdown file, add a \texttt{\_template.ipynb}, usually empty. Substitutions are
+applied to this template.
+
+
+To add a \texttt{mybinder} badge to your generated notebook, ensure you have a \texttt{Dockerfile} and \texttt{NuGet.config}
+in your \texttt{docs} directory and use text like this:
+\begin{Verbatim}[commandchars=\\\{\}]
+{[}\ops{!}{[}\id{Binder}{]}{(}\id{https}{:}\com{//mybinder.org/badge\_logo.svg)](https://mybinder.org/v2/gh/fsprojects/FSharp.Formatting/gh-pages?filepath=literate.ipynb)}
+
+\end{Verbatim}
+
+\subsection*{Generating Script outputs}
+
+
+
+To generate .fsx output for each script and markdown file, add a \texttt{\_template.fsx}, usually empty. Substitutions are
+applied to this template. It is either empty of contains \texttt{\{\{fsdocs-content\}\}} as the key where the body
+of the script is placed.
+
+
+\end{document}

@@ -1,0 +1,219 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\href{https://mybinder.org/v2/gh/diffsharp/diffsharp.github.io/master?filepath=codeformat.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-binder.svg}
+\caption{Binder}
+\end{figure}
+} 
+\href{codeformat.fsx}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-script.svg}
+\caption{Script}
+\end{figure}
+} 
+\href{codeformat.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-notebook.svg}
+\caption{Notebook}
+\end{figure}
+}
+\section*{Code formatting}
+
+
+
+This page demonstrates how to use \texttt{FSharp.Formatting.CodeFormat} to tokenize
+F\# source code, obtain information about the source code (mainly tooltips
+from the type-checker) and how to turn the code into a nicely formatted HTML.
+
+
+First, we need to load the assembly and open necessary namespaces:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{open} \id{FSharp}{.}\id{Formatting}{.}\id{CodeFormat}
+\kwd{open} \id{System}{.}\id{Reflection}
+\end{Verbatim}
+
+\subsection*{Starting a background agent}
+
+
+
+The \texttt{FSharp.Formatting.CodeFormat} namespace contains \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-codeformat-codeformat.html}{CodeFormat} type which is the
+entry point. The static method \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-codeformat-codeformat.html\#CreateAgent}{CodeFormat.CreateAgent} starts a background worker that
+can be called to format snippets repeatedly:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{formattingAgent} \ops{=} \ltyp{CodeFormat}{.}\id{CreateAgent}{(}{)}
+\end{Verbatim}
+
+
+
+If you want to process multiple snippets, it is a good idea to keep the
+formatting agent around if possible. The agent needs to load the F\# compiler
+(which needs to load various files itself) and so this takes a long time.
+\subsection*{Processing F\# source}
+
+
+
+The formatting agent provides a \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-codeformat-codeformatagent.html}{CodeFormatAgent.ParseAndCheckSource} method (together with an asynchronous
+version for use from F\# and also a version that returns a .NET \texttt{Task} for C\#).
+To call the method, we define a simple F\# code as a string:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{source} \ops{=} \str{"""}
+\str{    let hello () = }
+\str{      printfn "Hello world"}
+\str{  """}
+\kwd{let} \id{snippets}{,} \id{errors} \ops{=} \id{formattingAgent}{.}\id{ParseAndCheckSource}{(}\str{"C:{\textbackslash}{\textbackslash}snippet.fsx"}{,} \id{source}{)}
+\end{Verbatim}
+
+
+
+When calling the method, you need to specify a file name and the actual content
+of the script file. The file does not have to physically exist. It is used by the
+F\# compiler to resolve relative references (e.g. \texttt{\#r}) and to automatically name
+the module including all code in the file.
+
+
+You can also specify additional parameters, such as \texttt{*.dll} references, by passing
+a third argument with compiler options (e.g. \texttt{"-r:Foo.dll -r:Bar.dll"}).
+
+
+This operation might take some time, so it is a good idea to use an asynchronous
+variant of the method. It returns two arrays - the first contains F\# snippets
+in the source code and the second contains any errors reported by the compiler.
+A single source file can include multiple snippets using the same formatting tags
+as those used on \href{http://www.fssnip.net}{fssnip.net} as documented in the
+\href{http://www.fssnip.net/pages/About}{about page}.
+\subsection*{Working with returned tokens}
+
+
+
+Each returned snippet is essentially just a collection of lines and each line
+consists of a sequence of tokens. The following snippet prints basic information
+about the tokens of our sample snippet:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{// Get the first snippet and obtain list of lines}
+\kwd{let} {(}{Snippet}{(}\id{title}{,} \id{lines}{)}{)} \ops{=} \id{snippets} \ops{|>} \ltyp{Seq}{.}\id{head}
+
+\com{// Iterate over all lines and all tokens on each line}
+\kwd{for} {(}{Line}{(}\id{\_}{,} \lfun{tokens}{)}{)} \kwd{in} \id{lines} \kwd{do}
+  \kwd{for} \lfun{token} \kwd{in} \lfun{tokens} \kwd{do}
+    \kwd{match} \lfun{token} \kwd{with}
+    {|} \ltyp{TokenSpan}{.}\id{Token}{(}\lfun{kind}{,} \lfun{code}{,} \lfun{tip}{)} \kwd{->} 
+        \lfun{printf} \str{"}\lprf{\%s}\str{"} \lfun{code}
+        \lfun{tip} \ops{|>} \ltyp{Option}{.}\id{iter} {(}\kwd{fun} \lfun{spans} \kwd{->}
+          \lfun{printfn} \str{"}\lprf{\%A}\str{"} \lfun{spans}{)}          
+    {|} \ltyp{TokenSpan}{.}\id{Omitted} \id{\_} 
+    {|} \ltyp{TokenSpan}{.}\id{Output} \id{\_} 
+    {|} \ltyp{TokenSpan}{.}\id{Error} \id{\_} \kwd{->} {(}{)}
+  \lfun{printfn} \str{""}
+\end{Verbatim}
+
+
+
+The \texttt{TokenSpan.Token} is the most important kind of token. It consists of a kind
+(identifier, keyword, etc.), the original F\# code and tool tip information.
+The tool tip is further formatted using a simple document format, but we simply
+print the value using the F\# pretty printing, so the result looks as follows:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{hello}{[}\id{Literal} \str{"val hello : unit -> unit"}{;} \ops{..}{.}{]} {(}{)} \ops{=} 
+  \id{printfn}{[}\id{Literal} \str{"val printfn : TextWriterFormat<'T> -> 'T"}{;} \ops{..}{.}{]} \str{"Hello world"}
+
+\end{Verbatim}
+
+
+
+The \texttt{Omitted} token is generated if you use the special \texttt{(*[omit:...]*)} command.
+The \texttt{Output} token is generated if you use the \texttt{// [fsi:...]} command to format
+output returned by F\# interactive. The \texttt{Error} command wraps code that should be
+underlined with a red squiggle if the code contains an error.
+\subsection*{Generating HTML output}
+
+
+
+Finally, the \texttt{CodeFormat} type also includes a method \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-codeformat-codeformat.html}{CodeFormat.FormatHtml} that can be used
+to generate nice HTML output from an F\# snippet. This is used, for example, on
+\href{http://www.fssnip.net}{F\# Snippets}. The following example shows how to call it:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{prefix} \ops{=} \str{"fst"} 
+\kwd{let} \id{html} \ops{=} \ltyp{CodeFormat}{.}\id{FormatHtml}{(}\id{snippets}{,} \id{prefix}{)}
+
+\com{// Print all snippets, in case there is more of them}
+\kwd{for} \lfun{snip} \kwd{in} \id{html}{.}\id{Snippets} \kwd{do}
+  \lfun{printfn} \str{"}\lprf{\%s}\str{"} \lfun{snip}{.}\id{Content}
+
+\com{// Print HTML code that is generated for ToolTips}
+\lfun{printfn} \str{"}\lprf{\%s}\str{"} \id{html}{.}\id{ToolTip}
+\end{Verbatim}
+
+
+
+If the input contains multiple snippets separated using the \texttt{//[snippet:...]} comment, e.g.:
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip"><span class="c">// [snippet: First sample]</span>
+<span class="i">printf</span> <span class="s">"The answer is: %A"</span> <span class="n">42</span>
+<span class="c">// [/snippet]</span>
+<span class="c">// [snippet: Second sample]</span>
+<span class="i">printf</span> <span class="s">"Hello world!"</span>
+<span class="c">// [/snippet]</span>
+</pre>
+</td>
+</tr>
+</table>
+
+
+then the formatter returns multiple HTML blocks. However, the generated tool tips
+are shared by all snippets (to save space) and so they are returned separately.
+
+
+\end{document}

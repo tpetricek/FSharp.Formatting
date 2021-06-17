@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Generating API Docs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary navbar-nav-scroll fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<p><a href="https://mybinder.org/v2/gh/diffsharp/diffsharp.github.io/master?filepath=apidocs.ipynb"><img src="img/badge-binder.svg" alt="Binder" /></a>&emsp;
+<a href="apidocs.fsx"><img src="img/badge-script.svg" alt="Script" /></a>&emsp;
+<a href="apidocs.ipynb"><img src="img/badge-notebook.svg" alt="Notebook" /></a></p>
+<h1><a name="API-Documentation-Generation" class="anchor" href="#API-Documentation-Generation">API Documentation Generation</a></h1>
+<p>The <a href="commandline.html">command-line tool <code>fsdocs</code></a> can be used to generate documentation
+for F# libraries with XML comments.  The documentation is normally built using <code>fsdocs build</code> and developed using <code>fsdocs watch</code>. For
+the former the output will be placed in <code>output\reference</code> by default.</p>
+<h2><a name="Templates" class="anchor" href="#Templates">Templates</a></h2>
+<p>The HTML is built by instantiating a template. The template used is the first of:</p>
+<ul>
+<li><p><code>docs/reference/_template.html</code></p></li>
+<li><p><code>docs/_template.html</code></p></li>
+<li>The default template</li>
+</ul>
+<p>Usually the same template can be used as for <a href="content.html">other content</a>.</p>
+<h2><a name="Classic-XML-Doc-Comments" class="anchor" href="#Classic-XML-Doc-Comments">Classic XML Doc Comments</a></h2>
+<p>XML Doc Comments may use <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/">the normal F# and C# XML doc standards</a>.</p>
+<p>The tags that form the core of the XML doc specification are:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pn">&lt;</span><span class="id">c</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">para</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">see</span><span class="pn">&gt;</span><span class="pn">*</span>	<span class="pn">&lt;</span><span class="id">value</span><span class="pn">&gt;</span>
+<span class="pn">&lt;</span><span class="id">code</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">param</span><span class="pn">&gt;</span><span class="pn">*</span>	<span class="pn">&lt;</span><span class="id">seealso</span><span class="pn">&gt;</span><span class="pn">*</span>	
+<span class="pn">&lt;</span><span class="id">example</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">paramref</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">summary</span><span class="pn">&gt;</span>	
+<span class="pn">&lt;</span><span class="k">exception</span><span class="pn">&gt;</span><span class="pn">*</span>	<span class="pn">&lt;</span><span class="id">permission</span><span class="pn">&gt;</span><span class="pn">*</span>	<span class="pn">&lt;</span><span class="id">typeparam</span><span class="pn">&gt;</span><span class="pn">*</span>	
+<span class="pn">&lt;</span><span class="id">include</span><span class="pn">&gt;</span><span class="pn">*</span>	<span class="pn">&lt;</span><span class="id">remarks</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">typeparamref</span><span class="pn">&gt;</span>	
+<span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">list</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">inheritdoc</span><span class="pn">&gt;</span>	<span class="pn">&lt;</span><span class="id">returns</span><span class="pn">&gt;</span>	
+</code></pre>
+<p>In addition, you may also use the <a href="https://github.com/fsharp/fslang-design/blob/master/tooling/FST-1031-xmldoc-extensions.md">Recommended XML doc extensions for F# documentation tooling</a>.</p>
+<ul>
+<li><p><code>&lt;a href = "..."&gt;</code> links</p></li>
+<li><p>Arbitrary paragraph-level HTML such as <code>&lt;b&gt;</code> for bold in XML doc text</p></li>
+<li><p><code>&lt;namespacedoc&gt;</code> giving documentation for the enclosing namespace</p></li>
+<li><p><code>&lt;exclude&gt;</code> to exclude from XML docs</p></li>
+<li>
+<p><code>&lt;category&gt;</code> to give a category for an entity or member. An optional <code>index</code> attribute can be specified
+to help sort the list of categories.</p>
+</li>
+<li>
+<p><code>\(...\)</code> for inline math and <code>$$...$$</code> and <code>\[...\]</code>for math environments, see <a href="http://docs.mathjax.org.
+Some">http://docs.mathjax.org.
+Some</a> escaping of characters (e.g. <code>&amp;lt;</code>, <code>&amp;gt;</code>) may be needed to form valid XML</p>
+</li>
+</ul>
+<p>An example of an XML documentation comment, assuming the code is in namespace <code>TheNamespace</code>:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// &lt;summary&gt;</span>
+<span class="c">///   A module</span>
+<span class="c">/// &lt;/summary&gt;</span>
+<span class="c">///</span>
+<span class="c">/// &lt;namespacedoc&gt;</span>
+<span class="c">///   &lt;summary&gt;A namespace to remember&lt;/summary&gt;</span>
+<span class="c">///</span>
+<span class="c">///   &lt;remarks&gt;More on that&lt;/remarks&gt;</span>
+<span class="c">/// &lt;/namespacedoc&gt;</span>
+<span class="c">///</span>
+<span class="k">module</span> <span class="m">SomeModule</span> <span class="o">=</span> 
+    <span class="c">/// &lt;summary&gt;</span>
+    <span class="c">///   Some actual comment</span>
+    <span class="c">///   &lt;para&gt;Another paragraph, see  &lt;see cref=&quot;T:TheNamespace.SomeType&quot;/&gt;. &lt;/para&gt;</span>
+    <span class="c">/// &lt;/summary&gt;</span>
+    <span class="c">///</span>
+    <span class="c">/// &lt;param name=&quot;x&quot;&gt;The input&lt;/param&gt;</span>
+    <span class="c">///</span>
+    <span class="c">/// &lt;returns&gt;The output&lt;/returns&gt;</span>
+    <span class="c">///</span>
+    <span class="c">/// &lt;example&gt;</span>
+    <span class="c">///   Try using</span>
+    <span class="c">///   &lt;code&gt;</span>
+    <span class="c">///      open TheNamespace</span>
+    <span class="c">///      SomeModule.a</span>
+    <span class="c">///   &lt;/code&gt;</span>
+    <span class="c">/// &lt;/example&gt;</span>
+    <span class="c">///</span>
+    <span class="c">/// &lt;category&gt;Foo&lt;/category&gt;</span>
+   <span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="fn">someFunction</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="fn">x</span> <span class="o">=</span> <span class="n">42</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs4', 5)" onmouseover="showTip(event, 'fs4', 5)" class="fn">x</span>
+
+<span class="c">/// &lt;summary&gt;</span>
+<span class="c">///   A type, see  &lt;see cref=&quot;T:TheNamespace.SomeModule&quot;/&gt; and</span>
+<span class="c">///  &lt;see cref=&quot;M:TheNamespace.SomeModule.someFunction&quot;/&gt;. </span>
+<span class="c">/// &lt;/summary&gt;</span>
+<span class="c">///</span>
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs5', 6)" onmouseover="showTip(event, 'fs5', 6)" class="rt">SomeType</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span>
+   <span class="k">member</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="fn">x</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="prop">P</span> <span class="o">=</span> <span class="n">1</span>
+</code></pre>
+<p>Like types, members are referred to by xml doc sig.  These must currently be precise as the F#
+compiler doesn't elaborate these references from simpler names:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs8', 9)" onmouseover="showTip(event, 'fs8', 9)" class="rt">Class2</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> 
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs9', 10)" onmouseover="showTip(event, 'fs9', 10)" class="fn">this</span><span class="pn">.</span><span class="prop">Property</span> <span class="o">=</span> <span class="s">&quot;more&quot;</span>
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="fn">this</span><span class="pn">.</span><span class="fn">Method0</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> <span class="s">&quot;more&quot;</span>
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="fn">this</span><span class="pn">.</span><span class="fn">Method1</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="fn">c</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs11', 14)" onmouseover="showTip(event, 'fs11', 14)" class="rt">string</span><span class="pn">)</span> <span class="o">=</span> <span class="s">&quot;more&quot;</span>
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs9', 15)" onmouseover="showTip(event, 'fs9', 15)" class="fn">this</span><span class="pn">.</span><span class="fn">Method2</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs10', 16)" onmouseover="showTip(event, 'fs10', 16)" class="fn">c</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="rt">string</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs12', 18)" onmouseover="showTip(event, 'fs12', 18)" class="fn">o</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="rt">obj</span><span class="pn">)</span> <span class="o">=</span> <span class="s">&quot;more&quot;</span>
+
+<span class="c">/// &lt;see cref=&quot;P:TheNamespace.Class2.Property&quot; /&gt;</span>
+<span class="c">/// and &lt;see cref=&quot;M:TheNamespace.Class2.OtherMethod0&quot; /&gt;</span>
+<span class="c">/// and &lt;see cref=&quot;M:TheNamespace.Class2.Method1(System.String)&quot; /&gt;</span>
+<span class="c">/// and &lt;see cref=&quot;M:TheNamespace.Class2.Method2(System.String,System.Object)&quot; /&gt;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 20)" onmouseover="showTip(event, 'fs14', 20)" class="fn">referringFunction1</span> <span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> <span class="s">&quot;result&quot;</span>
+</code></pre>
+<p>Generic types are referred to by .NET compiled name, e.g.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs15', 21)" onmouseover="showTip(event, 'fs15', 21)" class="rt">GenericClass2</span><span class="pn">&lt;</span><span class="ta">&#39;</span><span class="id">T</span><span class="pn">&gt;</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> 
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs16', 22)" onmouseover="showTip(event, 'fs16', 22)" class="fn">this</span><span class="pn">.</span><span class="prop">Property</span> <span class="o">=</span> <span class="s">&quot;more&quot;</span>
+
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs16', 23)" onmouseover="showTip(event, 'fs16', 23)" class="fn">this</span><span class="pn">.</span><span class="fn">NonGenericMethod</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 24)" onmouseover="showTip(event, 'fs17', 24)" class="id">_c</span><span class="pn">:</span> <span class="ta">&#39;</span><span class="id">T</span><span class="pn">)</span> <span class="o">=</span> <span class="s">&quot;more&quot;</span>
+
+    <span class="k">member</span> <span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="fn">this</span><span class="pn">.</span><span class="fn">GenericMethod</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs17', 26)" onmouseover="showTip(event, 'fs17', 26)" class="id">_c</span><span class="pn">:</span> <span class="ta">&#39;</span><span class="id">T</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs18', 27)" onmouseover="showTip(event, 'fs18', 27)" class="id">_o</span><span class="pn">:</span> <span class="ta">&#39;</span><span class="id">U</span><span class="pn">)</span> <span class="o">=</span> <span class="s">&quot;more&quot;</span>
+
+<span class="c">/// See &lt;see cref=&quot;T:TheNamespace.GenericClass2`1&quot; /&gt;</span>
+<span class="c">/// and &lt;see cref=&quot;P:TheNamespace.GenericClass2`1.Property&quot; /&gt;</span>
+<span class="c">/// and &lt;see cref=&quot;M:TheNamespace.GenericClass2`1.NonGenericMethod(`0)&quot; /&gt;</span>
+<span class="c">/// and &lt;see cref=&quot;M:TheNamespace.GenericClass2`1.GenericMethod``1(`0,``0)&quot; /&gt;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 28)" onmouseover="showTip(event, 'fs19', 28)" class="fn">referringFunction2</span> <span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> <span class="s">&quot;result&quot;</span>
+
+<span class="c">(*</span>
+
+<span class="c">## Go to Source links</span>
+
+<span class="c">&#39;fsdocs&#39; normally automatically adds GitHub links to each functions, values and class members for further reference.</span>
+
+<span class="c">This is normally done automatically based on the following settings:</span>
+
+<span class="c">    &lt;RepositoryUrl&gt;https://github.com/...&lt;/RepositoryUrl&gt;</span>
+<span class="c">    &lt;RepositoryBranch&gt;...&lt;/RepositoryBranch&gt;</span>
+<span class="c">    &lt;RepositoryType&gt;git&lt;/RepositoryType&gt;</span>
+
+<span class="c">If your source is not built from the same project where you are building documentation then</span>
+<span class="c">you may need these settings:</span>
+
+<span class="c">    &lt;FsDocsSourceRepository&gt;...&lt;/FsDocsSourceRepository&gt; -- the URL for the root of the source </span>
+<span class="c">    &lt;FsDocsSourceFolder&gt;...&lt;/FsDocsSourceFolder&gt;         -- the root soure folder at time of build</span>
+
+<span class="c">It is assumed that `sourceRepo` and `sourceFolder` have synchronized contents.</span>
+
+<span class="c">## Markdown Comments</span>
+
+<span class="c">You can use Markdown instead of XML in `///` comments. If you do, you should set `&lt;UsesMarkdownComments&gt;` in</span>
+<span class="c">your F# project file.</span>
+
+<span class="c">&gt; Note: Markdown Comments are not supported in all F# IDE tooling.</span>
+
+<span class="c">### Adding cross-type links to modules and types in the same assembly</span>
+
+<span class="c">You can automatically add cross-type links to the documentation pages of other modules and types in the same assembly.</span>
+<span class="c">You can do this in two different ways:</span>
+
+<span class="c">* Add a [markdown inline link](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links) were the link</span>
+<span class="c">title is the name of the type you want to link.</span>
+
+<span class="c">      /// this will generate a link to [Foo.Bar] documentation</span>
+
+<span class="c">* Add a [Markdown inline code](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) (using</span>
+<span class="c">back-ticks) where the code is the name of the type you want to link.</span>
+
+<span class="c">      /// This will also generate a link to `Foo.Bar` documentation</span>
+
+<span class="c">You can use either the full name (including namespace and module) or the simple name of a type.</span>
+<span class="c">If more than one type is found with the same name the link will not be generated.</span>
+<span class="c">If a type with the given name is not found in the same assembly the link will not be generated.</span>
+<span class="c">*)</span>
+
+<span class="c">/// Contains two types [Bar] and [Foo.Baz]</span>
+<span class="k">module</span> <span class="m">Foo</span> <span class="o">=</span> 
+    
+    <span class="c">/// Bar is just an `int` and belongs to module [Foo]</span>
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs20', 29)" onmouseover="showTip(event, 'fs20', 29)" class="vt">Bar</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 30)" onmouseover="showTip(event, 'fs21', 30)" class="vt">int</span>
+    
+    <span class="c">/// Baz contains a `Foo.Bar` as its `id`</span>
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs22', 31)" onmouseover="showTip(event, 'fs22', 31)" class="rt">Baz</span> <span class="o">=</span> <span class="pn">{</span> <span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="prop">id</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs20', 33)" onmouseover="showTip(event, 'fs20', 33)" class="vt">Bar</span> <span class="pn">}</span>
+
+    <span class="c">/// This function operates on `Baz` types.</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs24', 34)" onmouseover="showTip(event, 'fs24', 34)" class="fn">f</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs25', 35)" onmouseover="showTip(event, 'fs25', 35)" class="fn">b</span><span class="pn">:</span><span onmouseout="hideTip(event, 'fs22', 36)" onmouseover="showTip(event, 'fs22', 36)" class="rt">Baz</span><span class="pn">)</span> <span class="o">=</span> 
+        <span onmouseout="hideTip(event, 'fs25', 37)" onmouseover="showTip(event, 'fs25', 37)" class="fn">b</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs23', 38)" onmouseover="showTip(event, 'fs23', 38)" class="id">id</span> <span class="o">*</span> <span class="n">42</span>
+
+<span class="c">/// Referencing [Foo3] will not generate a link as there is no type with the name `Foo3`</span>
+<span class="k">module</span> <span class="m">Foo3</span> <span class="o">=</span>
+    
+    <span class="c">/// This is not the same type as `Foo.Bar`</span>
+    <span class="k">type</span> <span onmouseout="hideTip(event, 'fs26', 39)" onmouseover="showTip(event, 'fs26', 39)" class="vt">Bar</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs27', 40)" onmouseover="showTip(event, 'fs27', 40)" class="vt">double</span>
+
+    <span class="c">/// Using the simple name for [Bar] will fail to create a link because the name is duplicated in </span>
+    <span class="c">/// [Foo.Bar] and in [Foo3.Bar]. In this case, using the full name works.</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 41)" onmouseover="showTip(event, 'fs28', 41)" class="fn">f2</span> <span onmouseout="hideTip(event, 'fs29', 42)" onmouseover="showTip(event, 'fs29', 42)" class="fn">b</span> <span class="o">=</span>
+         <span onmouseout="hideTip(event, 'fs29', 43)" onmouseover="showTip(event, 'fs29', 43)" class="fn">b</span> <span class="o">*</span> <span class="n">50</span>
+</code></pre>
+<h3><a name="Markdown-Comments-Excluding-APIs-from-the-docs" class="anchor" href="#Markdown-Comments-Excluding-APIs-from-the-docs">Markdown Comments: Excluding APIs from the docs</a></h3>
+<p>If you want to exclude modules or functions from the API docs you can use the <code>[omit]</code> tag.
+It needs to be set on a separate tripple-slashed line, but it could be either the first or the last:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// [omit]</span>
+<span class="c">/// Some actual comment</span>
+<span class="k">module</span> <span class="m">Bar</span> <span class="o">=</span> 
+   <span class="k">let</span> <span onmouseout="hideTip(event, 'fs30', 44)" onmouseover="showTip(event, 'fs30', 44)" class="id">a</span> <span class="o">=</span> <span class="n">42</span>
+</code></pre>
+<h2><a name="Building-library-documentation-programmatically" class="anchor" href="#Building-library-documentation-programmatically">Building library documentation programmatically</a></h2>
+<p>You can build library documentation programatically using the functionality
+in the <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocs.html">ApiDocs</a> type. To do this, load the assembly and open necessary namespaces:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="pp">#r</span> <span class="s">&quot;FSharp.Formatting.ApiDocs.dll&quot;</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs31', 45)" onmouseover="showTip(event, 'fs31', 45)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs32', 46)" onmouseover="showTip(event, 'fs32', 46)" class="id">Formatting</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs33', 47)" onmouseover="showTip(event, 'fs33', 47)" class="id">ApiDocs</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs34', 48)" onmouseover="showTip(event, 'fs34', 48)" class="id">System</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs35', 49)" onmouseover="showTip(event, 'fs35', 49)" class="id">IO</span>
+</code></pre>
+<p>For example the <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocs.html">ApiDocs.GenerateHtml</a> method:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs36', 50)" onmouseover="showTip(event, 'fs36', 50)" class="id">file</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs37', 51)" onmouseover="showTip(event, 'fs37', 51)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 52)" onmouseover="showTip(event, 'fs38', 52)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs1', 53)" onmouseover="showTip(event, 'fs1', 53)" class="id">root</span><span class="pn">,</span> <span class="s">&quot;bin/YourLibrary.dll&quot;</span><span class="pn">)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs39', 54)" onmouseover="showTip(event, 'fs39', 54)" class="id">input</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs40', 55)" onmouseover="showTip(event, 'fs40', 55)" class="rt">ApiDocInput</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs41', 56)" onmouseover="showTip(event, 'fs41', 56)" class="id">FromFile</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs36', 57)" onmouseover="showTip(event, 'fs36', 57)" class="id">file</span><span class="pn">)</span> 
+<span onmouseout="hideTip(event, 'fs42', 58)" onmouseover="showTip(event, 'fs42', 58)" class="rt">ApiDocs</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs43', 59)" onmouseover="showTip(event, 'fs43', 59)" class="id">GenerateHtml</span>
+    <span class="pn">(</span> <span class="pn">[</span> <span onmouseout="hideTip(event, 'fs39', 60)" onmouseover="showTip(event, 'fs39', 60)" class="id">input</span> <span class="pn">]</span><span class="pn">,</span> 
+      <span class="fn">output</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs37', 61)" onmouseover="showTip(event, 'fs37', 61)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 62)" onmouseover="showTip(event, 'fs38', 62)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs1', 63)" onmouseover="showTip(event, 'fs1', 63)" class="id">root</span><span class="pn">,</span> <span class="s">&quot;output&quot;</span><span class="pn">)</span><span class="pn">,</span>
+      <span class="fn">collectionName</span><span class="o">=</span><span class="s">&quot;YourLibrary&quot;</span><span class="pn">,</span>
+      <span class="fn">template</span><span class="o">=</span><span onmouseout="hideTip(event, 'fs37', 64)" onmouseover="showTip(event, 'fs37', 64)" class="rt">Path</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs38', 65)" onmouseover="showTip(event, 'fs38', 65)" class="id">Combine</span><span class="pn">(</span><span onmouseout="hideTip(event, 'fs1', 66)" onmouseover="showTip(event, 'fs1', 66)" class="id">root</span><span class="pn">,</span> <span class="s">&quot;templates&quot;</span><span class="pn">,</span> <span class="s">&quot;template.html&quot;</span><span class="pn">)</span><span class="pn">,</span>
+      <span class="fn">substitutions</span><span class="o">=</span><span class="pn">[</span><span class="pn">]</span><span class="pn">)</span>
+</code></pre>
+
+            <div class="fsdocs-tip" id="fs1">val root : string</div>
+<div class="fsdocs-tip" id="fs2">type &#39;T list = List&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs3">val someFunction : x:int -&gt; int<br /><em>&#160;&lt;summary&gt;<br />&#160;&#160;&#160;Some actual comment<br />&#160;&#160;&#160;&lt;para&gt;Another paragraph, see  &lt;see cref=&quot;T:TheNamespace.SomeType&quot;/&gt;. &lt;/para&gt;<br />&#160;&lt;/summary&gt;<br /><br />&#160;&lt;param name=&quot;x&quot;&gt;The input&lt;/param&gt;<br /><br />&#160;&lt;returns&gt;The output&lt;/returns&gt;<br /><br />&#160;&lt;example&gt;<br />&#160;&#160;&#160;Try using<br />&#160;&#160;&#160;&lt;code&gt;<br />&#160;&#160;&#160;&#160;&#160;&#160;open TheNamespace<br />&#160;&#160;&#160;&#160;&#160;&#160;SomeModule.a<br />&#160;&#160;&#160;&lt;/code&gt;<br />&#160;&lt;/example&gt;<br /><br />&#160;&lt;category&gt;Foo&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs4">val x : int</div>
+<div class="fsdocs-tip" id="fs5">Multiple items<br />type SomeType =<br />&#160;&#160;new : unit -&gt; SomeType<br />&#160;&#160;member P : int<br /><em>&#160;&lt;summary&gt;<br />&#160;&#160;&#160;A type, see  &lt;see cref=&quot;T:TheNamespace.SomeModule&quot;/&gt; and<br />&#160;&#160;&lt;see cref=&quot;M:TheNamespace.SomeModule.someFunction&quot;/&gt;. <br />&#160;&lt;/summary&gt;<br /></em><br /><br />--------------------<br />new : unit -&gt; SomeType</div>
+<div class="fsdocs-tip" id="fs6">val x : SomeType</div>
+<div class="fsdocs-tip" id="fs7">member SomeType.P : int</div>
+<div class="fsdocs-tip" id="fs8">Multiple items<br />type Class2 =<br />&#160;&#160;new : unit -&gt; Class2<br />&#160;&#160;member Method0 : unit -&gt; string<br />&#160;&#160;member Method1 : c:string -&gt; string<br />&#160;&#160;member Method2 : c:string * o:obj -&gt; string<br />&#160;&#160;member Property : string<br /><br />--------------------<br />new : unit -&gt; Class2</div>
+<div class="fsdocs-tip" id="fs9">val this : Class2</div>
+<div class="fsdocs-tip" id="fs10">val c : string</div>
+<div class="fsdocs-tip" id="fs11">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />--------------------<br />type string = System.String</div>
+<div class="fsdocs-tip" id="fs12">val o : obj</div>
+<div class="fsdocs-tip" id="fs13">type obj = System.Object</div>
+<div class="fsdocs-tip" id="fs14">val referringFunction1 : unit -&gt; string<br /><em>&#160;&lt;see cref=&quot;P:TheNamespace.Class2.Property&quot; /&gt;<br />&#160;and &lt;see cref=&quot;M:TheNamespace.Class2.OtherMethod0&quot; /&gt;<br />&#160;and &lt;see cref=&quot;M:TheNamespace.Class2.Method1(System.String)&quot; /&gt;<br />&#160;and &lt;see cref=&quot;M:TheNamespace.Class2.Method2(System.String,System.Object)&quot; /&gt;</em></div>
+<div class="fsdocs-tip" id="fs15">Multiple items<br />type GenericClass2&lt;&#39;T&gt; =<br />&#160;&#160;new : unit -&gt; GenericClass2&lt;&#39;T&gt;<br />&#160;&#160;member GenericMethod : _c:&#39;T * _o:&#39;U -&gt; string<br />&#160;&#160;member NonGenericMethod : _c:&#39;T -&gt; string<br />&#160;&#160;member Property : string<br /><br />--------------------<br />new : unit -&gt; GenericClass2&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs16">val this : GenericClass2&lt;&#39;T&gt;</div>
+<div class="fsdocs-tip" id="fs17">val _c : &#39;T</div>
+<div class="fsdocs-tip" id="fs18">val _o : &#39;U</div>
+<div class="fsdocs-tip" id="fs19">val referringFunction2 : unit -&gt; string<br /><em>&#160;See &lt;see cref=&quot;T:TheNamespace.GenericClass2`1&quot; /&gt;<br />&#160;and &lt;see cref=&quot;P:TheNamespace.GenericClass2`1.Property&quot; /&gt;<br />&#160;and &lt;see cref=&quot;M:TheNamespace.GenericClass2`1.NonGenericMethod(`0)&quot; /&gt;<br />&#160;and &lt;see cref=&quot;M:TheNamespace.GenericClass2`1.GenericMethod``1(`0,``0)&quot; /&gt;</em></div>
+<div class="fsdocs-tip" id="fs20">[&lt;Struct&gt;]<br />type Bar = int<br /><em>&#160;Bar is just an `int` and belongs to module [Foo]</em></div>
+<div class="fsdocs-tip" id="fs21">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />--------------------<br />[&lt;Struct&gt;]<br />type int = int32<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; =<br />&#160;&#160;int</div>
+<div class="fsdocs-tip" id="fs22">type Baz =<br />&#160;&#160;{ id: Bar }<br /><em>&#160;Baz contains a `Foo.Bar` as its `id`</em></div>
+<div class="fsdocs-tip" id="fs23">Baz.id: Bar</div>
+<div class="fsdocs-tip" id="fs24">val f : b:Baz -&gt; Bar<br /><em>&#160;This function operates on `Baz` types.</em></div>
+<div class="fsdocs-tip" id="fs25">val b : Baz</div>
+<div class="fsdocs-tip" id="fs26">[&lt;Struct&gt;]<br />type Bar = double<br /><em>&#160;This is not the same type as `Foo.Bar`</em></div>
+<div class="fsdocs-tip" id="fs27">Multiple items<br />val double : value:&#39;T -&gt; double (requires member op_Explicit)<br /><br />--------------------<br />[&lt;Struct&gt;]<br />type double = System.Double<br /><br />--------------------<br />type double&lt;&#39;Measure&gt; = float&lt;&#39;Measure&gt;</div>
+<div class="fsdocs-tip" id="fs28">val f2 : b:int -&gt; int<br /><em>&#160;Using the simple name for [Bar] will fail to create a link because the name is duplicated in <br />&#160;[Foo.Bar] and in [Foo3.Bar]. In this case, using the full name works.</em></div>
+<div class="fsdocs-tip" id="fs29">val b : int</div>
+<div class="fsdocs-tip" id="fs30">val a : int</div>
+<div class="fsdocs-tip" id="fs31">Multiple items<br />namespace FSharp<br /><br />--------------------<br />namespace Microsoft.FSharp</div>
+<div class="fsdocs-tip" id="fs32">namespace FSharp.Formatting</div>
+<div class="fsdocs-tip" id="fs33">namespace FSharp.Formatting.ApiDocs</div>
+<div class="fsdocs-tip" id="fs34">namespace System</div>
+<div class="fsdocs-tip" id="fs35">namespace System.IO</div>
+<div class="fsdocs-tip" id="fs36">val file : string</div>
+<div class="fsdocs-tip" id="fs37">type Path =<br />&#160;&#160;static member ChangeExtension : path: string * extension: string -&gt; string<br />&#160;&#160;static member Combine : path1: string * path2: string -&gt; string + 3 overloads<br />&#160;&#160;static member EndsInDirectorySeparator : path: ReadOnlySpan&lt;char&gt; -&gt; bool + 1 overload<br />&#160;&#160;static member GetDirectoryName : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetExtension : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetFileName : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetFileNameWithoutExtension : path: ReadOnlySpan&lt;char&gt; -&gt; ReadOnlySpan&lt;char&gt; + 1 overload<br />&#160;&#160;static member GetFullPath : path: string -&gt; string + 1 overload<br />&#160;&#160;static member GetInvalidFileNameChars : unit -&gt; char []<br />&#160;&#160;static member GetInvalidPathChars : unit -&gt; char []<br />&#160;&#160;...</div>
+<div class="fsdocs-tip" id="fs38">Path.Combine([&lt;System.ParamArray&gt;] paths: string []) : string<br />Path.Combine(path1: string, path2: string) : string<br />Path.Combine(path1: string, path2: string, path3: string) : string<br />Path.Combine(path1: string, path2: string, path3: string, path4: string) : string</div>
+<div class="fsdocs-tip" id="fs39">val input : ApiDocInput</div>
+<div class="fsdocs-tip" id="fs40">type ApiDocInput =<br />&#160;&#160;{ Path: string<br />&#160;&#160;&#160;&#160;XmlFile: string option<br />&#160;&#160;&#160;&#160;SourceFolder: string option<br />&#160;&#160;&#160;&#160;SourceRepo: string option<br />&#160;&#160;&#160;&#160;Substitutions: Substitutions option<br />&#160;&#160;&#160;&#160;MarkdownComments: bool<br />&#160;&#160;&#160;&#160;Warn: bool<br />&#160;&#160;&#160;&#160;PublicOnly: bool }<br />&#160;&#160;&#160;&#160;static member FromFile : assemblyPath:string * ?mdcomments:bool * ?substitutions:Substitutions * ?sourceRepo:string * ?sourceFolder:string * ?publicOnly:bool * ?warn:bool -&gt; ApiDocInput</div>
+<div class="fsdocs-tip" id="fs41">static member ApiDocInput.FromFile : assemblyPath:string * ?mdcomments:bool * ?substitutions:FSharp.Formatting.Templating.Substitutions * ?sourceRepo:string * ?sourceFolder:string * ?publicOnly:bool * ?warn:bool -&gt; ApiDocInput</div>
+<div class="fsdocs-tip" id="fs42">type ApiDocs =<br />&#160;&#160;static member GenerateHtml : inputs:ApiDocInput list * output:string * collectionName:string * substitutions:Substitutions * ?template:string * ?root:string * ?qualify:bool * ?libDirs:string list * ?otherFlags:string list * ?urlRangeHighlight:(Uri -&gt; int -&gt; int -&gt; string) * ?strict:bool -&gt; ApiDocModel * ApiDocsSearchIndexEntry []<br />&#160;&#160;static member private GenerateHtmlPhased : inputs:ApiDocInput list * output:string * collectionName:string * substitutions:Substitutions * ?template:string * ?root:string * ?qualify:bool * ?libDirs:string list * ?otherFlags:string list * ?urlRangeHighlight:(Uri -&gt; int -&gt; int -&gt; string) * ?strict:bool -&gt; ApiDocModel * Substitutions * ApiDocsSearchIndexEntry [] * (#seq&lt;ParamKey * string&gt; -&gt; unit)<br />&#160;&#160;static member GenerateMarkdown : inputs:ApiDocInput list * output:string * collectionName:string * substitutions:Substitutions * ?template:string * ?root:string * ?qualify:bool * ?libDirs:string list * ?otherFlags:string list * ?urlRangeHighlight:(Uri -&gt; int -&gt; int -&gt; string) * ?strict:bool -&gt; ApiDocModel * ApiDocsSearchIndexEntry []<br />&#160;&#160;static member private GenerateMarkdownPhased : inputs:ApiDocInput list * output:string * collectionName:string * substitutions:Substitutions * ?template:string * ?root:string * ?qualify:bool * ?libDirs:string list * ?otherFlags:string list * ?urlRangeHighlight:(Uri -&gt; int -&gt; int -&gt; string) * ?strict:bool -&gt; ApiDocModel * Substitutions * ApiDocsSearchIndexEntry [] * (#seq&lt;ParamKey * string&gt; -&gt; unit)<br />&#160;&#160;static member GenerateModel : inputs:ApiDocInput list * collectionName:string * substitutions:Substitutions * ?qualify:bool * ?libDirs:string list * ?otherFlags:string list * ?root:string * ?urlRangeHighlight:(Uri -&gt; int -&gt; int -&gt; string) * ?strict:bool * ?extension:ApiDocFileExtensions -&gt; ApiDocModel<br />&#160;&#160;static member SearchIndexEntriesForModel : model:ApiDocModel -&gt; ApiDocsSearchIndexEntry []</div>
+<div class="fsdocs-tip" id="fs43">static member ApiDocs.GenerateHtml : inputs:ApiDocInput list * output:string * collectionName:string * substitutions:FSharp.Formatting.Templating.Substitutions * ?template:string * ?root:string * ?qualify:bool * ?libDirs:string list * ?otherFlags:string list * ?urlRangeHighlight:(System.Uri -&gt; int -&gt; int -&gt; string) * ?strict:bool -&gt; ApiDocModel * ApiDocsSearchIndexEntry []</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

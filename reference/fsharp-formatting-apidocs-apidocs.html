@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ApiDocs (FSharp.Formatting)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary navbar-nav-scroll fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div>
+  <h2>
+    ApiDocs Type
+  </h2>
+  <dl class="fsdocs-metadata">
+    <dt>
+      Namespace: 
+      <a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs.html">
+        FSharp.Formatting.ApiDocs
+      </a>
+    </dt>
+    <dt>
+      Assembly: FSharp.Formatting.ApiDocs.dll
+    </dt>
+    <dt>
+      Base Type: 
+      <code>obj</code>
+    </dt>
+  </dl>
+  <div class="fsdocs-xmldoc">
+    <div>
+      <p class="fsdocs-summary">
+        
+  This type exposes the functionality for producing documentation model from `dll` files with associated `xml` files
+  generated by the F# or C# compiler. To generate documentation model, use one of the overloades of the `Generate` method.
+ 
+      </p>
+    </div>
+  </div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div>
+    <h3>
+      Static members
+    </h3>
+    <table class="table outer-list fsdocs-member-list">
+      <thead>
+        <tr>
+          <td class="fsdocs-member-list-header">
+            Static member
+          </td>
+          <td class="fsdocs-member-list-header">
+            Description
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '189', 189)" onmouseover="showTip(event, '189', 189)">
+                <p>
+                  <a id="GenerateHtml">
+                    <a href="#GenerateHtml">
+                      <code><span>ApiDocs.GenerateHtml<span><span>(<span>inputs,&#32;output,&#32;collectionName,&#32;substitutions,&#32;?template,&#32;?root,&#32;?qualify,&#32;?libDirs,&#32;?otherFlags,&#32;?urlRangeHighlight,&#32;?strict</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="189">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ApiDocs.GenerateHtml<span><span>(<span>inputs,&#32;output,&#32;collectionName,&#32;substitutions,&#32;?template,&#32;?root,&#32;?qualify,&#32;?libDirs,&#32;?otherFlags,&#32;?urlRangeHighlight,&#32;?strict</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        inputs
+                      </b>
+                      :
+                      <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocinput.html">ApiDocInput</a>&#32;list</span></code>
+                       - 
+                      the components to generate documentation for
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        output
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      the output directory
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        collectionName
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      the overall collection name
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        substitutions
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-substitutions.html">Substitutions</a></code>
+                       - 
+                      the substitutions to use in content and templates
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?template
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      the template to use for each documentation page
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?root
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      The root url of the generated documentation within the website
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?qualify
+                      </b>
+                      :
+                      <code>bool</code>
+                       - 
+                      qualify the output set by collection name, e.g. `reference/FSharp.Core/...`
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?libDirs
+                      </b>
+                      :
+                      <code><span>string&#32;list</span></code>
+                       - 
+                      Use this to specify additional paths where referenced DLL files can be found when formatting code snippets inside Markdown comments
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?otherFlags
+                      </b>
+                      :
+                      <code><span>string&#32;list</span></code>
+                       - 
+                      Additional flags that are passed to the F# compiler to specify references explicitly etc.
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?urlRangeHighlight
+                      </b>
+                      :
+                      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a>&#32;->&#32;int&#32;->&#32;int&#32;->&#32;string</span></code>
+                       - 
+                      A function that can be used to override the default way of generating GitHub links
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?strict
+                      </b>
+                      :
+                      <code>bool</code>
+                       - 
+                      Fail if any assembly is missing XML docs or can't be resolved
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a>&#32;*&#32;<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocssearchindexentry.html">ApiDocsSearchIndexEntry</a>[]</span></span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.ApiDocs.ApiDocs.GenerateHtml`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.ApiDocs.ApiDocs.GenerateHtml\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.ApiDocs/ApiDocs.fs#L86-86" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Generates default HTML pages for the assemblies specified by the `inputs` parameter
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  inputs
+                </span>
+                :
+                <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocinput.html">ApiDocInput</a>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the components to generate documentation for
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  output
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the output directory
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  collectionName
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the overall collection name
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  substitutions
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-substitutions.html">Substitutions</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the substitutions to use in content and templates
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?template
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the template to use for each documentation page
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?root
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  The root url of the generated documentation within the website
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?qualify
+                </span>
+                :
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  qualify the output set by collection name, e.g. `reference/FSharp.Core/...`
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?libDirs
+                </span>
+                :
+                <code><span>string&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Use this to specify additional paths where referenced DLL files can be found when formatting code snippets inside Markdown comments
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?otherFlags
+                </span>
+                :
+                <code><span>string&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Additional flags that are passed to the F# compiler to specify references explicitly etc.
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?urlRangeHighlight
+                </span>
+                :
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a>&#32;->&#32;int&#32;->&#32;int&#32;->&#32;string</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  A function that can be used to override the default way of generating GitHub links
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?strict
+                </span>
+                :
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Fail if any assembly is missing XML docs or can't be resolved
+                </p>
+              </dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a>&#32;*&#32;<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocssearchindexentry.html">ApiDocsSearchIndexEntry</a>[]</span></span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '190', 190)" onmouseover="showTip(event, '190', 190)">
+                <p>
+                  <a id="GenerateMarkdown">
+                    <a href="#GenerateMarkdown">
+                      <code><span>ApiDocs.GenerateMarkdown<span><span>(<span>inputs,&#32;output,&#32;collectionName,&#32;substitutions,&#32;?template,&#32;?root,&#32;?qualify,&#32;?libDirs,&#32;?otherFlags,&#32;?urlRangeHighlight,&#32;?strict</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="190">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ApiDocs.GenerateMarkdown<span><span>(<span>inputs,&#32;output,&#32;collectionName,&#32;substitutions,&#32;?template,&#32;?root,&#32;?qualify,&#32;?libDirs,&#32;?otherFlags,&#32;?urlRangeHighlight,&#32;?strict</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        inputs
+                      </b>
+                      :
+                      <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocinput.html">ApiDocInput</a>&#32;list</span></code>
+                       - 
+                      the components to generate documentation for
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        output
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      the output directory
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        collectionName
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      the overall collection name
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        substitutions
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-substitutions.html">Substitutions</a></code>
+                       - 
+                      the substitutions to use in content and templates
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?template
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      the template to use for each documentation page
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?root
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      The root url of the generated documentation within the website
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?qualify
+                      </b>
+                      :
+                      <code>bool</code>
+                       - 
+                      qualify the output set by collection name, e.g. `reference/FSharp.Core/...`
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?libDirs
+                      </b>
+                      :
+                      <code><span>string&#32;list</span></code>
+                       - 
+                      Use this to specify additional paths where referenced DLL files can be found when formatting code snippets inside Markdown comments
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?otherFlags
+                      </b>
+                      :
+                      <code><span>string&#32;list</span></code>
+                       - 
+                      Additional flags that are passed to the F# compiler to specify references explicitly etc.
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?urlRangeHighlight
+                      </b>
+                      :
+                      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a>&#32;->&#32;int&#32;->&#32;int&#32;->&#32;string</span></code>
+                       - 
+                      A function that can be used to override the default way of generating GitHub links
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?strict
+                      </b>
+                      :
+                      <code>bool</code>
+                       - 
+                      Fail if any assembly is missing XML docs or can't be resolved
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a>&#32;*&#32;<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocssearchindexentry.html">ApiDocsSearchIndexEntry</a>[]</span></span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.ApiDocs.ApiDocs.GenerateMarkdown`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.ApiDocs.ApiDocs.GenerateMarkdown\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.ApiDocs/ApiDocs.fs#L132-132" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Generates default Markdown pages for the assemblies specified by the `inputs` parameter
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  inputs
+                </span>
+                :
+                <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocinput.html">ApiDocInput</a>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the components to generate documentation for
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  output
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the output directory
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  collectionName
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the overall collection name
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  substitutions
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-substitutions.html">Substitutions</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the substitutions to use in content and templates
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?template
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the template to use for each documentation page
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?root
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  The root url of the generated documentation within the website
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?qualify
+                </span>
+                :
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  qualify the output set by collection name, e.g. `reference/FSharp.Core/...`
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?libDirs
+                </span>
+                :
+                <code><span>string&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Use this to specify additional paths where referenced DLL files can be found when formatting code snippets inside Markdown comments
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?otherFlags
+                </span>
+                :
+                <code><span>string&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Additional flags that are passed to the F# compiler to specify references explicitly etc.
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?urlRangeHighlight
+                </span>
+                :
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a>&#32;->&#32;int&#32;->&#32;int&#32;->&#32;string</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  A function that can be used to override the default way of generating GitHub links
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?strict
+                </span>
+                :
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Fail if any assembly is missing XML docs or can't be resolved
+                </p>
+              </dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a>&#32;*&#32;<span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocssearchindexentry.html">ApiDocsSearchIndexEntry</a>[]</span></span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '191', 191)" onmouseover="showTip(event, '191', 191)">
+                <p>
+                  <a id="GenerateModel">
+                    <a href="#GenerateModel">
+                      <code><span>ApiDocs.GenerateModel<span><span>(<span>inputs,&#32;collectionName,&#32;substitutions,&#32;?qualify,&#32;?libDirs,&#32;?otherFlags,&#32;?root,&#32;?urlRangeHighlight,&#32;?strict,&#32;?extension</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="191">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ApiDocs.GenerateModel<span><span>(<span>inputs,&#32;collectionName,&#32;substitutions,&#32;?qualify,&#32;?libDirs,&#32;?otherFlags,&#32;?root,&#32;?urlRangeHighlight,&#32;?strict,&#32;?extension</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        inputs
+                      </b>
+                      :
+                      <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocinput.html">ApiDocInput</a>&#32;list</span></code>
+                       - 
+                      the components to generate documentation for
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        collectionName
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      the overall collection name
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        substitutions
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-substitutions.html">Substitutions</a></code>
+                       - 
+                      the substitutions to use in content and templates
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?qualify
+                      </b>
+                      :
+                      <code>bool</code>
+                       - 
+                      qualify the output set by collection name, e.g. <code>reference/FSharp.Core/...</code>
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?libDirs
+                      </b>
+                      :
+                      <code><span>string&#32;list</span></code>
+                       - 
+                      Use this to specify additional paths where referenced DLL files can be found when formatting code snippets inside Markdown comments
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?otherFlags
+                      </b>
+                      :
+                      <code><span>string&#32;list</span></code>
+                       - 
+                      Additional flags that are passed to the F# compiler (you can use this if you want to
+    specify references explicitly etc.)
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?root
+                      </b>
+                      :
+                      <code>string</code>
+                       - 
+                      The root url of the generated documentation within the website
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?urlRangeHighlight
+                      </b>
+                      :
+                      <code><span><a href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a>&#32;->&#32;int&#32;->&#32;int&#32;->&#32;string</span></code>
+                       - 
+                      A function that can be used to override the default way of generating GitHub links
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?strict
+                      </b>
+                      :
+                      <code>bool</code>
+                       - 
+                      Fail if any assembly is missing XML docs or can't be resolved
+                    </span>
+                    <br/>
+                    <span>
+                      <b>
+                        ?extension
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocfileextensions.html">ApiDocFileExtensions</a></code>
+                       - 
+                      The extensions used for files and URLs
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.ApiDocs.ApiDocs.GenerateModel`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.ApiDocs.ApiDocs.GenerateModel\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.ApiDocs/ApiDocs.fs#L33-33" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Generates a documentation model for the assemblies specified by the `inputs` parameter
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  inputs
+                </span>
+                :
+                <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocinput.html">ApiDocInput</a>&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the components to generate documentation for
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  collectionName
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the overall collection name
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  substitutions
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-templating-substitutions.html">Substitutions</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the substitutions to use in content and templates
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?qualify
+                </span>
+                :
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  qualify the output set by collection name, e.g. <code>reference/FSharp.Core/...</code>
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?libDirs
+                </span>
+                :
+                <code><span>string&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Use this to specify additional paths where referenced DLL files can be found when formatting code snippets inside Markdown comments
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?otherFlags
+                </span>
+                :
+                <code><span>string&#32;list</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Additional flags that are passed to the F# compiler (you can use this if you want to
+    specify references explicitly etc.)
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?root
+                </span>
+                :
+                <code>string</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  The root url of the generated documentation within the website
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?urlRangeHighlight
+                </span>
+                :
+                <code><span><a href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a>&#32;->&#32;int&#32;->&#32;int&#32;->&#32;string</span></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  A function that can be used to override the default way of generating GitHub links
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?strict
+                </span>
+                :
+                <code>bool</code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  Fail if any assembly is missing XML docs or can't be resolved
+                </p>
+              </dd>
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  ?extension
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocfileextensions.html">ApiDocFileExtensions</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  The extensions used for files and URLs
+                </p>
+              </dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+        <tr>
+          <td class="fsdocs-member-usage">
+            <div>
+              <code onmouseout="hideTip(event, '192', 192)" onmouseover="showTip(event, '192', 192)">
+                <p>
+                  <a id="SearchIndexEntriesForModel">
+                    <a href="#SearchIndexEntriesForModel">
+                      <code><span>ApiDocs.SearchIndexEntriesForModel<span><span>(<span>model</span>)</span></span></span></code>
+                    </a>
+                  </a>
+                </p>
+              </code>
+              <div class="fsdocs-tip" id="192">
+                <div class="member-tooltip">
+                  Full Usage: 
+                  <code><span>ApiDocs.SearchIndexEntriesForModel<span><span>(<span>model</span>)</span></span></span></code>
+                  <br/>
+                  <br/>
+                  Parameters: 
+                  <ul>
+                    <span>
+                      <b>
+                        model
+                      </b>
+                      :
+                      <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a></code>
+                       - 
+                      the model for documentation
+                    </span>
+                    <br/>
+                  </ul>
+                  <br/>
+                  <span>
+                    Returns: 
+                    <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocssearchindexentry.html">ApiDocsSearchIndexEntry</a>[]</span></code>
+                  </span>
+                  <br/>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="fsdocs-member-xmldoc">
+            <div class="fsdocs-summary">
+              <div class="fsdocs-source-link" title="Copy signature (Markdown)" onclick="Clipboard_CopyTo('`cref:M:FSharp.Formatting.ApiDocs.ApiDocs.SearchIndexEntriesForModel`')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-md-hover.png" class="hover"/>
+              </div>
+              <div class="fsdocs-source-link" title="Copy signature (XML)" onclick="Clipboard_CopyTo('<see cref=\'M:FSharp.Formatting.ApiDocs.ApiDocs.SearchIndexEntriesForModel\'/>')">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/copy-xml-hover.png" class="hover"/>
+              </div>
+              <a href="https://github.com/fsprojects/FSharp.Formatting/tree/master/src/FSharp.Formatting.ApiDocs/ApiDocs.fs#L52-52" class="fsdocs-source-link" title="Source on GitHub">
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github.png" class="normal"/>
+                <img src="https://fsprojects.github.io/FSharp.Formatting/content/img/github-hover.png" class="hover"/>
+              </a>
+              <p class="fsdocs-summary">
+                
+ Generates the search index from the given documentation model
+ 
+              </p>
+            </div>
+            <dl class="fsdocs-params">
+              <dt class="fsdocs-param">
+                <span class="fsdocs-param-name">
+                  model
+                </span>
+                :
+                <code><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocmodel.html">ApiDocModel</a></code>
+              </dt>
+              <dd class="fsdocs-param-docs">
+                <p>
+                  the model for documentation
+                </p>
+              </dd>
+            </dl>
+            <dl class="fsdocs-returns">
+              <dt>
+                <span class="fsdocs-return-name">
+                  Returns: 
+                </span>
+                <code><span><a href="https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-apidocs-apidocssearchindexentry.html">ApiDocsSearchIndexEntry</a>[]</span></code>
+              </dt>
+              <dd class="fsdocs-return-docs"></dd>
+            </dl>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

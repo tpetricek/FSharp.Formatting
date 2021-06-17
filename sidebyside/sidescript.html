@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Literate Script</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div class="row">
+                <div class="col-xs-4">
+                    <pre class="fssnip highlighted"><code lang="fsharp"><span class="c">(**</span>
+<span class="c">---</span>
+<span class="c">title: Literate Script</span>
+<span class="c">category: Examples</span>
+<span class="c">categoryindex: 2</span>
+<span class="c">index: 1</span>
+<span class="c">---</span>
+<span class="c"># Example: Using Literate Script Content</span>
+
+<span class="c">This file demonstrates how to write literate F# script</span>
+<span class="c">files (`*.fsx`) that can be transformed into nice HTML</span>
+<span class="c">using the `literate.fsx` script from the [F# Formatting</span>
+<span class="c">package](http://fsprojects.github.io/FSharp.Formatting).</span>
+
+<span class="c">As you can see, a comment starting with double asterisk</span>
+<span class="c">is treated as part of the document and is transformed </span>
+<span class="c">using Markdown, which means that you can use:</span>
+
+<span class="c"> - Unordered or ordered lists </span>
+<span class="c"> - Text formatting including **bold** and _emphasis_</span>
+
+<span class="c">And numerous other [Markdown][md] features.</span>
+
+<span class="c"> [md]: http://daringfireball.net/projects/markdown</span>
+
+<span class="c">## Writing F# code</span>
+
+<span class="c">Code that is not inside comment will be formatted as</span>
+<span class="c">a sample snippet.</span>
+<span class="c">*)</span>
+
+<span class="c">/// The Hello World of functional languages!</span>
+<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="fn">factorial</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">x</span> <span class="o">=</span> 
+  <span class="k">if</span> <span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="fn">x</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="n">1</span> 
+  <span class="k">else</span> <span onmouseout="hideTip(event, 'fs2', 4)" onmouseover="showTip(event, 'fs2', 4)" class="fn">x</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs1', 5)" onmouseover="showTip(event, 'fs1', 5)" class="fn">factorial</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs2', 6)" onmouseover="showTip(event, 'fs2', 6)" class="fn">x</span> <span class="o">-</span> <span class="n">1</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="id">f10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 8)" onmouseover="showTip(event, 'fs1', 8)" class="fn">factorial</span> <span class="n">10</span>
+
+<span class="c">(**</span>
+<span class="c">Hiding code</span>
+<span class="c">-----------</span>
+
+<span class="c">If you want to include some code in the source code, </span>
+<span class="c">but omit it from the output, you can use the `hide` </span>
+<span class="c">command.</span>
+<span class="c">*)</span>
+
+<span class="c">(*** hide ***)</span>
+<span class="c">/// This is a hidden answer</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 9)" onmouseover="showTip(event, 'fs4', 9)" class="id">hidden</span> <span class="o">=</span> <span class="n">42</span>
+
+<span class="c">(** </span>
+<span class="c">The value will be defined in the F# code and so you</span>
+<span class="c">can use it from other (visible) code and get correct</span>
+<span class="c">tool tips:</span>
+<span class="c">*)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 10)" onmouseover="showTip(event, 'fs5', 10)" class="id">answer</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 11)" onmouseover="showTip(event, 'fs4', 11)" class="id">hidden</span>
+
+<span class="c">(** </span>
+<span class="c">## Moving code around</span>
+
+<span class="c">Sometimes, it is useful to first explain some code that</span>
+<span class="c">has to be located at the end of the snippet (perhaps </span>
+<span class="c">because it uses some definitions discussed in the middle).</span>
+<span class="c">This can be done using `include` and `define` commands.</span>
+
+<span class="c">The following snippet gets correct tool tips, even though</span>
+<span class="c">it uses `laterFunction`:</span>
+<span class="c">*)</span>
+
+<span class="c">(*** include:later-bit ***)</span>
+
+<span class="c">(**</span>
+<span class="c">Then we can explain how `laterFunction` is defined:</span>
+<span class="c">*)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 12)" onmouseover="showTip(event, 'fs6', 12)" class="fn">laterFunction</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> 
+  <span class="s">&quot;Not very difficult, is it?&quot;</span>
+
+<span class="c">(**</span>
+<span class="c">This example covers pretty much all features that are </span>
+<span class="c">currently implemented in `literate.fsx`, but feel free </span>
+<span class="c">to [fork the project on GitHub][fs] and add more </span>
+<span class="c">features or report bugs!</span>
+
+<span class="c">  [fs]: https://github.com/fsprojects/FSharp.Formatting</span>
+
+<span class="c">*)</span>
+
+<span class="c">(*** define:later-bit ***)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 13)" onmouseover="showTip(event, 'fs7', 13)" class="id">sample</span> <span class="o">=</span> 
+  <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="fn">laterFunction</span><span class="pn">(</span><span class="pn">)</span>
+  <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="fn">printfn</span> <span class="s">&quot;Got: </span><span class="pf">%s</span><span class="s">&quot;</span>
+</code></pre>
+
+                </div>
+                <div class="col-xs-4">
+                    
+<h1><a name="Example-Using-Literate-Script-Content" class="anchor" href="#Example-Using-Literate-Script-Content">Example: Using Literate Script Content</a></h1>
+<p>This file demonstrates how to write literate F# script
+files (<code>*.fsx</code>) that can be transformed into nice HTML
+using the <code>literate.fsx</code> script from the <a href="http://fsprojects.github.io/FSharp.Formatting">F# Formatting
+package</a>.</p>
+<p>As you can see, a comment starting with double asterisk
+is treated as part of the document and is transformed
+using Markdown, which means that you can use:</p>
+<ul>
+<li>Unordered or ordered lists</li>
+<li>Text formatting including <strong>bold</strong> and <em>emphasis</em></li>
+</ul>
+<p>And numerous other <a href="http://daringfireball.net/projects/markdown">Markdown</a> features.</p>
+<h2><a name="Writing-F-code" class="anchor" href="#Writing-F-code">Writing F# code</a></h2>
+<p>Code that is not inside comment will be formatted as
+a sample snippet.</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// The Hello World of functional languages!</span>
+<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="fn">factorial</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">x</span> <span class="o">=</span> 
+  <span class="k">if</span> <span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="fn">x</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="n">1</span> 
+  <span class="k">else</span> <span onmouseout="hideTip(event, 'fs2', 4)" onmouseover="showTip(event, 'fs2', 4)" class="fn">x</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs1', 5)" onmouseover="showTip(event, 'fs1', 5)" class="fn">factorial</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs2', 6)" onmouseover="showTip(event, 'fs2', 6)" class="fn">x</span> <span class="o">-</span> <span class="n">1</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="id">f10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 8)" onmouseover="showTip(event, 'fs1', 8)" class="fn">factorial</span> <span class="n">10</span>
+</code></pre>
+<h2><a name="Hiding-code" class="anchor" href="#Hiding-code">Hiding code</a></h2>
+<p>If you want to include some code in the source code,
+but omit it from the output, you can use the <code>hide</code>
+command.</p>
+<p>The value will be defined in the F# code and so you
+can use it from other (visible) code and get correct
+tool tips:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 10)" onmouseover="showTip(event, 'fs5', 10)" class="id">answer</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs4', 11)" onmouseover="showTip(event, 'fs4', 11)" class="id">hidden</span>
+</code></pre>
+<h2><a name="Moving-code-around" class="anchor" href="#Moving-code-around">Moving code around</a></h2>
+<p>Sometimes, it is useful to first explain some code that
+has to be located at the end of the snippet (perhaps
+because it uses some definitions discussed in the middle).
+This can be done using <code>include</code> and <code>define</code> commands.</p>
+<p>The following snippet gets correct tool tips, even though
+it uses <code>laterFunction</code>:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs7', 13)" onmouseover="showTip(event, 'fs7', 13)" class="id">sample</span> <span class="o">=</span> 
+  <span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="fn">laterFunction</span><span class="pn">(</span><span class="pn">)</span>
+  <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs8', 15)" onmouseover="showTip(event, 'fs8', 15)" class="fn">printfn</span> <span class="s">&quot;Got: </span><span class="pf">%s</span><span class="s">&quot;</span>
+</code></pre>
+<p>Then we can explain how <code>laterFunction</code> is defined:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 12)" onmouseover="showTip(event, 'fs6', 12)" class="fn">laterFunction</span><span class="pn">(</span><span class="pn">)</span> <span class="o">=</span> 
+  <span class="s">&quot;Not very difficult, is it?&quot;</span>
+</code></pre>
+<p>This example covers pretty much all features that are
+currently implemented in <code>literate.fsx</code>, but feel free
+to <a href="https://github.com/fsprojects/FSharp.Formatting">fork the project on GitHub</a> and add more
+features or report bugs!</p>
+
+                    <div class="fsdocs-tip" id="fs1">val factorial : x:int -&gt; int<br /><em>&#160;The Hello World of functional languages!</em></div>
+<div class="fsdocs-tip" id="fs2">val x : int</div>
+<div class="fsdocs-tip" id="fs3">val f10 : int</div>
+<div class="fsdocs-tip" id="fs4">val hidden : int<br /><em>&#160;This is a hidden answer</em></div>
+<div class="fsdocs-tip" id="fs5">val answer : int</div>
+<div class="fsdocs-tip" id="fs6">val laterFunction : unit -&gt; string</div>
+<div class="fsdocs-tip" id="fs7">val sample : unit</div>
+<div class="fsdocs-tip" id="fs8">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T</div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

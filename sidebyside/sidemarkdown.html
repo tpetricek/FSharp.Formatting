@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Markdown Content</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-menu">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License (Apache 2.0)</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <div class="row">
+                <div class="col-xs-4">
+                    <table class="pre"><tr><td><pre><code>---
+title: Markdown Content
+category: Examples
+categoryindex: 2
+index: 2
+---
+# Example: Using Markdown Content
+
+This file demonstrates how to write Markdown document with 
+embedded F# snippets that can be transformed into nice HTML 
+using the `literate.fsx` script from the [F# Formatting
+package](http://fsprojects.github.io/FSharp.Formatting).
+
+In this case, the document itself is a valid Markdown and 
+you can use standard Markdown features to format the text:
+
+ - Here is an example of unordered list and...
+ - Text formatting including **bold** and _emphasis_
+
+For more information, see the [Markdown][md] reference.
+
+ [md]: http://daringfireball.net/projects/markdown
+
+
+## Writing F# code
+
+In standard Markdown, you can include code snippets by 
+writing a block indented by four spaces and the code 
+snippet will be turned into a `&lt;pre&gt;` element. If you do 
+the same using Literate F# tool, the code is turned into
+a nicely formatted F# snippet:
+
+    /// The Hello World of functional languages!
+    let rec factorial x = 
+      if x = 0 then 1 
+      else x * (factorial (x - 1))
+
+    let f10 = factorial 10
+
+
+## Hiding code
+
+If you want to include some code in the source code, 
+but omit it from the output, you can use the `hide` 
+command. You can also use `module=...` to specify that 
+the snippet should be placed in a separate module 
+(e.g. to avoid duplicate definitions).
+
+    [hide, module=Hidden]
+    /// This is a hidden answer
+    let answer = 42
+
+The value will be deffined in the F# code that is 
+processed and so you can use it from other (visible) 
+code and get correct tool tips:
+
+    let answer = Hidden.answer
+
+
+## Including other snippets
+
+When writing literate programs as Markdown documents, 
+you can also include snippets in other languages. 
+These will not be colorized and processed as F# 
+code samples:
+
+    [lang=csharp]
+    Console.WriteLine("Hello world!");
+
+This snippet is turned into a `pre` element with the
+`lang` attribute set to `csharp`.</code></pre></td></tr></table>
+
+                </div>
+                <div class="col-xs-4">
+                    
+<h1><a name="Example-Using-Markdown-Content" class="anchor" href="#Example-Using-Markdown-Content">Example: Using Markdown Content</a></h1>
+<p>This file demonstrates how to write Markdown document with
+embedded F# snippets that can be transformed into nice HTML
+using the <code>literate.fsx</code> script from the <a href="http://fsprojects.github.io/FSharp.Formatting">F# Formatting
+package</a>.</p>
+<p>In this case, the document itself is a valid Markdown and
+you can use standard Markdown features to format the text:</p>
+<ul>
+<li>Here is an example of unordered list and...</li>
+<li>Text formatting including <strong>bold</strong> and <em>emphasis</em></li>
+</ul>
+<p>For more information, see the <a href="http://daringfireball.net/projects/markdown">Markdown</a> reference.</p>
+<h2><a name="Writing-F-code" class="anchor" href="#Writing-F-code">Writing F# code</a></h2>
+<p>In standard Markdown, you can include code snippets by
+writing a block indented by four spaces and the code
+snippet will be turned into a <code>&lt;pre&gt;</code> element. If you do
+the same using Literate F# tool, the code is turned into
+a nicely formatted F# snippet:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="c">/// The Hello World of functional languages!</span>
+<span class="k">let</span> <span class="k">rec</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="fn">factorial</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="fn">x</span> <span class="o">=</span> 
+  <span class="k">if</span> <span onmouseout="hideTip(event, 'fs2', 3)" onmouseover="showTip(event, 'fs2', 3)" class="fn">x</span> <span class="o">=</span> <span class="n">0</span> <span class="k">then</span> <span class="n">1</span> 
+  <span class="k">else</span> <span onmouseout="hideTip(event, 'fs2', 4)" onmouseover="showTip(event, 'fs2', 4)" class="fn">x</span> <span class="o">*</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs1', 5)" onmouseover="showTip(event, 'fs1', 5)" class="fn">factorial</span> <span class="pn">(</span><span onmouseout="hideTip(event, 'fs2', 6)" onmouseover="showTip(event, 'fs2', 6)" class="fn">x</span> <span class="o">-</span> <span class="n">1</span><span class="pn">)</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs3', 7)" onmouseover="showTip(event, 'fs3', 7)" class="id">f10</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs1', 8)" onmouseover="showTip(event, 'fs1', 8)" class="fn">factorial</span> <span class="n">10</span>
+</code></pre>
+<h2><a name="Hiding-code" class="anchor" href="#Hiding-code">Hiding code</a></h2>
+<p>If you want to include some code in the source code,
+but omit it from the output, you can use the <code>hide</code>
+command. You can also use <code>module=...</code> to specify that
+the snippet should be placed in a separate module
+(e.g. to avoid duplicate definitions).</p>
+<p>The value will be deffined in the F# code that is
+processed and so you can use it from other (visible)
+code and get correct tool tips:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 9)" onmouseover="showTip(event, 'fs4', 9)" class="id">answer</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs5', 10)" onmouseover="showTip(event, 'fs5', 10)" class="m">Hidden</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs6', 11)" onmouseover="showTip(event, 'fs6', 11)" class="id">answer</span>
+</code></pre>
+<h2><a name="Including-other-snippets" class="anchor" href="#Including-other-snippets">Including other snippets</a></h2>
+<p>When writing literate programs as Markdown documents,
+you can also include snippets in other languages.
+These will not be colorized and processed as F#
+code samples:</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip highlighted"><code lang="csharp">Console.WriteLine(<span class="s">"Hello world!"</span>);
+</code></pre></td></tr></table>
+<p>This snippet is turned into a <code>pre</code> element with the
+<code>lang</code> attribute set to <code>csharp</code>.</p>
+
+                    <div class="fsdocs-tip" id="fs1">val factorial : x:int -&gt; int<br /><em>&#160;The Hello World of functional languages!</em></div>
+<div class="fsdocs-tip" id="fs2">val x : int</div>
+<div class="fsdocs-tip" id="fs3">val f10 : int</div>
+<div class="fsdocs-tip" id="fs4">val answer : int</div>
+<div class="fsdocs-tip" id="fs5">module Hidden<br /><br />from sidemarkdown</div>
+<div class="fsdocs-tip" id="fs6">val answer : int<br /><em>&#160;This is a hidden answer</em></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/'</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

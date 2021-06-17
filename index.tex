@@ -1,0 +1,131 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{F\# Formatting: Documentation Tools for F\# Code}
+
+
+
+FSharp.Formatting is a set of libraries and tools for processing F\# script files, markdown and for
+generating API documentation. F\# Formatting package is used by this project and many other repositories.
+
+
+To use the tool, install and use the \href{commandline.html}{fsdocs} tool in a typical F\# project with
+F\# project files plus markdown and script content in the \texttt{docs} directory:
+\begin{Verbatim}[commandchars=\\\{\}]
+\id{dotnet} \id{tool} \id{install} \id{FSharp}{.}\id{Formatting}{.}\id{CommandTool}
+\id{dotnet} \id{fsdocs} \id{build} 
+\id{dotnet} \id{fsdocs} \id{watch}
+
+\end{Verbatim}
+
+
+
+To use the tool, explore the following topics:
+\begin{itemize}
+\item 
+
+\href{content.html}{Authoring Content} - explains the content expected in the \texttt{docs} directory for the \texttt{fsdocs} tool.
+
+\item 
+
+\href{commandline.html}{Using the Command line tool} - explains how to use the \texttt{fsdocs} tool.
+
+\item 
+
+\href{apidocs.html}{Generating API documentation} - how to generate HTML documentation
+from "XML comments" in your .NET libraries. The tool handles comments written in
+Markdown too.
+
+\item 
+
+\href{styling.html}{Styling} - explains some options for styling the output of \texttt{fsdocs}.
+
+\item 
+
+\href{literate.html}{Using literate programming} - explains how to generate documentation
+for your projects or to write nicely formatted F\# blog posts.
+
+\item 
+
+\href{evaluation.html}{Embedding F\# outputs in literate programming} - provides more details on literate programming and
+explains how to embed results of a literate script file in the generated output. This way,
+you can easily format the results of running your code!
+
+\end{itemize}
+
+\subsection*{Using FSharp.Formatting as a library}
+
+
+
+F\# Formatting is also \href{https://nuget.org/packages/FSharp.Formatting}{available on NuGet} as a set of libraries.
+\begin{itemize}
+\item 
+
+\href{markdown.html}{Markdown parser} - explains the F\# Markdown
+processor that is available in this library with some basic examples of
+document processing.
+
+\item 
+
+\href{codeformat.html}{F\# code formatting} - more details about the F\# code
+formatter and how to use it to obtain information about F\# source files.
+
+\end{itemize}
+
+\subsection*{More information}
+
+
+
+The documentation for this library is generated automatically using the tools
+built here. If you spot a typo, please submit a pull request! The source Markdown and F\# script files are
+available in the \href{https://github.com/fsprojects/FSharp.Formatting/tree/master/docs}{docs folder on GitHub}.
+
+
+The project is hosted on \href{https://github.com/fsprojects/FSharp.Formatting}{GitHub} where you can
+\href{https://github.com/fsprojects/FSharp.Formatting/issues}{report issues}, fork the project and submit pull requests.
+See the  \href{https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md}{License file} in the GitHub repository.
+
+
+\end{document}

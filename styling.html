@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Customization and Styling
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary navbar-nav-scroll fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<h1><a name="Customization-and-Styling" class="anchor" href="#Customization-and-Styling">Customization and Styling</a></h1>
+<p>When using <code>fsdocs</code>, there are six levels of extra content development and styling.</p>
+<ol>
+<li>Don't do any styling or documentation customization and simply write content.  This is by far the simplest option to maintain.</li>
+<li>
+<p>Add content such as an <code>docs/index.md</code> to customize the front-page content for your generated docs.
+You can also add content such as <code>docs/reference/fslib.md</code> to give a bespoke landing page
+for one of your namespaces, e.g. here assumed to be <code>namespace FsLib</code>.  This will override any
+generated content.</p>
+</li>
+<li>Customize via Styling Parameters</li>
+<li>Customize via CSS</li>
+<li>Customize via a new template</li>
+<li>Customize by generating your own site using your own code</li>
+</ol>
+<p>By default <code>fsdocs</code> does no styling customization and uses the following defaults. These are the settings used to build this site.</p>
+<ul>
+<li><p>Uses the default template in <a href="https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/_template.html">docs/_template.html</a></p></li>
+<li><p>Uses the default styles in <a href="https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/content/fsdocs-default.css">docs/content/fsdocs-default.css</a>.</p></li>
+<li><p>Uses no custom styles in <a href="https://github.com/fsprojects/FSharp.Formatting/blob/master/docs/content/fsdocs-default.css">docs/content/fsdocs-custom.css</a>.</p></li>
+<li>Uses no styling parameters except those extracted from the project files.</li>
+</ul>
+<p>For your project, you don't need any of these files. However you can add them if you wish, though if
+you adjust them there is no guarantee that your template will continue to work with future versions of F# Formatting.</p>
+<h2><a name="Customizing-via-Styling-Parameters" class="anchor" href="#Customizing-via-Styling-Parameters">Customizing via Styling Parameters</a></h2>
+<p>The following <a href="content.html">content parameters</a> are particularly related to visual styling:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>Substitution name</p></th>
+<th align="left"><p>Value (if not overriden by --parameters)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>fsdocs-authors</code></p></td>
+<td align="left"><p><code>&lt;Authors&gt;</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>fsdocs-collection-name-link</code></p></td>
+<td align="left"><p><code>&lt;FsDocsCollectionNameLink&gt;</code></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>fsdocs-license-link</code></p></td>
+<td align="left"><p><code>&lt;FsDocsLicenseLink&gt;</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>fsdocs-logo-src</code></p></td>
+<td align="left"><p><code>&lt;FsDocsLogoSource&gt;</code></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>fsdocs-logo-link</code></p></td>
+<td align="left"><p><code>&lt;FsDocsLogoLink&gt;</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>fsdocs-navbar-position</code></p></td>
+<td align="left"><p><code>&lt;FsDocsNavbarPosition&gt;</code> (<code>fixed-left</code> or <code>fixed-right</code>)</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>fsdocs-release-notes-link</code></p></td>
+<td align="left"><p><code>&lt;FsDocsReleaseNotesLink&gt;</code> else <code>&lt;PackageProjectUrl&gt;/blob/master/RELEASE_NOTES.md</code></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>fsdocs-repository-link</code></p></td>
+<td align="left"><p><code>&lt;RepositoryUrl&gt;</code></p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>fsdocs-theme</code></p></td>
+<td align="left"><p><code>&lt;FsDocsTheme&gt;</code>, must currently be <code>default</code></p></td>
+</tr>
+</tbody>
+</table>
+
+<p>These basic entry-level styling parameters can be set in the project file or <code>Directory.Build.props</code>.
+For example:</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip highlighted"><code lang="xml">    <span class="c">&lt;!-- Example ultra-simple styling and generation settings for FsDocs default template--&gt;</span>
+    <span class="k">&lt;</span><span class="i">PackageLicenseUrl</span><span class="k">&gt;</span>https://github.com/foo/bar/blob/master/License.txt<span class="k">&lt;/</span><span class="i">PackageLicenseUrl</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">PackageProjectUrl</span><span class="k">&gt;</span>https://foo.github.io/bar/<span class="k">&lt;/</span><span class="i">PackageProjectUrl</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">RepositoryUrl</span><span class="k">&gt;</span>https://github.com/foo/bar/<span class="k">&lt;/</span><span class="i">RepositoryUrl</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">FsDocsLogoLink</span><span class="k">&gt;</span>https://fsharp.org<span class="k">&lt;/</span><span class="i">FsDocsLogoLink</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">FsDocsLicenseLink</span><span class="k">&gt;</span>https://github.com/foo/bar/blob/master/License.txt<span class="k">&lt;/</span><span class="i">FsDocsLicenseLink</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">FsDocsReleaseNotesLink</span><span class="k">&gt;</span>https://github.com/foo/bar/blob/master/release-notes.md<span class="k">&lt;/</span><span class="i">FsDocsReleaseNotesLink</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">FsDocsNavbarPosition</span><span class="k">&gt;</span>fixed-left<span class="k">&lt;/</span><span class="i">FsDocsNavbarPosition</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">FsDocsWarnOnMissingDocs</span><span class="k">&gt;</span>true<span class="k">&lt;/</span><span class="i">FsDocsWarnOnMissingDocs</span><span class="k">&gt;</span>
+    <span class="k">&lt;</span><span class="i">FsDocsTheme</span><span class="k">&gt;</span>default<span class="k">&lt;/</span><span class="i">FsDocsTheme</span><span class="k">&gt;</span>
+</code></pre></td></tr></table>
+<p>As an example, here is <a href="templates/leftside/styling.html">a page with <code>fsdocs-navbar-position</code> set to <code>fixed-right</code></a>.</p>
+<h2><a name="Customizing-via-CSS" class="anchor" href="#Customizing-via-CSS">Customizing via CSS</a></h2>
+<p>You can start styling by creating a file <code>docs/fsdocs-custom.css</code> and adding entries to it.  It is loaded by
+the standard template.  The CSS classes of generated content are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>CSS class</p></th>
+<th align="left"><p>Corresponding Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-tip</code></p></td>
+<td align="left"><p>generated tooltips</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-xmldoc</code></p></td>
+<td align="left"><p>generated xmldoc sections</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-member-list</code></p></td>
+<td align="left"><p>generated member lists (tables)</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-member-usage</code></p></td>
+<td align="left"><p>usage in generated member lists</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-member-tooltip</code></p></td>
+<td align="left"><p>tooltips in generated member lists</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-member-xmldoc</code></p></td>
+<td align="left"><p>documentation in generated member lists</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-entity-list</code></p></td>
+<td align="left"><p>generated entity lists</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-entity-name</code></p></td>
+<td align="left"><p>generated entity lists</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-entity-xmldoc</code></p></td>
+<td align="left"><p>documentation in generated entity lists</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-exception-list</code></p></td>
+<td align="left"><p>generated exception lists</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-summary</code></p></td>
+<td align="left"><p>the 'summary' section of an XML doc</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-remarks</code></p></td>
+<td align="left"><p>the 'remarks' section of an XML doc</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-params</code></p></td>
+<td align="left"><p>the 'parameters' section of an XML doc</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-param</code></p></td>
+<td align="left"><p>a 'parameter' section of an XML doc</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-param-name</code></p></td>
+<td align="left"><p>a 'parameter' name of an XML doc</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-returns</code></p></td>
+<td align="left"><p>the 'returns' section of an XML doc</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-example</code></p></td>
+<td align="left"><p>the 'example' section of an XML doc</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>.fsdocs-note</code></p></td>
+<td align="left"><p>the 'notes' section of an XML doc</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>.fsdocs-para</code></p></td>
+<td align="left"><p>a paragraph of an XML doc</p></td>
+</tr>
+</tbody>
+</table>
+
+<p>Some generated elements are given specific HTML ids:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>HTML Element Id</p></th>
+<th align="left"><p>Content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>#fsdocs-content</code></p></td>
+<td align="left"><p>The generated content</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>#fsdocs-searchbox</code></p></td>
+<td align="left"><p>The search box</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>#fsdocs-logo</code></p></td>
+<td align="left"><p>The logo</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>#fsdocs-nav</code></p></td>
+<td align="left"><p>The navigation-bar</p></td>
+</tr>
+</tbody>
+</table>
+
+<p>If you write a new theme by CSS styling please contribute it back to FSharp.Formatting.</p>
+<h2><a name="Customizing-via-a-new-template" class="anchor" href="#Customizing-via-a-new-template">Customizing via a new template</a></h2>
+<p>You can do advanced styling by creating a new template.  Add a file <code>docs/_template.html</code>, likely starting
+with the existing default template.</p>
+<blockquote>
+<p>NOTE: To enable hot reload during development with <code>fsdocs watch</code> in a custom <code>_template.html</code> file,
+make sure to add the single line <code>{{fsdocs-watch-script}}</code>  to your <code>&lt;head&gt;</code> tag.
+NOTE: There is no guarantee that your template will continue to work with future versions of F# Formatting.
+If you do develop a good template please consider contributing it back to F# Formatting.</p>
+</blockquote>
+<h2><a name="Customizing-by-generating-your-own-site-using-your-own-code" class="anchor" href="#Customizing-by-generating-your-own-site-using-your-own-code">Customizing by generating your own site using your own code</a></h2>
+<p>The <code>FSharp.Formatting.ApiDocs</code> namespace includes a <code>GenerateModel</code> that captures
+the results of documentation preparation in <code>ApiDocsModel</code> and allows you to
+generate your own site using your own code.</p>
+<blockquote>
+<p>NOTE: The ApiDocsModel API is undergoing change and improvement and there is no guarantee that your bespoke site generation will continue to work
+with future versions of F# Formatting.
+NOTE: The <code>ApiDocsModel</code> currently includes some generated HTML with some specific style tags.
+In the long term these may be removed from the design of that component.</p>
+</blockquote>
+
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+

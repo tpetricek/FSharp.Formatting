@@ -1,0 +1,281 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\href{https://mybinder.org/v2/gh/diffsharp/diffsharp.github.io/master?filepath=evaluation.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-binder.svg}
+\caption{Binder}
+\end{figure}
+} 
+\href{evaluation.fsx}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-script.svg}
+\caption{Script}
+\end{figure}
+} 
+\href{evaluation.ipynb}{\begin{figure}[htbp]\centering
+\includegraphics[width=1.0\textwidth]{img/badge-notebook.svg}
+\caption{Notebook}
+\end{figure}
+}
+\section*{Embedding script output}
+
+
+
+For literate F\# scripts, you may embed the result of running the script as part of the literate output.
+This is a feature of the functions discussed in \href{literate.html}{literate programming} and
+it is implemented using the \href{http://fsharp.github.io/FSharp.Compiler.Service/}{F\# Compiler service}.
+\subsection*{Including Console Output}
+
+
+
+To include the Console output use \texttt{include-output}:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{test} \ops{=} \num{40} \ops{+} \num{2}
+
+\lfun{printf} \str{"A result is: }\lprf{\%d}\str{"} \id{test}
+\com{(*** include-output ***)}
+
+\end{Verbatim}
+
+
+
+The script defines a variable \texttt{test} and then prints it. The console output is included
+in the output.
+
+
+To include the a formatted value use \texttt{include-it}:
+\begin{Verbatim}[commandchars=\\\{\}]
+{[} \num{0} \ops{..} \num{99} {]}
+
+\com{(*** include-it ***)}
+
+\end{Verbatim}
+
+
+
+To include the meta output of F\# Interactive processing such as type signatures use \texttt{(*** include-fsi-output ***)}:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{test} \ops{=} \num{40} \ops{+} \num{3}
+
+\com{(*** include-fsi-output ***)}
+
+\end{Verbatim}
+
+
+
+To include both console otuput and F\# Interactive output blended use \texttt{(*** include-fsi-merged-output ***)}.
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{test} \ops{=} \num{40} \ops{+} \num{4}
+\com{(*** include-fsi-merged-output ***)}
+
+\end{Verbatim}
+
+
+
+You can use the same commands with a named snippet:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{(*** include-it: test ***)}
+\com{(*** include-fsi-output: test ***)}
+\com{(*** include-output: test ***)}
+
+\end{Verbatim}
+
+
+
+You can use the \texttt{include-value} command to format a specific value:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{value1} \ops{=} {[} \num{0} \ops{..} \num{50} {]}
+\kwd{let} \id{value2} \ops{=} {[} \num{51} \ops{..} \num{100} {]}
+\com{(*** include-value: value1 ***)}
+
+\end{Verbatim}
+
+\subsection*{Using AddPrinter and AddHtmlPrinter}
+
+
+
+You can use \texttt{fsi.AddPrinter}, \texttt{fsi.AddPrintTransformer} and \texttt{fsi.AddHtmlPrinter} to extend the formatting of objects.
+\subsection*{Emitting Raw Text}
+
+
+
+To emit raw text in F\# literate scripts use the following:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{(**}
+\com{	(*** raw ***)}
+\com{	Some raw text.}
+\com{*)}
+
+\end{Verbatim}
+
+
+
+which would emit
+<pre>
+Some raw text.
+</pre>
+
+
+directly into the document.
+\subsection*{F\# Formatting as a Library:  Specifying the Evaluator and Formatting}
+
+
+
+If using F\# Formatting as a library the embedding of F\# output requires specifying an additional parameter to the
+parsing functions discussed in \href{literate.html}{literate programming documentation}.
+Assuming you have all the references in place, you can now create an instance of
+\href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-evaluation-fsievaluator.html}{FsiEvaluator} that represents a wrapper for F\# interactive and pass it to all the
+functions that parse script files or process script files:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{open} \id{FSharp}{.}\id{Formatting}{.}\id{Literate}
+\kwd{open} \id{FSharp}{.}\id{Formatting}{.}\id{Literate}{.}\id{Evaluation}
+\kwd{open} \id{FSharp}{.}\id{Formatting}{.}\id{Markdown}
+
+\com{// Sample literate content}
+\kwd{let} \id{content} \ops{=} \str{"""}
+\str{let a = 10}
+\str{(*** include-value:a ***)"""}
+
+\com{// Create evaluator and parse script}
+\kwd{let} \id{fsi} \ops{=} \lfun{FsiEvaluator}{(}{)}
+\kwd{let} \id{doc} \ops{=} \ltyp{Literate}{.}\id{ParseScriptString}{(}\id{content}{,} \lfun{fsiEvaluator} \ops{=} \id{fsi}{)}
+\ltyp{Literate}{.}\id{ToHtml}{(}\id{doc}{)}
+\end{Verbatim}
+
+
+
+When the \texttt{fsiEvaluator} parameter is specified, the script is evaluated and so you
+can use additional commands such as \texttt{include-value}. When the evaluator is \emph{not} specified,
+it is not created automatically and so the functionality is not available (this way,
+you won't accidentally run unexpected code!)
+
+
+If you specify the \texttt{fsiEvaluator} parameter, but don't want a specific snippet to be evaluated
+(because it might throw an exception, for example), you can use the \texttt{(*** do-not-eval ***)}
+command.
+
+
+The constructor of \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-evaluation-fsievaluator.html}{FsiEvaluator} takes command line parameters for \texttt{fsi.exe} that can
+be used to specify, for example, defined symbols and other attributes for F\# Interactive.
+
+
+You can also subscribe to the \texttt{EvaluationFailed} event which is fired whenever the evaluation
+of an expression fails. You can use that to do tests that verify that all off the code in your
+documentation executes without errors.
+\subsection*{F\# Formatting as a Library: Custom formatting functions}
+
+
+
+As mentioned earlier, values are formatted using a simple \texttt{"\%A"} formatter by default.
+However, you can specify a formatting function that provides a nicer formatting for values
+of certain types. For example, let's say that we would want to format F\# lists such as
+\texttt{[1; 2; 3]} as HTML ordered lists \texttt{<ol>}.
+
+
+This can be done by calling \href{https://fsprojects.github.io/FSharp.Formatting/reference/fsharp-formatting-literate-evaluation-fsievaluator.html}{FsiEvaluator.RegisterTransformation} on the \texttt{FsiEvaluator} instance:
+\begin{Verbatim}[commandchars=\\\{\}]
+\com{// Create evaluator \& register simple formatter for lists}
+\kwd{let} \id{fsiOl} \ops{=} \lfun{FsiEvaluator}{(}{)}
+\id{fsiOl}{.}\id{RegisterTransformation}{(}\kwd{fun} {(}\lfun{o}{,} \lfun{ty}{,} \id{\_executionCount}{)} \kwd{->}
+  \com{// If the type of value is an F\# list, format it nicely}
+  \kwd{if} \lfun{ty}{.}\id{IsGenericType} \ops{\&\&} \lfun{ty}{.}\id{GetGenericTypeDefinition}{(}{)} \ops{=} \kwd{typedefof}{<}\ltyp{list}{<}\id{\_}{>}{>} \kwd{then}
+    \kwd{let} \lfun{items} \ops{=} 
+      \com{// Get items as objects and create paragraph for each item}
+      {[} \kwd{for} \lfun{it} \kwd{in} \ltyp{Seq}{.}\id{cast}{<}\ltyp{obj}{>} {(}\lfun{unbox} \lfun{o}{)} \kwd{->} 
+          {[} {Paragraph}{(}{[}{Literal}{(}\lfun{it}{.}\id{ToString}{(}{)}{,} {None}{)}{]}{,} {None}{)} {]} {]}
+    \com{// Return option value (success) with ordered list}
+    {Some} {[} {ListBlock}{(}\ltyp{MarkdownListKind}{.}\id{Ordered}{,} \lfun{items}{,} {None}{)} {]}
+  \kwd{else} {None}{)}
+\end{Verbatim}
+
+
+
+The function is called with two arguments - \texttt{o} is the value to be formatted and \texttt{ty}
+is the static type of the value (as inferred by the F\# compiler). The sample checks
+that the type of the value is a list (containing values of any type) and then it
+casts all values in the list to \texttt{obj} (for simplicity). Then we generate Markdown
+blocks representing an ordered list. This means that the code will work for both
+LaTeX and HTML formatting - but if you only need one, you can simply produce HTML and
+embed it in \texttt{InlineHtmlBlock}.
+
+
+To use the new \texttt{FsiEvaluator}, we can use the same style as earlier. This time, we format
+a simple list containing strings:
+\begin{Verbatim}[commandchars=\\\{\}]
+\kwd{let} \id{listy} \ops{=} \str{"""}
+\str{\#\#\# Formatting demo}
+\str{let test = ["one";"two";"three"]}
+\str{(*** include-value:test ***)"""}
+
+\kwd{let} \id{docOl} \ops{=} \ltyp{Literate}{.}\id{ParseScriptString}{(}\id{listy}{,} \lfun{fsiEvaluator} \ops{=} \id{fsiOl}{)}
+\ltyp{Literate}{.}\id{ToHtml}{(}\id{docOl}{)}
+\end{Verbatim}
+
+
+
+The resulting HTML formatting of the document contains the snippet that defines \texttt{test},
+followed by a nicely formatted ordered list:
+<blockquote>
+<h3>Formatting demo</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip">
+<span class="l">1: </span>
+</pre>
+</td>
+<td class="snippet"><pre class="fssnip">
+<span class="k">let</span> <spanclass="i">test</span> <span class="o">=</span> [<span class="s">&quot;</span><span class="s">one</span><span class="s">&quot;</span>;<span class="s">&quot;</span><span class="s">two</span><span class="s">&quot;</span>;<span class="s">&quot;</span><span class="s">three</span><span class="s">&quot;</span>]</pre>
+</td>
+</tr>
+</table>
+<ol>
+<li><p>one</p></li>
+<li><p>two</p></li>
+<li><p>three</p></li>
+</ol>
+</blockquote>
+
+
+\end{document}

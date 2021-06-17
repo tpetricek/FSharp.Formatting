@@ -1,0 +1,149 @@
+\documentclass{article}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+
+\definecolor{officegreen}{rgb}{0, 0.5, 0}
+\definecolor{navy}{rgb}{0, 0, 0.5}
+\definecolor{linecolor}{rgb}{0.5, 0.6875, 0.6875}
+\definecolor{outputcolor}{rgb}{0.375, 0.375, 0.375}
+
+\newcommand{\id}[1]{\textcolor{black}{#1}}
+\newcommand{\com}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\inact}[1]{\textcolor{gray}{#1}}
+\newcommand{\kwd}[1]{\textcolor{navy}{#1}}
+\newcommand{\num}[1]{\textcolor{officegreen}{#1}}
+\newcommand{\ops}[1]{\textcolor{purple}{#1}}
+\newcommand{\prep}[1]{\textcolor{purple}{#1}}
+\newcommand{\str}[1]{\textcolor{olive}{#1}}
+\newcommand{\lines}[1]{\textcolor{linecolor}{#1}}
+\newcommand{\fsi}[1]{\textcolor{outputcolor}{#1}}
+\newcommand{\omi}[1]{\textcolor{gray}{#1}}
+
+% Overriding color and style of line numbers
+\renewcommand{\theFancyVerbLine}{
+\lines{\small \arabic{FancyVerbLine}:}}
+
+\lstset{%
+  backgroundcolor=\color{gray!15},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\title{{page-title}}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\section*{Command line}
+
+
+
+To use F\# Formatting tools via the command line, you can use the \texttt{fsdocs} dotnet tool.
+\begin{lstlisting}
+dotnet tool install FSharp.Formatting.CommandTool
+dotnet fsdocs [command] [options]
+
+\end{lstlisting}
+\subsection*{The build command}
+
+
+
+This command processes a \texttt{docs} directory and generates API docs for projects in the solution according to the
+rules of \href{apidocs.html}{API doc generation}. The input accepted is described in \href{content.html}{content}.
+\begin{lstlisting}
+fsdocs build
+
+\end{lstlisting}
+
+
+The command line options accepted are:
+\begin{tabular}{|l|l|}\hline
+\textbf{Command Line Option} & \textbf{Description}\\ \hline\hline
+\texttt{--input} & Input directory of content (default: \texttt{docs})\\ \hline
+\texttt{--projects} & Project files to build API docs for outputs, defaults to all packable projects\\ \hline
+\texttt{--output} & Output Directory (default 'output' for 'build' and 'tmp/watch' for 'watch')\\ \hline
+\texttt{--noapidocs} & Disable generation of API docs\\ \hline
+\texttt{--eval} & Evaluate F\# fragments in scripts\\ \hline
+\texttt{--saveimages} & Save images referenced in docs\\ \hline
+\texttt{--nolinenumbers} & Don't add line numbers, default is to add line number.\\ \hline
+\texttt{--parameters} & Additional substitution parameters for templates\\ \hline
+\texttt{--nonpublic} & The tool will also generate documentation for non-public members\\ \hline
+\texttt{--nodefaultcontent} & Do not copy default content styles, javascript or use default templates\\ \hline
+\texttt{--clean} & Clean the output directory\\ \hline
+\texttt{--help} & Display this help screen\\ \hline
+\texttt{--version} & Display version information\\ \hline
+\texttt{--properties} & Provide properties to dotnet msbuild, e.g. --properties Configuration=Release Version=3.4\\ \hline
+\texttt{--strict} & Fail if docs are missing or can't be generated\\ \hline
+\end{tabular}
+
+
+
+The following command line options are also accepted but it is instead recommended you use
+settings in your .fsproj project files:
+\begin{tabular}{|l|l|}\hline
+\textbf{Command Line Option} & \textbf{Description}\\ \hline\hline
+\texttt{--sourcefolder} & Source folder at time of component build (\texttt{<FsDocsSourceFolder>})\\ \hline
+\texttt{--sourcerepo} & Source repository for github links (\texttt{<FsDocsSourceRepository>})\\ \hline
+\texttt{--mdcomments} & Assume comments in F\# code are markdown (\texttt{<UsesMarkdownComments>})\\ \hline
+\end{tabular}
+
+\subsection*{The watch command}
+
+
+
+This command does the same as \texttt{fsdocs build} but in "watch" mode, waiting for changes. Only the files in the input
+directory (e.g. \texttt{docs}) are watched.
+\begin{lstlisting}
+fsdocs watch
+
+\end{lstlisting}
+
+
+Restarting may be necesssary on changes to project files. The same parameters are accepted, plus these:
+\begin{tabular}{|l|l|}\hline
+\textbf{Command Line Option} & \textbf{Description}\\ \hline\hline
+\texttt{--noserver} & Do not serve content when watching.\\ \hline
+\texttt{--nolaunch} & Do not launch a browser window.\\ \hline
+\texttt{--open} & URL extension to launch \href{http://localhost:<port>/\%s.}{http://localhost:<port>/\%s.}\\ \hline
+\texttt{--port} & Port to serve content for \href{http://localhost}{http://localhost} serving.\\ \hline
+\end{tabular}
+
+\subsection*{Searchable docs}
+
+
+
+When using the command-line tool a Lunr search index is automatically generated in \texttt{index.json}.
+
+
+A search box is included in the default template.  To add a search box
+to your own \texttt{\_template.html}, include \texttt{fsdocs-search.js}, which is added to the \texttt{content}
+by default.
+\begin{lstlisting}
+...
+<div id="header">
+  <div class="searchbox">
+    <label for="search-by">
+      <i class="fas fa-search"></i>
+    </label>
+    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+    <span data-search-clear="">
+      <i class="fas fa-times"></i>
+    </span>
+  </div>
+</div>
+...
+
+\end{lstlisting}
+
+
+\end{document}

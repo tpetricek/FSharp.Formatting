@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Command line
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Tomas Petricek; Oleg Pestov; Anh-Dung Phan; Xiang Zhang; Matthias Dittrich">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary navbar-nav-scroll fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <a href="https://fsprojects.github.io/FSharp.Formatting/"><img id="fsdocs-logo" src="https://fsprojects.github.io/FSharp.Formatting/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/fsprojects/FSharp.Formatting/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/commandline.html">
+    Command line
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/content.html">
+    Creating Content
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/literate.html">
+    Literate Scripts
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/apidocs.html">
+    Generating API Docs
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/evaluation.html">
+    Embedding script output
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/styling.html">
+    Customization and Styling
+
+  </a>
+</li>             
+<li class="nav-header">
+  Examples
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidescript.html">
+    Literate Script
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sidemarkdown.html">
+    Markdown Content
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/sidebyside/sideextensions.html">
+    Markdown LaTeX
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/templates/leftside/styling.html">
+    Example: Styling for Right-Side Navigation Bar
+
+  </a>
+</li>             
+<li class="nav-header">
+  Advanced
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/codeformat.html">
+    Code formatting
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/upgrade.html">
+    Upgrading to fsdocs
+
+  </a>
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/markdown.html">
+    Markdown parser
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="https://fsprojects.github.io/FSharp.Formatting/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="https://fsprojects.github.io/FSharp.Formatting/">FSharp.Formatting</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            
+<h1><a name="Command-line" class="anchor" href="#Command-line">Command line</a></h1>
+<p>To use F# Formatting tools via the command line, you can use the <code>fsdocs</code> dotnet tool.</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="text">dotnet tool install FSharp.Formatting.CommandTool
+dotnet fsdocs [command] [options]
+</code></pre></td></tr></table>
+<h2><a name="The-build-command" class="anchor" href="#The-build-command">The build command</a></h2>
+<p>This command processes a <code>docs</code> directory and generates API docs for projects in the solution according to the
+rules of <a href="apidocs.html">API doc generation</a>. The input accepted is described in <a href="content.html">content</a>.</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="text">fsdocs build
+</code></pre></td></tr></table>
+<p>The command line options accepted are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>Command Line Option</p></th>
+<th align="left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>--input</code></p></td>
+<td align="left"><p>Input directory of content (default: <code>docs</code>)</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--projects</code></p></td>
+<td align="left"><p>Project files to build API docs for outputs, defaults to all packable projects</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--output</code></p></td>
+<td align="left"><p>Output Directory (default 'output' for 'build' and 'tmp/watch' for 'watch')</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--noapidocs</code></p></td>
+<td align="left"><p>Disable generation of API docs</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--eval</code></p></td>
+<td align="left"><p>Evaluate F# fragments in scripts</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--saveimages</code></p></td>
+<td align="left"><p>Save images referenced in docs</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--nolinenumbers</code></p></td>
+<td align="left"><p>Don't add line numbers, default is to add line number.</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--parameters</code></p></td>
+<td align="left"><p>Additional substitution parameters for templates</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--nonpublic</code></p></td>
+<td align="left"><p>The tool will also generate documentation for non-public members</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--nodefaultcontent</code></p></td>
+<td align="left"><p>Do not copy default content styles, javascript or use default templates</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--clean</code></p></td>
+<td align="left"><p>Clean the output directory</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--help</code></p></td>
+<td align="left"><p>Display this help screen</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--version</code></p></td>
+<td align="left"><p>Display version information</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--properties</code></p></td>
+<td align="left"><p>Provide properties to dotnet msbuild, e.g. --properties Configuration=Release Version=3.4</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--strict</code></p></td>
+<td align="left"><p>Fail if docs are missing or can't be generated</p></td>
+</tr>
+</tbody>
+</table>
+
+<p>The following command line options are also accepted but it is instead recommended you use
+settings in your .fsproj project files:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>Command Line Option</p></th>
+<th align="left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>--sourcefolder</code></p></td>
+<td align="left"><p>Source folder at time of component build (<code>&lt;FsDocsSourceFolder&gt;</code>)</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--sourcerepo</code></p></td>
+<td align="left"><p>Source repository for github links (<code>&lt;FsDocsSourceRepository&gt;</code>)</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--mdcomments</code></p></td>
+<td align="left"><p>Assume comments in F# code are markdown (<code>&lt;UsesMarkdownComments&gt;</code>)</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2><a name="The-watch-command" class="anchor" href="#The-watch-command">The watch command</a></h2>
+<p>This command does the same as <code>fsdocs build</code> but in "watch" mode, waiting for changes. Only the files in the input
+directory (e.g. <code>docs</code>) are watched.</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="text">fsdocs watch
+</code></pre></td></tr></table>
+<p>Restarting may be necesssary on changes to project files. The same parameters are accepted, plus these:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"><p>Command Line Option</p></th>
+<th align="left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><p><code>--noserver</code></p></td>
+<td align="left"><p>Do not serve content when watching.</p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--nolaunch</code></p></td>
+<td align="left"><p>Do not launch a browser window.</p></td>
+</tr>
+<tr class="odd">
+<td align="left"><p><code>--open</code></p></td>
+<td align="left"><p>URL extension to launch <a href="http://localhost:&lt;port&gt;/%s.">http://localhost:<port>/%s.</a></p></td>
+</tr>
+<tr class="even">
+<td align="left"><p><code>--port</code></p></td>
+<td align="left"><p>Port to serve content for <a href="http://localhost">http://localhost</a> serving.</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2><a name="Searchable-docs" class="anchor" href="#Searchable-docs">Searchable docs</a></h2>
+<p>When using the command-line tool a Lunr search index is automatically generated in <code>index.json</code>.</p>
+<p>A search box is included in the default template.  To add a search box
+to your own <code>_template.html</code>, include <code>fsdocs-search.js</code>, which is added to the <code>content</code>
+by default.</p>
+<table class="pre"><tr><td class="snippet"><pre class="fssnip"><code lang="text">...
+&lt;div id="header"&gt;
+  &lt;div class="searchbox"&gt;
+    &lt;label for="search-by"&gt;
+      &lt;i class="fas fa-search"&gt;&lt;/i&gt;
+    &lt;/label&gt;
+    &lt;input data-search-input="" id="search-by" type="search" placeholder="Search..." /&gt;
+    &lt;span data-search-clear=""&gt;
+      &lt;i class="fas fa-times"&gt;&lt;/i&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+...
+</code></pre></td></tr></table>
+
+            
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = 'https://fsprojects.github.io/FSharp.Formatting/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="https://fsprojects.github.io/FSharp.Formatting/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
+
