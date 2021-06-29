@@ -7,7 +7,6 @@ open NUnit.Framework
 open FSharp.Formatting.ApiDocs
 open FSharp.Formatting.Templating
 open FsUnitTyped
-open FSharp.Compiler.SourceCodeServices
 open NUnit.Framework.Internal
 open System
 
@@ -28,27 +27,22 @@ let configuration =
     "Release"
 #endif
 
-let tfm =
-#if NETCOREAPP
-    "netstandard2.1"
-#else
-    "net472"
-#endif
+let tfm = "netstandard2.1"
 
 // NOTE - For these tests to run properly they require the output of all the metadata
 // test project to be directed to the directory below
 let testBin = __SOURCE_DIRECTORY__ </> "files/bin" </> configuration </> tfm |> fullpath
 
-#if INTERACTIVE 
+#if INTERACTIVE
 ;;
 printfn "\n-- Root - %s" root;;
 printfn "\n-- TestBin - %s" testBin;;
-#endif 
+#endif
 
 do FSharp.Formatting.TestHelpers.enableLogging()
 let library = testBin </> "AttributesTestLib.dll"
 
-let inputs = ApiDocInput.FromFile(library) 
+let inputs = ApiDocInput.FromFile(library)
 
 let findModule name (moduleInfos: ApiDocEntityInfo list)=
     moduleInfos
@@ -104,12 +98,12 @@ let ``ApiDocs extracts Attribute with named arguments``() =
   attribute.Name |> shouldEqual "TestAttribute"
   attribute.FullName |> shouldEqual "AttributeTestNamespace.TestAttribute"
   attribute.ConstructorArguments |> shouldBeEmpty
-  
+
   attribute.NamedConstructorArguments |>  shouldContain ("Int", box 1)
   attribute.NamedConstructorArguments |>  shouldContain ("String", box "test")
   let _,arrayArgument = attribute.NamedConstructorArguments |> Seq.find (fun (n,_)-> n="Array")
   arrayArgument |>  shouldEqual (box [| box "1"; box "2"|])
-  ()  
+  ()
 
 [<Test>]
 let ``ApiDocs extracts Attribute on interface``() =

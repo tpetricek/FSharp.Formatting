@@ -138,7 +138,7 @@ module Crack =
         RepositoryCommit : string option
     }
 
-    let private crackProjectFileAndIncludeTargetFrameworks slnDir extraMsbuildProperties (file : string) =
+    let private crackProjectFileAndIncludeTargetFrameworks _slnDir extraMsbuildProperties (file : string) =
         let additionalInfo =
             [ "OutputType"
               "IsTestProject"
@@ -184,7 +184,7 @@ module Crack =
         let msgs = (loggedMessages.ToArray() |> Array.toList)
         match result with
         | Ok projOptions  ->
-                
+
             let props = projOptions.CustomProperties |> List.map (fun p -> p.Name, p.Value)|> Map.ofList
             //printfn "props = %A" (Map.toList props)
             let msbuildPropString prop = props |> Map.tryFind prop |> Option.bind (function s when String.IsNullOrWhiteSpace(s) -> None | s -> Some s)

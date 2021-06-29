@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>fsdocs</AssemblyName>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <PackageId>FSharp.Formatting.CommandTool</PackageId>
     <RollForward>LatestMajor</RollForward>
     <IsPackable>true</IsPackable>

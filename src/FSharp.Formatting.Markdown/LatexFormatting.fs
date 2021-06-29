@@ -29,18 +29,18 @@ let specialChars =
         @"<\textbackslash>", @"{\textbackslash}";
         "~",@"{\textasciitilde}";
         "^", @"{\textasciicircum}" |]
-    
+
 let latexEncode s =
     specialChars |> Array.fold (fun (acc:string) (k, v) -> acc.Replace(k, v)) (System.Net.WebUtility.HtmlDecode s)
 
 /// Lookup a specified key in a dictionary, possibly
 /// ignoring newlines or spaces in the key.
-let (|LookupKey|_|) (dict:IDictionary<_, _>) (key:string) = 
-  [ key; key.Replace("\r\n", ""); key.Replace("\r\n", " "); 
+let (|LookupKey|_|) (dict:IDictionary<_, _>) (key:string) =
+  [ key; key.Replace("\r\n", ""); key.Replace("\r\n", " ");
     key.Replace("\n", ""); key.Replace("\n", " ") ]
   |> Seq.tryPick (fun key ->
     match dict.TryGetValue(key) with
-    | true, v -> Some v 
+    | true, v -> Some v
     | _ -> None)
 
 /// Context passed around while formatting the LaTEX
@@ -55,7 +55,7 @@ let smallBreak (ctx:FormattingContext) () =
 let noBreak (_ctx:FormattingContext) () = ()
 
 /// Write MarkdownSpan value to a TextWriter
-let rec formatSpan (ctx:FormattingContext) = function 
+let rec formatSpan (ctx:FormattingContext) = function
   | LatexInlineMath(body, _) -> ctx.Writer.Write(sprintf "$%s$" body)
   | LatexDisplayMath(body, _) -> ctx.Writer.Write(sprintf "$$%s$$" body)
   | EmbedSpans(cmd, _) -> formatSpans ctx (cmd.Render())
@@ -63,7 +63,7 @@ let rec formatSpan (ctx:FormattingContext) = function
   | HardLineBreak(_) -> ctx.LineBreak(); ctx.LineBreak()
 
   | AnchorLink _ -> ()
-  | IndirectLink(body, _, LookupKey ctx.Links (link, _), _) 
+  | IndirectLink(body, _, LookupKey ctx.Links (link, _), _)
   | DirectLink(body, link, _, _)
   | IndirectLink(body, link, _, _) ->
       ctx.Writer.Write(@"\href{")
@@ -72,8 +72,8 @@ let rec formatSpan (ctx:FormattingContext) = function
       formatSpans ctx body
       ctx.Writer.Write("}")
 
-  | IndirectImage(body, _, LookupKey ctx.Links (link, _), _) 
-  | DirectImage(body, link, _, _) 
+  | IndirectImage(body, _, LookupKey ctx.Links (link, _), _)
+  | DirectImage(body, link, _, _)
   | IndirectImage(body, link, _, _) ->
       // Use the technique introduced at
       // http://stackoverflow.com/q/14014827
@@ -82,7 +82,7 @@ let rec formatSpan (ctx:FormattingContext) = function
         ctx.LineBreak()
       ctx.Writer.Write(@"\includegraphics[width=1.0\textwidth]{")
       ctx.Writer.Write(latexEncode link)
-      ctx.Writer.Write("}") 
+      ctx.Writer.Write("}")
       ctx.LineBreak()
       if not (System.String.IsNullOrWhiteSpace(body)) then
         ctx.Writer.Write(@"\caption{")
@@ -92,15 +92,15 @@ let rec formatSpan (ctx:FormattingContext) = function
         ctx.Writer.Write(@"\end{figure}")
         ctx.LineBreak()
 
-  | Strong(body, _) -> 
+  | Strong(body, _) ->
       ctx.Writer.Write(@"\textbf{")
       formatSpans ctx body
       ctx.Writer.Write("}")
-  | InlineCode(body, _) -> 
+  | InlineCode(body, _) ->
       ctx.Writer.Write(@"\texttt{")
       ctx.Writer.Write(latexEncode body)
       ctx.Writer.Write("}")
-  | Emphasis(body, _) -> 
+  | Emphasis(body, _) ->
       ctx.Writer.Write(@"\emph{")
       formatSpans ctx body
       ctx.Writer.Write("}")
@@ -121,8 +121,8 @@ let rec formatParagraph (ctx:FormattingContext) paragraph =
     ctx.LineBreak(); ctx.LineBreak()
 
   | EmbedParagraphs(cmd, _) -> formatParagraphs ctx (cmd.Render())
-  | Heading(n, spans, _) -> 
-      let level = 
+  | Heading(n, spans, _) ->
+      let level =
         match n with
         | 1 -> @"\section*"
         | 2 -> @"\subsection*"
@@ -136,7 +136,7 @@ let rec formatParagraph (ctx:FormattingContext) paragraph =
       ctx.LineBreak()
   | Paragraph(spans, _) ->
       ctx.LineBreak(); ctx.LineBreak()
-      for span in spans do 
+      for span in spans do
         formatSpan ctx span
 
   | HorizontalRule(_) ->
@@ -169,11 +169,11 @@ let rec formatParagraph (ctx:FormattingContext) paragraph =
       ctx.LineBreak()
 
       let bodyCtx = { ctx with LineBreak = noBreak ctx }
-      let formatRow (prefix:string) (postfix:string) row = 
+      let formatRow (prefix:string) (postfix:string) row =
         row |> Seq.iteri (fun i cell ->
           if i <> 0 then ctx.Writer.Write(" & ")
           ctx.Writer.Write(prefix)
-          cell |> List.iter (formatParagraph bodyCtx) 
+          cell |> List.iter (formatParagraph bodyCtx)
           ctx.Writer.Write(postfix) )
 
       for header in Option.toList headers do
@@ -205,7 +205,7 @@ let rec formatParagraph (ctx:FormattingContext) paragraph =
       ctx.Writer.Write(@"\end{quote}")
       ctx.LineBreak()
 
-  | Span(spans, _) -> 
+  | Span(spans, _) ->
       formatSpans ctx spans
   | InlineHtmlBlock(code, _executionCount, _) ->
       ctx.Writer.Write(code)
@@ -217,23 +217,23 @@ let rec formatParagraph (ctx:FormattingContext) paragraph =
       ctx.LineBreak()
       ctx.Writer.Write(@"\end{lstlisting}")
       ctx.LineBreak()
-  | YamlFrontmatter (lines, _) -> ()
+  | YamlFrontmatter (_lines, _) -> ()
   ctx.LineBreak()
 
 /// Write a list of MarkdownParagraph values to a TextWriter
-and formatParagraphs ctx paragraphs = 
+and formatParagraphs ctx paragraphs =
   let length = List.length paragraphs
   let ctx = { ctx with LineBreak = smallBreak ctx }
   for _last, paragraph in paragraphs |> Seq.mapi (fun i v -> (i = length - 1), v) do
     formatParagraph ctx paragraph
 
-/// Format Markdown document and write the result to 
+/// Format Markdown document and write the result to
 /// a specified TextWriter. Parameters specify newline character
 /// and a dictionary with link keys defined in the document.
-let formatMarkdown writer links replacements newline crefResolver paragraphs = 
+let formatMarkdown writer links replacements newline crefResolver paragraphs =
   let ctx = { Links = links; Substitutions=replacements; Newline=newline; ResolveApiDocReference=crefResolver; DefineSymbol="LATEX" }
   let paragraphs = applySubstitutionsInMarkdown ctx paragraphs
-  formatParagraphs 
+  formatParagraphs
     { Writer = writer
       Links = links
       Newline = newline

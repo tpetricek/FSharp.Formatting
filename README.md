@@ -16,8 +16,8 @@ See https://fsprojects.github.io/FSharp.Formatting/
 One built you can run the command-line tool to self-build the docs for this directory using 
 
     dotnet build
-    src\FSharp.Formatting.CommandTool\bin\Debug\netcoreapp3.1\fsdocs.exe watch
-    src\FSharp.Formatting.CommandTool\bin\Debug\netcoreapp3.1\fsdocs.exe build --clean
+    src\FSharp.Formatting.CommandTool\bin\Debug\net5.0\fsdocs.exe watch
+    src\FSharp.Formatting.CommandTool\bin\Debug\net5.0\fsdocs.exe build --clean
 
 
 ## Maintainer(s)

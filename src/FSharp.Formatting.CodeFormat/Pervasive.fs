@@ -4,8 +4,8 @@ module internal FSharp.Formatting.CodeFormat.Pervasive
 open System
 open System.Diagnostics
 open System.Runtime.CompilerServices
-open FSharp.Compiler.SyntaxTree
-open FSharp.Compiler.SourceCodeServices
+open FSharp.Compiler.Syntax
+open FSharp.Compiler.CodeAnalysis
 open FSharp.Compiler.Text
 
 [<assembly: InternalsVisibleTo("FSharp.CodeFormat.Tests")>]
@@ -87,7 +87,7 @@ let asyncMaybe = AsyncMaybeBuilder()
 
 let inline liftAsync (computation : Async<'T>) : Async<'T option> = async {
     let! a = computation
-    return Some a 
+    return Some a
 }
 
 
@@ -99,7 +99,7 @@ module Async =
         return f a
     }
 
-    /// Creates an asynchronous workflow that runs the asynchronous workflow given as an argument at most once. 
+    /// Creates an asynchronous workflow that runs the asynchronous workflow given as an argument at most once.
     /// When the returned workflow is started for the second time, it reuses the result of the previous execution.
     let cache (input : Async<'T>) =
         let agent = MailboxProcessor<AsyncReplyChannel<_>>.Start <| fun agent ->
@@ -109,7 +109,7 @@ module Async =
                 replyCh.Reply res
                 while true do
                     let! replyCh = agent.Receive ()
-                    replyCh.Reply res 
+                    replyCh.Reply res
             }
         async { return! agent.PostAndAsyncReply id }
 
@@ -130,23 +130,20 @@ type FSharpChecker with
 
             let tryGetFreshResultsWithTimeout () : Async<CheckResults> = async {
                 try let! worker = Async.StartChild (parseAndCheckFile, 2000)
-                    let! result = worker 
+                    let! result = worker
                     return Ready result
                 with :? TimeoutException -> return StillRunning parseAndCheckFile
             }
 
             let bindParsedInput (results: (FSharpParseFileResults * FSharpCheckFileResults) option) =
                 match results with
-                | Some (parseResults, checkResults) ->
-                    match parseResults.ParseTree with
-                    | Some parsedInput -> Some (parseResults, parsedInput, checkResults)
-                    | None -> None
+                | Some (parseResults, checkResults) -> Some (parseResults, parseResults.ParseTree, checkResults)
                 | None -> None
 
             if allowStaleResults then
                 async {
                     let! freshResults = tryGetFreshResultsWithTimeout()
-                    
+
                     let! results =
                         match freshResults with
                         | Ready x -> async.Return x

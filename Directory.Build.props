@@ -7,8 +7,6 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <OtherFlags>/warnon:1182</OtherFlags>
-    <!-- we still can generate docs on netcoreapp3.1 -->
-    <OtherFlags>/langversion:4.7</OtherFlags>
   </PropertyGroup>
 
   <!-- NuGet Metadata -->

@@ -8,14 +8,14 @@ open System.Text
 open FSharp.Patterns
 open FSharp.Collections
 open FSharp.Formatting.Markdown
-open FSharp.Compiler.SourceCodeServices
+open FSharp.Compiler.Tokenization
 
 // --------------------------------------------------------------------------------------
 // Handle special comments that can appear in F# snipptes. This includes:
 // Marking of a snippet that should be formatted:
 //
 //     // [snippet:Some name]
-//     // [/snippet] 
+//     // [/snippet]
 //
 // Omitting of a block of code in a visible snippet:
 //
@@ -23,7 +23,7 @@ open FSharp.Compiler.SourceCodeServices
 //
 // Displaying of F# interactive output:
 //
-//     // [fsi:<here is some fsi output>] 
+//     // [fsi:<here is some fsi output>]
 //
 // --------------------------------------------------------------------------------------
 
@@ -39,9 +39,9 @@ type NamedSnippet = string * Snippet
 ///    // [snippet:Some title]
 ///    ... some F# code ...
 ///    // [/snippet]
-let rec getSnippets (state:NamedSnippet option) (snippets:NamedSnippet list) 
+let rec getSnippets (state:NamedSnippet option) (snippets:NamedSnippet list)
                     (source:IndexedSnippetLine list) (lines:string[]) =
-  match source with 
+  match source with
   | [] -> snippets
   | (line, tokens)::rest ->
     let text = lines.[line.StartLine].Trim(), line
@@ -52,21 +52,21 @@ let rec getSnippets (state:NamedSnippet option) (snippets:NamedSnippet list)
         let title = (fst title).Substring(0, (fst title).IndexOf(']'))
         getSnippets (Some(title, [])) snippets rest lines
     // Not inside a snippet and there is a usual line
-    | None, _ -> 
+    | None, _ ->
         getSnippets state snippets rest lines
 
     // We're inside a snippet and it ends
     | Some(title, acc), StringPosition.StartsWithTrim "//" (StringPosition.StartsWithTrim "[/snippet]" _) ->
         getSnippets None ((title, acc |> List.rev)::snippets) rest lines
     // We're inside snippet - add current line to it
-    | Some(title, acc), _ -> 
+    | Some(title, acc), _ ->
         getSnippets (Some(title, (line, tokens)::acc)) snippets rest lines
 
 
-/// Preprocesses a line and merges all subsequent comments on a line 
+/// Preprocesses a line and merges all subsequent comments on a line
 /// into a single long comment (so that we can parse it as snippet command)
-let rec mergeComments (line:SnippetLine) (cmt:Token option) (acc:SnippetLine) = 
-  match line, cmt with 
+let rec mergeComments (line:SnippetLine) (cmt:Token option) (acc:SnippetLine) =
+  match line, cmt with
   | [], Some(cmt) -> cmt::acc |> List.rev
   | [], None -> acc |> List.rev
   | (str, tok)::line, None when tok.TokenName = "COMMENT" || tok.TokenName = "LINE_COMMENT" ->
@@ -82,44 +82,44 @@ let rec mergeComments (line:SnippetLine) (cmt:Token option) (acc:SnippetLine) =
 
 /// Continue reading shrinked code until we reach the end (*[/omit]*) tag
 /// (see the function below for more information and beginning of shrinking)
-let rec shrinkOmittedCode (text:StringBuilder) line content (source:Snippet) = 
-  match content, source with 
+let rec shrinkOmittedCode (text:StringBuilder) line content (source:Snippet) =
+  match content, source with
   // Take the next line, merge comments and continue looking for end
-  | [], (line, content)::source -> 
+  | [], (line, content)::source ->
       shrinkOmittedCode (text.Append("\n")) line (mergeComments content None []) source
-  | (String.StartsAndEndsWithTrim ("(*", "*)") "[/omit]", tok)::rest, source 
+  | (String.StartsAndEndsWithTrim ("(*", "*)") "[/omit]", tok)::rest, source
         when tok.TokenName = "COMMENT" ->
       line, rest, source, text
-  | (str, _tok)::rest, _ -> 
+  | (str, _tok)::rest, _ ->
       shrinkOmittedCode (text.Append(str)) line rest source
   | [], [] -> line, [], [], text
 
 
-/// Find all code marked using the (*[omit:<...>]*) tags and replace it with 
+/// Find all code marked using the (*[omit:<...>]*) tags and replace it with
 /// a special token (named "OMIT...." where "...." is a replacement string)
-let rec shrinkLine line (content:SnippetLine) (source:Snippet) = 
-  match content with 
+let rec shrinkLine line (content:SnippetLine) (source:Snippet) =
+  match content with
   | [] -> [], source
   | (String.StartsAndEndsWithTrim ("(*", "*)") (String.StartsAndEndsWithTrim ("[omit:", "]") body), (tok:FSharpTokenInfo))::rest
-        when tok.TokenName = "COMMENT" -> 
-      let line, remcontent, source, text = 
+        when tok.TokenName = "COMMENT" ->
+      let line, remcontent, source, text =
         shrinkOmittedCode (StringBuilder()) line rest source
       let line, source = shrinkLine line remcontent source
       (body, { tok with TokenName = "OMIT" + (text.ToString()) })::line, source
   | (String.StartsWithTrim "//" (String.StartsAndEndsWith ("[fsi:", "]") fsi), (tok:FSharpTokenInfo))::rest ->
       let line, source = shrinkLine line rest source
       (fsi, { tok with TokenName = "FSI"})::line, source
-  | (str, tok)::rest -> 
+  | (str, tok)::rest ->
       let line, source = shrinkLine line rest source
       (str, tok)::line, source
 
 /// Process the whole source file and shrink all blocks marked using
 /// special 'omit' meta-comments (see the two functions above)
-let rec shrinkOmittedParts (source:Snippet) : Snippet = 
-  [ match source with 
+let rec shrinkOmittedParts (source:Snippet) : Snippet =
+  [ match source with
     | [] -> ()
-    | (line, content)::source -> 
-      let content, source = shrinkLine line (mergeComments content None []) source 
+    | (line, content)::source ->
+      let content, source = shrinkLine line (mergeComments content None []) source
       yield line, content
       yield! shrinkOmittedParts source ]
 

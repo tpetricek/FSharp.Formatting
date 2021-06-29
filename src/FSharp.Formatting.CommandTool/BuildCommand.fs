@@ -173,7 +173,7 @@ type internal DocContent(outputDirectory, previous: Map<_,_>, lineNumbers, fsiEv
         // Two-letter directory names (e.g. 'ja') with 'docs' count as multi-language and are suppressed from table-of-content
         // generation and site search index
         let isOtherLang = isOtherLang || (indirName.Length = 2 && allCultures |> Array.contains indirName )
-        
+
         let possibleNewHtmlTemplate = Path.Combine(inputFolder, "_template.html")
         let htmlTemplate = if File.Exists(possibleNewHtmlTemplate) then Some possibleNewHtmlTemplate else htmlTemplate
         let possibleNewPynbTemplate = Path.Combine(inputFolder, "_template.ipynb")
@@ -227,7 +227,7 @@ type internal DocContent(outputDirectory, previous: Map<_,_>, lineNumbers, fsiEv
                 match thing with
                 | (inputFile, isOtherLang, model)
                     when // Don't put the index or other-language entries in the list
-                         not isOtherLang && 
+                         not isOtherLang &&
                          model.OutputKind = OutputKind.Html &&
                          not (Path.GetFileNameWithoutExtension(inputFile) = "index") -> model
                 | _ -> () ]
@@ -245,7 +245,7 @@ type internal DocContent(outputDirectory, previous: Map<_,_>, lineNumbers, fsiEv
                 for model in snd modelsByCategory.[0] do
                     let link = model.Uri(root)
                     li [Class "nav-item"] [ a [Class "nav-link"; (Href link)] [encode model.Title ] ]
-            else 
+            else
                 // At least one category has been specified. Sort each category by index and emit
                 // Use 'Other' as a header for uncategorised things
                 for (cat, modelsInCategory) in modelsByCategory do
@@ -543,7 +543,7 @@ type CoreBuildOptions(watch) =
             else this.output
 
         // This is in-package
-        //   From .nuget\packages\fsharp.formatting.commandtool\7.1.7\tools\netcoreapp3.1\any
+        //   From .nuget\packages\fsharp.formatting.commandtool\7.1.7\tools\net5.0\any
         //   to .nuget\packages\fsharp.formatting.commandtool\7.1.7\templates
         let dir = Path.GetDirectoryName(typeof<CoreBuildOptions>.Assembly.Location)
         let defaultTemplateAttempt1 = Path.GetFullPath(Path.Combine(dir, "..", "..", "..", "templates", "_template.html"))
@@ -562,7 +562,7 @@ type CoreBuildOptions(watch) =
         let extraInputs = [
             if not this.nodefaultcontent then
                 // The "extras" content goes in "."
-                //   From .nuget\packages\fsharp.formatting.commandtool\7.1.7\tools\netcoreapp3.1\any
+                //   From .nuget\packages\fsharp.formatting.commandtool\7.1.7\tools\net5.0\any
                 //   to .nuget\packages\fsharp.formatting.commandtool\7.1.7\extras
                 let attempt1 = Path.GetFullPath(Path.Combine(dir, "..", "..", "..", "extras"))
                 if (try Directory.Exists(attempt1) with _ -> false) then
@@ -570,8 +570,8 @@ type CoreBuildOptions(watch) =
                     (attempt1, ".")
                 else
                     // This is for in-repo use only, assuming we are executing directly from
-                    //   src\FSharp.Formatting.CommandTool\bin\Debug\netcoreapp3.1\fsdocs.exe
-                    //   src\FSharp.Formatting.CommandTool\bin\Release\netcoreapp3.1\fsdocs.exe
+                    //   src\FSharp.Formatting.CommandTool\bin\Debug\net5.0\fsdocs.exe
+                    //   src\FSharp.Formatting.CommandTool\bin\Release\net5.0\fsdocs.exe
                     let attempt2 = Path.GetFullPath(Path.Combine(dir, "..", "..", "..", "..", "..", "docs", "content"))
                     if (try Directory.Exists(attempt2) with _ -> false) then
                         printfn "using extra content from %s" attempt2
@@ -607,7 +607,7 @@ type CoreBuildOptions(watch) =
                 // if running in watch mode, inject hot reload script
                 [ParamKeys.``fsdocs-watch-script``, Serve.generateWatchScript this.port_option]
             else
-                // otherwise, inject empty replacement string 
+                // otherwise, inject empty replacement string
                 [ParamKeys.``fsdocs-watch-script``, ""]
 
         // Incrementally generate API docs (regenerates all api docs, in two phases)
@@ -623,10 +623,10 @@ type CoreBuildOptions(watch) =
                               OutputKind.Html, Path.Combine(this.input, "_template.html")
                               OutputKind.Md, Path.Combine(this.input, "reference", "_template.md")
                               OutputKind.Md, Path.Combine(this.input, "_template.md")
-                            ] 
+                            ]
                             match templates |> Seq.tryFind (fun (_,path) -> path |> File.Exists) with
                              | Some (kind, path) -> kind, Some path
-                             | None ->  
+                             | None ->
                                let templateFiles = templates |> Seq.map snd |> String.concat "', '"
                                match defaultTemplate with
                                 | Some d ->
@@ -635,14 +635,14 @@ type CoreBuildOptions(watch) =
                                 | None ->
                                     printfn "note, no template file '%s' found, and no default template at '%s'" templateFiles defaultTemplateAttempt1
                                     OutputKind.Html, None
-                               
+
                         printfn ""
                         printfn "API docs:"
                         printfn "  generating model for %d assemblies in API docs..." apiDocInputs.Length
 
                         let model, globals, index, phase2 =
-                            match outputKind with 
-                             | OutputKind.Html -> 
+                            match outputKind with
+                             | OutputKind.Html ->
                                  ApiDocs.GenerateHtmlPhased (
                                     inputs = apiDocInputs,
                                     output = output,
@@ -770,7 +770,7 @@ type CoreBuildOptions(watch) =
         let ok =
             let ok1 = runGeneratePhase1()
             // Note, the above generates these outputs:
-            //   latestApiDocModel 
+            //   latestApiDocModel
             //   latestApiDocGlobalParameters
             //   latestApiDocCodeReferenceResolver
             //   latestApiDocPhase2
@@ -845,7 +845,7 @@ type CoreBuildOptions(watch) =
                         Serve.signalHotReload <- true
                     }
                     |> Async.Start
-                ) 
+                )
 
             let apiDocsDependenciesChanged = Event<_>()
             apiDocsDependenciesChanged.Publish.Add(fun () ->

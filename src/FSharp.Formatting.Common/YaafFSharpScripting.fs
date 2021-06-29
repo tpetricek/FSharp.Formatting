@@ -8,8 +8,10 @@ open System.Reflection.Emit
 open System.Diagnostics
 open System.Runtime.CompilerServices
 open FSharp.Compiler.Interactive.Shell
-open FSharp.Compiler.SourceCodeServices
+open FSharp.Compiler.CodeAnalysis
 open FSharp.Compiler.Text
+open FSharp.Compiler.Diagnostics
+open FSharp.Compiler.Symbols
 
 #nowarn "25" // Binding incomplete: let [ t ] = list
 
@@ -178,13 +180,13 @@ module internal CompilerServiceExtensions =
           let mapError (err:FSharpDiagnostic) =
             sprintf "**** %s: %s" (if err.Severity = FSharpDiagnosticSeverity.Error then "error" else "warning") err.Message
           if results.HasCriticalErrors then
-              let errors = results.Errors |> Seq.map mapError
+              let errors = results.Diagnostics |> Seq.map mapError
               let errorMsg = sprintf "Parsing and checking project failed: \n\t%s" (System.String.Join("\n\t", errors))
               Log.errorf "%s" errorMsg
               failwith errorMsg
           else
-            if results.Errors.Length > 0 then
-              let warnings = results.Errors |> Seq.map mapError
+            if results.Diagnostics.Length > 0 then
+              let warnings = results.Diagnostics |> Seq.map mapError
               Log.warnf "Parsing and checking warnings: \n\t%s" (System.String.Join("\n\t", warnings))
           let references = results.ProjectContext.GetReferencedAssemblies()
           references

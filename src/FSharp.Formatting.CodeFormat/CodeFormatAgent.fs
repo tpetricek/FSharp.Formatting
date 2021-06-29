@@ -8,13 +8,17 @@ open System
 open System.IO
 open System.Runtime.ExceptionServices
 open FSharp.Compiler
-open FSharp.Compiler.SourceCodeServices
+open FSharp.Compiler.Tokenization
 open FSharp.Compiler.Text
 open FSharp.Formatting.CodeFormat
 open FSharp.Formatting.CodeFormat.CommentFilter
 open FSharp.Formatting.Common
 open FSharp.Formatting.Internal
 open FSharp.Formatting.Markdown
+open FSharp.Compiler.EditorServices
+open FSharp.Compiler.CodeAnalysis
+open FSharp.Compiler.Diagnostics
+
 // --------------------------------------------------------------------------------------
 // ?
 // --------------------------------------------------------------------------------------
@@ -150,10 +154,11 @@ type CodeFormatAgent() =
     | SemanticClassificationType.TypeArgument -> Some TokenKind.TypeArgument
     | SemanticClassificationType.Operator -> Some TokenKind.Operator
     | SemanticClassificationType.IntrinsicFunction -> Some TokenKind.Keyword
+    | _ -> None
 
 
     // Processes a single line of the snippet
-    let processSnippetLine (checkResults: FSharpCheckFileResults) (semanticRanges: struct(range * SemanticClassificationType)[])
+    let processSnippetLine (checkResults: FSharpCheckFileResults) (semanticRanges: SemanticClassificationItem[])
                             (lines: string[]) (line: int, lineTokens: SnippetLine) =
         let lineStr = lines.[line]
 
@@ -198,7 +203,7 @@ type CodeFormatAgent() =
                     // If we're processing an identfier, see if it has any tool tip
                     if (token.TokenName = "IDENT") then
                         let island = List.rev island
-                        let tip = checkResults.GetToolTipText(line + 1, token.LeftColumn + 1, lines.[line], island,FSharpTokenTag.IDENT)
+                        let tip = checkResults.GetToolTip(line + 1, token.LeftColumn + 1, lines.[line], island,FSharpTokenTag.IDENT)
                         match tip |> ToolTipReader.tryFormatTip with
                         | Some(_) as res -> res
                         | _ -> None
@@ -221,8 +226,8 @@ type CodeFormatAgent() =
                     | _ ->
                     let kind =
                         semanticRanges
-                        |> Array.tryFind (fun struct(range,_) -> range.StartColumn  = token.LeftColumn)
-                        |> Option.bind (fun struct(_,category) -> categoryToTokenKind category)
+                        |> Array.tryFind (fun item -> item.Range.StartColumn  = token.LeftColumn)
+                        |> Option.bind (fun item -> categoryToTokenKind item.Type)
                         |> Option.defaultValue (Helpers.getTokenKind token.ColorClass)
                     yield TokenSpan.Token (kind, body, tip)
                 // Process the rest of the line
@@ -232,30 +237,30 @@ type CodeFormatAgent() =
             | _x, Some { LeftCol = strLeftCol; RightCol = strRightCol } ->
               let printfOrEscapedSpans =
                   semanticRanges
-                  |> Array.filter (fun struct(range,category) ->
-                      (category = SemanticClassificationType.Printf) &&
-                      range.StartColumn >= strLeftCol &&
-                      range.EndColumn <= strRightCol)
+                  |> Array.filter (fun item ->
+                      (item.Type = SemanticClassificationType.Printf) &&
+                      item.Range.StartColumn >= strLeftCol &&
+                      item.Range.EndColumn <= strRightCol)
 
               match printfOrEscapedSpans with
               | [||] -> yield TokenSpan.Token (TokenKind.String, lineStr.[strLeftCol..strRightCol], None)
               | spans ->
                   let data =
                     spans
-                    |> Array.fold (fun points struct(range, _category) ->
+                    |> Array.fold (fun points item ->
                         points
-                        |> Set.add range.StartColumn
-                        |> Set.add (range.EndColumn - 1)) Set.empty
+                        |> Set.add item.Range.StartColumn
+                        |> Set.add (item.Range.EndColumn - 1)) Set.empty
                     |> Set.add (strLeftCol - 1)
                     |> Set.add (strRightCol + 1)
                     |> Set.toSeq
                     |> Seq.pairwise
                     |> Seq.map (fun (leftPoint, rightPoint) ->
                         printfOrEscapedSpans
-                        |> Array.tryFind (fun struct(range,_category) -> range.StartColumn = leftPoint)
-                        |> Option.bind (fun struct(range,category)->
-                             categoryToTokenKind category
-                             |> Option.map (fun kind -> range.StartColumn, range.EndColumn, kind))
+                        |> Array.tryFind (fun item -> item.Range.StartColumn = leftPoint)
+                        |> Option.bind (fun item ->
+                             categoryToTokenKind item.Type
+                             |> Option.map (fun kind -> item.Range.StartColumn, item.Range.EndColumn, kind))
                         |> Option.defaultValue (leftPoint+1, rightPoint, TokenKind.String))
 
                   for leftPoint, rightPoint, kind in data do
@@ -322,7 +327,7 @@ type CodeFormatAgent() =
         let! (opts,_errors) = fsChecker.GetProjectOptionsFromScript(filePath, SourceText.ofString source, loadedTimeStamp = DateTime.Now, otherFlags = args, assumeDotNetFramework = false)
 
         let formatError (e:FSharpDiagnostic) =
-             sprintf "%s (%d,%d)-(%d,%d): %A FS%04d: %s" e.FileName e.StartLineAlternate e.StartColumn e.EndLineAlternate e.EndColumn e.Severity e.ErrorNumber e.Message
+             sprintf "%s (%d,%d)-(%d,%d): %A FS%04d: %s" e.FileName e.StartLine e.StartColumn e.EndLine e.EndColumn e.Severity e.ErrorNumber e.Message
 
         let formatErrors errors =
             System.String.Join("\n", errors |> Seq.map formatError)
@@ -371,7 +376,7 @@ type CodeFormatAgent() =
         //Log.verbf "project options '%A', OtherOptions: \n\t%s" { opts with OtherOptions = [||] } (System.String.Join("\n\t", opts.OtherOptions))
         //let! results = fsChecker.ParseAndCheckProject(opts)
         //let _errors = results.Errors
-        
+
         if _errors |> List.filter (fun e -> e.Severity = FSharpDiagnosticSeverity.Error) |> List.length > 0 then
             Log.warnf "errors from GetProjectOptionsFromScript '%s'" (formatErrors _errors)
 
@@ -391,10 +396,10 @@ type CodeFormatAgent() =
         | Some (_parseResults, parsedInput, checkResults) ->
             Log.verbf "starting to GetAllUsesOfAllSymbolsInFile from '%s'" filePath
             let _symbolUses = checkResults.GetAllUsesOfAllSymbolsInFile ()
-            let errors = checkResults.Errors
+            let errors = checkResults.Diagnostics
             let classifications =
                 checkResults.GetSemanticClassification (Some parsedInput.Range)
-                |> Seq.groupBy (fun struct(r,_c) -> r.StartLine)
+                |> Seq.groupBy (fun item -> item.Range.StartLine)
                 |> Map.ofSeq
 
 
@@ -441,8 +446,8 @@ type CodeFormatAgent() =
                 for errInfo in errors do
                     if errInfo.Message <> "Multiple references to 'mscorlib.dll' are not permitted" then
                         yield SourceError(
-                            (errInfo.StartLineAlternate - 1, errInfo.StartColumn),
-                            (errInfo.EndLineAlternate - 1, errInfo.EndColumn),
+                            (errInfo.StartLine - 1, errInfo.StartColumn),
+                            (errInfo.EndLine - 1, errInfo.EndColumn),
                             (if errInfo.Severity = FSharpDiagnosticSeverity.Error then ErrorKind.Error else ErrorKind.Warning),
                             errInfo.Message
                         )

@@ -5,7 +5,7 @@ open System.Collections.Generic
 open System.IO
 open System.Web
 open FSharp.Formatting.Common
-open FSharp.Compiler.SourceCodeServices
+open FSharp.Compiler.Symbols
 open FSharp.Formatting.Templating
 open FSharp.Formatting.HtmlModel
 open FSharp.Formatting.HtmlModel.Html
